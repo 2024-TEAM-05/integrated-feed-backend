@@ -1,0 +1,41 @@
+package team05.integrated_feed_backend.core.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.security.SecurityScheme;
+
+@Configuration
+public class SwaggerConfig {
+	private static final String BEARER_TOKEN_PREFIX = "Bearer";
+	private static String securityJwtName = "JWT";
+
+	@Bean
+	public OpenAPI openAPI() {
+		SecurityRequirement securityRequirement = new SecurityRequirement().addList(securityJwtName);
+		return new OpenAPI()
+			.components(apiComponents())
+			.addSecurityItem(securityRequirement)
+			.info(apiInfo());
+	}
+
+	private Info apiInfo() {
+		return new Info()
+			.title("Integrated Feed Backend API Docs")
+			.description("소셜 미디어 통합 피드 서비스")
+			.version("1.0.0");
+	}
+
+	private Components apiComponents() {
+		return new Components()
+			.addSecuritySchemes(securityJwtName, new SecurityScheme()
+				.name(securityJwtName)
+				.type(SecurityScheme.Type.HTTP)
+				.scheme(BEARER_TOKEN_PREFIX)
+				.bearerFormat(securityJwtName));
+	}
+}
