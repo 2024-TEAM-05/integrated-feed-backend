@@ -120,8 +120,8 @@ public class GlobalExceptionHandler {
 	}
 
 	/**
-	 * 특정 리소스를 찾지 못한 경우
-	 * ex) 특정 id에 대한 리소스를 찾지 못한 경우
+	 * 특정 리소스를 찾지 못한 경우 (애플리케이션 에러일 가능성이 높음)
+	 * ex) 특정 경로에 대한 리소스를 찾지 못한 경우
 	 * **/
 	@ExceptionHandler(MissingResourceException.class)
 	public ResponseEntity<BaseApiResponse> handleNotFound(MissingResourceException e) {
