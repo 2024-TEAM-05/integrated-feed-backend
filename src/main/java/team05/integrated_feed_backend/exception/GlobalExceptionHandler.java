@@ -108,7 +108,7 @@ public class GlobalExceptionHandler {
 	// ?QNA 이거 원래 handleUnauthorized 라고 정의되어 있었는데, 해당 예외 찾아보니 그 기능이 아닌 것 같은데,
 	// 이렇게 설정하신 이유가 있을지 궁금합니다.
 	@ExceptionHandler(UnsupportedOperationException.class)
-	public ResponseEntity<BaseApiResponse> handleUnauthorized(UnsupportedOperationException e) {
+	public ResponseEntity<BaseApiResponse> handleUnsupportedOperation(UnsupportedOperationException e) {
 		log.warn(e.getMessage(), e);
 
 		StatusCode statusCode = statusCodeParser.parse(e.getMessage());
