@@ -12,7 +12,7 @@ import io.swagger.v3.oas.models.servers.Server;
 
 @Configuration
 public class SwaggerConfig {
-	private static final String BEARER_TOKEN_PREFIX = "Bearer";
+	private static final String BEARER_TOKEN_PREFIX = "bearer";
 	private static String securityJwtName = "JWT";
 
 	@Bean
