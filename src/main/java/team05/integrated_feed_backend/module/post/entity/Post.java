@@ -3,7 +3,7 @@ package team05.integrated_feed_backend.module.post.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import team05.integrated_feed_backend.common.enums.SocialMediaType;
-import team05.integrated_feed_backend.core.entity.BaseEntity;
+import team05.integrated_feed_backend.common.BaseEntity;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,7 +18,6 @@ public class Post extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "post_id")
     private Long postId;
 
     @Column(nullable = false)

@@ -1,7 +1,7 @@
 package team05.integrated_feed_backend.module.post.entity;
 import jakarta.persistence.*;
 import lombok.*;
-import team05.integrated_feed_backend.core.entity.BaseEntity;
+import team05.integrated_feed_backend.common.BaseEntity;
 
 @Entity
 @Getter
@@ -11,7 +11,6 @@ import team05.integrated_feed_backend.core.entity.BaseEntity;
 public class PostHashtag extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "post_hashtag_id")
     private Long postHashtagId;
 
     @ManyToOne(fetch = FetchType.LAZY)

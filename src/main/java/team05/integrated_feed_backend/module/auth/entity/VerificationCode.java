@@ -2,7 +2,7 @@ package team05.integrated_feed_backend.module.auth.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import team05.integrated_feed_backend.core.entity.BaseEntity;
+import team05.integrated_feed_backend.common.BaseEntity;
 import team05.integrated_feed_backend.module.user.entity.User;
 
 import java.time.LocalDateTime;

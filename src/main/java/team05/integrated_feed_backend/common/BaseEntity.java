@@ -1,4 +1,4 @@
-package team05.integrated_feed_backend.core.entity;
+package team05.integrated_feed_backend.common;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;

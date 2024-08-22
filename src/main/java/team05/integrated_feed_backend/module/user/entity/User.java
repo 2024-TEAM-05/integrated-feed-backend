@@ -2,7 +2,7 @@ package team05.integrated_feed_backend.module.user.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import team05.integrated_feed_backend.core.entity.BaseEntity;
+import team05.integrated_feed_backend.common.BaseEntity;
 
 @Entity
 @Table(name = "member")
@@ -13,7 +13,6 @@ import team05.integrated_feed_backend.core.entity.BaseEntity;
 public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
     private Long userId;
 
     @Column(nullable = false, unique = true)
