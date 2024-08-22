@@ -40,5 +40,5 @@ public class Post extends BaseEntity {
     private Long shareCount;
 
     @OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<PostHashtag> postHashtags = new HashSet<PostHashtag>(); // Post와 PostHashtag 간 일대다
+    private Set<PostHashtag> postHashtags = new HashSet<PostHashtag>();
 }

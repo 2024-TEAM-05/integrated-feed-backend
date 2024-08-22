@@ -11,13 +11,14 @@ import team05.integrated_feed_backend.common.BaseEntity;
 public class PostHashtag extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "post_hashtag_id")
     private Long postHashtagId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id", nullable = false)
-    private Post post; // Post와 다대일 관계
+    private Post post;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hashtag_id", nullable = false)
-    private Hashtag hashtag; // Hashtag와 다대일 관계
+    private Hashtag hashtag;
 }

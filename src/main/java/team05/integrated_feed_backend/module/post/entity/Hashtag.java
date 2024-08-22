@@ -21,5 +21,5 @@ public class Hashtag extends BaseEntity {
     private String hashtag;
 
     @OneToMany(mappedBy = "hashtag", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<PostHashtag> postHashtags = new HashSet<PostHashtag>();  // Hashtag와 PostHashtag 간의 일대다 관계
+    private Set<PostHashtag> postHashtags = new HashSet<PostHashtag>();
 }
