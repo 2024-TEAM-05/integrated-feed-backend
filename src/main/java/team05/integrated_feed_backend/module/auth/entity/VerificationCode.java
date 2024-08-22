@@ -17,7 +17,7 @@ public class VerificationCode extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long verificationCodeId;
 
-    @ManyToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
