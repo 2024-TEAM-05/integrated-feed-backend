@@ -3,7 +3,7 @@ package team05.integrated_feed_backend.module.auth.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import team05.integrated_feed_backend.common.BaseEntity;
-import team05.integrated_feed_backend.module.user.entity.User;
+import team05.integrated_feed_backend.module.user.entity.Member;
 
 import java.time.LocalDateTime;
 
@@ -18,8 +18,8 @@ public class VerificationCode extends BaseEntity {
     private Long verificationCodeId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "member_id", nullable = false)
+    private Member member;
 
     @Column(nullable = false)
     private String code;
