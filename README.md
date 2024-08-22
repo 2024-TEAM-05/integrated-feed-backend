@@ -5,7 +5,6 @@
 
 <details>
 	<summary> 게시물 “좋아요수”, “공유수” 증가 API</summary>
-  	<div markdown="1">
         
 ### **요약 (Summary)**
 
@@ -28,7 +27,8 @@
 
 ### **계획 (Plan)**
 
-### 플로우 차트
+<details>
+	<summary> 플로우 차트</summary>
 
 ```mermaid
 graph TD
@@ -45,7 +45,10 @@ graph TD
 
 ```
 
-### 클래스 다이어그램
+</details>
+
+<details>
+	<summary> 클래스 다이어그램 </summary>
 
 ```mermaid
 classDiagram
@@ -115,7 +118,11 @@ classDiagram
 
 ```
 
-### 시퀀스 다이어그램
+</details>
+
+<details>
+	<summary> 시퀀스 다이어그램 </summary>
+
 
 ```mermaid
 sequenceDiagram
@@ -168,6 +175,8 @@ sequenceDiagram
     PostController -->> Client: Acknowledgment
 
 ```
+
+</details>
 
 # **마일스톤 (Milestones)**
 
