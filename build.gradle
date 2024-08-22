@@ -41,6 +41,10 @@ dependencies {
     annotationProcessor "jakarta.persistence:jakarta.persistence-api"
 }
 
+clean {
+    delete file('src/main/generated')
+}
+
 tasks.named('test') {
     useJUnitPlatform()
 }
