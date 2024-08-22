@@ -19,7 +19,6 @@ import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import team05.integrated_feed_backend.common.BaseApiResponse;
-import team05.integrated_feed_backend.exception.code.GlobalStatusCode;
 import team05.integrated_feed_backend.exception.code.StatusCode;
 import team05.integrated_feed_backend.exception.code.StatusCodeParser;
 import team05.integrated_feed_backend.exception.custom.BusinessException;
@@ -95,7 +94,7 @@ public class GlobalExceptionHandler {
 
 		StatusCode statusCode = statusCodeParser.parse(e.getMessage());
 		if (statusCode == null) {
-			statusCode = GlobalStatusCode.ILLEGAL_ARGUMENT;
+			statusCode = StatusCode.ILLEGAL_ARGUMENT;
 		}
 
 		return ResponseEntity.status(statusCode.getHttpStatus()).body(BaseApiResponse.of(statusCode));
@@ -113,7 +112,7 @@ public class GlobalExceptionHandler {
 
 		StatusCode statusCode = statusCodeParser.parse(e.getMessage());
 		if (statusCode == null) {
-			statusCode = GlobalStatusCode.UNSUPPORTED_OPERATION;
+			statusCode = StatusCode.UNSUPPORTED_OPERATION;
 		}
 
 		return ResponseEntity.status(statusCode.getHttpStatus()).body(BaseApiResponse.of(statusCode));
@@ -129,7 +128,7 @@ public class GlobalExceptionHandler {
 
 		StatusCode statusCode = statusCodeParser.parse(e.getMessage());
 		if (statusCode == null) {
-			statusCode = GlobalStatusCode.RESOURCE_NOT_FOUND;
+			statusCode = StatusCode.RESOURCE_NOT_FOUND;
 		}
 
 		return ResponseEntity.status(statusCode.getHttpStatus()).body(BaseApiResponse.of(statusCode));
@@ -144,7 +143,7 @@ public class GlobalExceptionHandler {
 
 		StatusCode statusCode = statusCodeParser.parse(e.getMessage());
 		if (statusCode == null) {
-			statusCode = GlobalStatusCode.INTERNAL_SERVER_ERROR;
+			statusCode = StatusCode.INTERNAL_SERVER_ERROR;
 		}
 
 		return ResponseEntity.internalServerError().body(BaseApiResponse.of(statusCode));
@@ -158,7 +157,7 @@ public class GlobalExceptionHandler {
 	private ResponseEntity<BaseApiResponse> handleUnexpected(String message) {
 		log.error("예상하지 못한 에러가 발생했습니다. {}", message);
 
-		GlobalStatusCode statusCode = GlobalStatusCode.UNEXPECT_INTERNAL_ERROR;
+		StatusCode statusCode = StatusCode.UNEXPECT_INTERNAL_ERROR;
 
 		return ResponseEntity.internalServerError().body(BaseApiResponse.of(statusCode));
 	}

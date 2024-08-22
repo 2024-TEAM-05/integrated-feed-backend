@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import lombok.Getter;
 
 @Getter
-public enum GlobalStatusCode implements StatusCode {
+public enum StatusCode {
 
 	/**
 	 * 200 번대 CODE
@@ -30,7 +30,7 @@ public enum GlobalStatusCode implements StatusCode {
 	private final HttpStatus httpStatus;
 	private final String message;
 
-	GlobalStatusCode(HttpStatus httpStatus, String message) {
+	StatusCode(HttpStatus httpStatus, String message) {
 		this.httpStatus = httpStatus;
 		this.message = message;
 	}

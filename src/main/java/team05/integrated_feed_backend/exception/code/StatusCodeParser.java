@@ -9,6 +9,6 @@ public class StatusCodeParser {
 	public StatusCode parse(String message) {
 		String name = message;
 
-		return GlobalStatusCode.valueOf(name);
+		return StatusCode.valueOf(name);
 	}
 }
