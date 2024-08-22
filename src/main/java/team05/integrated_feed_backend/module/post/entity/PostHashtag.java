@@ -5,8 +5,8 @@ import team05.integrated_feed_backend.common.BaseEntity;
 
 @Entity
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 public class PostHashtag extends BaseEntity {
     @Id
