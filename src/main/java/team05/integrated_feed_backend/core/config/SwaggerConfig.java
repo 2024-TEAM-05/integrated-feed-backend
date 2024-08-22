@@ -19,7 +19,7 @@ public class SwaggerConfig {
 	public OpenAPI openAPI() {
 		SecurityRequirement securityRequirement = new SecurityRequirement().addList(securityJwtName);
 		return new OpenAPI()
-			.addServersItem(new Server().url("").description("현재 서버"))
+			.addServersItem(new Server().url("/").description("현재 서버"))
 			.components(apiComponents())
 			.addSecurityItem(securityRequirement)
 			.info(apiInfo());
