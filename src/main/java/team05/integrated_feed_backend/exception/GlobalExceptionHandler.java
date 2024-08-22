@@ -104,8 +104,6 @@ public class GlobalExceptionHandler {
 	 * 지원되지 않는 기능이나, 메서드를 요청한 경우
 	 * ex) post 메서드를 지원하지 않는 엔드 포인트에 post 요청한 경우
 	 * **/
-	// ?QNA 이거 원래 handleUnauthorized 라고 정의되어 있었는데, 해당 예외 찾아보니 그 기능이 아닌 것 같은데,
-	// 이렇게 설정하신 이유가 있을지 궁금합니다.
 	@ExceptionHandler(UnsupportedOperationException.class)
 	public ResponseEntity<BaseApiResponse> handleUnsupportedOperation(UnsupportedOperationException e) {
 		log.warn(e.getMessage(), e);
@@ -152,8 +150,6 @@ public class GlobalExceptionHandler {
 	/**
 	 * 예상하지 못한 곳에서 난 서버 에러인 경우
 	 */
-	// ?QNA status code parsing 문제인 것 같은데,
-	// 해당 에러를 발생시키는 게 맞을지, 정의해둔 기존 에러 코드로 내보내는 게 나을지 고민
 	private ResponseEntity<BaseApiResponse> handleUnexpected(String message) {
 		log.error("예상하지 못한 에러가 발생했습니다. {}", message);
 
