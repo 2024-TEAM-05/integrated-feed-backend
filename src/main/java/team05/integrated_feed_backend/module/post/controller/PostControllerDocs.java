@@ -10,7 +10,7 @@ import team05.integrated_feed_backend.module.post.dto.response.PostSearchRes;
 @Tag(name = "Post", description = "피드 관련 API")
 public interface PostControllerDocs {
 
-	@Operation(summary = "게시물 조회", description = "게시물을 조회 조건에 따라 검색합니다.")
+	@Operation(summary = "게시물 목록 조회", description = "게시물을 조회 조건에 따라 검색합니다.")
 	@ApiResponse(responseCode = "200", description = "요청이 성공했습니다.")
 	BaseApiResponse<PostSearchRes> getPosts(
 		PostSearchReq postSearchReq
