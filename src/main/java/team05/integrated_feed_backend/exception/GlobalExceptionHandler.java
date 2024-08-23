@@ -3,15 +3,14 @@ package team05.integrated_feed_backend.exception;
 import static org.springframework.http.HttpStatus.*;
 
 import java.util.Arrays;
-import java.util.MissingResourceException;
 import java.util.stream.Collectors;
 
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
@@ -20,142 +19,132 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import team05.integrated_feed_backend.common.BaseApiResponse;
 import team05.integrated_feed_backend.exception.code.StatusCode;
-import team05.integrated_feed_backend.exception.code.StatusCodeParser;
+import team05.integrated_feed_backend.exception.custom.BadRequestException;
 import team05.integrated_feed_backend.exception.custom.BusinessException;
+import team05.integrated_feed_backend.exception.custom.DataNotFoundException;
+import team05.integrated_feed_backend.exception.custom.DuplicateResourceException;
+import team05.integrated_feed_backend.exception.custom.ForbiddenException;
 
 @Slf4j
 @RequiredArgsConstructor
 public class GlobalExceptionHandler {
 
-	private final StatusCodeParser statusCodeParser;
+	/**
+	 * 요청이 잘못된 경우
+	 * ex) 필수 입력 값을 전달하지 않은 경우
+	 **/
+	@ResponseStatus(BAD_REQUEST)
+	@ExceptionHandler({BadRequestException.class})
+	public BaseApiResponse<Void> handleBadRequestException(BadRequestException e) {
+		log.warn(e.getMessage(), e);
+
+		return BaseApiResponse.of(getStatusCodeFromException(e));
+	}
+
+	/**
+	 * 중복된 데이터 저장 요청을 정의한 에러인 경우
+	 * ex) F 엔티티에 동일한 data를 넣은 경우
+	 **/
+	@ResponseStatus(CONFLICT)
+	@ExceptionHandler({DuplicateResourceException.class})
+	public BaseApiResponse<Void> handleDuplicateResourceException(DuplicateResourceException e) {
+		log.warn(e.getMessage(), e);
+
+		return BaseApiResponse.of(getStatusCodeFromException(e));
+	}
+
+	/**
+	 * 접근할 수 없는 데이터 요청을 정의한 에러인 경우
+	 * ex) 사용자가 관리자 권한의 api 요청을 한 경우
+	 **/
+	@ResponseStatus(FORBIDDEN)
+	@ExceptionHandler({ForbiddenException.class})
+	public BaseApiResponse<Void> handleForbiddenException(ForbiddenException e) {
+		log.warn(e.getMessage(), e);
+
+		return BaseApiResponse.of(getStatusCodeFromException(e));
+	}
+
+	/**
+	 * 요청 시 필수 데이터이나, 전달하지 않은 요청을 정의한 에러인 경우
+	 * ex) 게시물 id 전달했으나, 존재하지 않은 게시물인 경우
+	 **/
+	@ResponseStatus(NOT_FOUND)
+	@ExceptionHandler({DataNotFoundException.class})
+	public BaseApiResponse<Void> handleDataNotFoundException(DataNotFoundException e) {
+		log.warn(e.getMessage(), e);
+
+		return BaseApiResponse.of(getStatusCodeFromException(e));
+	}
 
 	/**
 	 * 비즈니스 로직 상 발생할 수 있는 정의한 에러인 경우
-	 * ex) 중복된 데이터 저장 요청, 찾을 수 없는 데이터 요청, 접근할 수 없는 데이터 요청, 잘못된 형식의 요청인 경우
-	 * **/
+	 * ex) 하위 커스텀 외의 비즈니스 로직 예외인 경우
+	 **/
+	@ResponseStatus(BAD_REQUEST)
 	@ExceptionHandler({BusinessException.class})
-	public ResponseEntity<BaseApiResponse> handleBusinessException(BusinessException e) {
-		HttpStatus httpStatus = e.getStatusCode().getHttpStatus();
+	public BaseApiResponse<Void> handleBusinessException(BusinessException e) {
+		log.warn(e.getMessage(), e);
 
-		// 서버 에러인 경우 stack trace
-		if (httpStatus.value() == 500) {
-			e.printStackTrace();
-		}
-
-		return ResponseEntity.status(httpStatus).body(BaseApiResponse.of(e.getStatusCode()));
+		return BaseApiResponse.of(getStatusCodeFromException(e));
 	}
 
 	/**
 	 * 유효성 검사 실패 에러 잡는 경우
 	 * ex) validation 으로 설정해둔 NotNull 필드가 null로 온 경우
-	 * **/
+	 **/
+	@ResponseStatus(BAD_REQUEST)
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResponseEntity<BaseApiResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+	public BaseApiResponse<Void> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+		log.warn(e.getMessage(), e);
+
 		// validation 검사 실패 항목 보여주는 메세지
 		String errors = convertToErrorResponses(e);
 
-		return ResponseEntity.badRequest().body(BaseApiResponse.of(BAD_REQUEST, errors));
+		return BaseApiResponse.of(BAD_REQUEST, errors);
 	}
 
 	/**
 	 * 메서드 인자 타입이 맞지 않은 경우
 	 * ex) Inteager type에 String type이 들어온 경우
-	 * **/
+	 **/
+	@ResponseStatus(BAD_REQUEST)
 	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
-	public ResponseEntity<BaseApiResponse> handleMethodArgumentTypeMismatchException(
-		MethodArgumentTypeMismatchException e) {
+	public BaseApiResponse<Void> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
+		log.warn(e.getMessage(), e);
+
 		// 타입이 맞지 않은 메서드 인자 보여주는 메세지
 		String message = formatMessageFrom(e);
 
-		return ResponseEntity.badRequest().body(BaseApiResponse.of(BAD_REQUEST, message));
+		return BaseApiResponse.of(BAD_REQUEST, message);
 	}
 
 	/**
 	 * JSON 파싱 시, 잘못된 형식의 데이터를 넣은 경우
 	 * ex) enumType 에 해당하지 않은 항목이 들어온 경우
-	 * **/
+	 **/
+	@ResponseStatus(BAD_REQUEST)
 	@ExceptionHandler(HttpMessageNotReadableException.class)
-	public ResponseEntity<BaseApiResponse> handleInvalidFormatException(InvalidFormatException e) {
+	public BaseApiResponse<Void> handleInvalidFormatException(InvalidFormatException e) {
 		log.warn(e.getMessage(), e);
 
 		// enum type 의 항목 보여주는 메세지
 		String message = formatMessageFrom(e);
 
-		return ResponseEntity.badRequest().body(BaseApiResponse.of(BAD_REQUEST, message));
-	}
-
-	/**
-	 * 메서드로 잘못된 인자가 전달된 경우 (애플리케이션 에러일 가능성이 높음)
-	 * ex) null 값을 허용하지 않는 인자에 null 이 전달된 경우
-	 * **/
-	@ExceptionHandler(IllegalArgumentException.class)
-	public ResponseEntity<BaseApiResponse> handleBadRequest(IllegalArgumentException e) {
-		log.warn(e.getMessage(), e);
-
-		StatusCode statusCode = statusCodeParser.parse(e.getMessage());
-		if (statusCode == null) {
-			statusCode = StatusCode.ILLEGAL_ARGUMENT;
-		}
-
-		return ResponseEntity.status(statusCode.getHttpStatus()).body(BaseApiResponse.of(statusCode));
-	}
-
-	/**
-	 * 지원되지 않는 기능이나, 메서드를 요청한 경우
-	 * ex) post 메서드를 지원하지 않는 엔드 포인트에 post 요청한 경우
-	 * **/
-	@ExceptionHandler(UnsupportedOperationException.class)
-	public ResponseEntity<BaseApiResponse> handleUnsupportedOperation(UnsupportedOperationException e) {
-		log.warn(e.getMessage(), e);
-
-		StatusCode statusCode = statusCodeParser.parse(e.getMessage());
-		if (statusCode == null) {
-			statusCode = StatusCode.UNSUPPORTED_OPERATION;
-		}
-
-		return ResponseEntity.status(statusCode.getHttpStatus()).body(BaseApiResponse.of(statusCode));
-	}
-
-	/**
-	 * 특정 리소스를 찾지 못한 경우 (애플리케이션 에러일 가능성이 높음)
-	 * ex) 특정 경로에 대한 리소스를 찾지 못한 경우
-	 * **/
-	@ExceptionHandler(MissingResourceException.class)
-	public ResponseEntity<BaseApiResponse> handleNotFound(MissingResourceException e) {
-		log.warn(e.getMessage(), e);
-
-		StatusCode statusCode = statusCodeParser.parse(e.getMessage());
-		if (statusCode == null) {
-			statusCode = StatusCode.RESOURCE_NOT_FOUND;
-		}
-
-		return ResponseEntity.status(statusCode.getHttpStatus()).body(BaseApiResponse.of(statusCode));
+		return BaseApiResponse.of(BAD_REQUEST, message);
 	}
 
 	/**
 	 * 정의하지 못한 내부 서버 에러인 경우
-	 * **/
+	 **/
+	@ResponseStatus(INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(Exception.class)
-	public ResponseEntity<BaseApiResponse> handleUnknownException(Exception e) {
+	public BaseApiResponse<Void> handleUnknownException(Exception e) {
 		log.error(e.getMessage(), e);
 
-		StatusCode statusCode = statusCodeParser.parse(e.getMessage());
-		if (statusCode == null) {
-			statusCode = StatusCode.INTERNAL_SERVER_ERROR;
-		}
+		StatusCode statusCode = StatusCode.findStatusCodeByNameSafe(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR);
 
-		return ResponseEntity.internalServerError().body(BaseApiResponse.of(statusCode));
-	}
-
-	/**
-	 * 예상하지 못한 곳에서 난 서버 에러인 경우
-	 */
-	private ResponseEntity<BaseApiResponse> handleUnexpected(String message) {
-		log.error("예상하지 못한 에러가 발생했습니다. {}", message);
-
-		StatusCode statusCode = StatusCode.UNEXPECT_INTERNAL_ERROR;
-
-		return ResponseEntity.internalServerError().body(BaseApiResponse.of(statusCode));
+		return BaseApiResponse.of(statusCode);
 	}
 
 	/**
@@ -190,4 +179,17 @@ public class GlobalExceptionHandler {
 		return enumTypeName + "는 [" + validValues + "] 중 하나여야 합니다.";
 	}
 
+	/**
+	 * BusinessException 및 하위 커스텀 예외 클래스에서 StatusCode 내보내는 메서드
+	 **/
+	private static StatusCode getStatusCodeFromException(BusinessException e) {
+		HttpStatus httpStatus = e.getStatusCode().getHttpStatus();
+
+		// 서버 에러인 경우 stack trace
+		if (httpStatus.value() == 500) {
+			e.printStackTrace();
+		}
+
+		return e.getStatusCode();
+	}
 }
