@@ -10,10 +10,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class PostDto {
@@ -32,15 +30,15 @@ public class PostDto {
 
 	@Schema(description = "조회 수")
 	@JsonProperty("view_count")
-	private int viewCount;
+	private Long viewCount;
 
 	@Schema(description = "좋아요 수")
 	@JsonProperty("like_count")
-	private int likeCount;
+	private Long likeCount;
 
 	@Schema(description = "공유 수")
 	@JsonProperty("share_count")
-	private int shareCount;
+	private Long shareCount;
 
 	@Schema(description = "생성일")
 	@JsonProperty("created_at")
