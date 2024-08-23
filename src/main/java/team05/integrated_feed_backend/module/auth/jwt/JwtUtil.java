@@ -1,4 +1,4 @@
-package team05.integrated_feed_backend.common.util;
+package team05.integrated_feed_backend.module.auth.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
