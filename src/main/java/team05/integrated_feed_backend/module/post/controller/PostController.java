@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import team05.integrated_feed_backend.common.DataApiResponse;
+import team05.integrated_feed_backend.common.BaseApiResponse;
 import team05.integrated_feed_backend.common.dto.PaginationQuery;
 import team05.integrated_feed_backend.module.post.dto.request.PostSearchReq;
 import team05.integrated_feed_backend.module.post.dto.response.PostSearchRes;
@@ -20,13 +20,13 @@ public class PostController implements PostControllerDocs {
 
 	@Override
 	@GetMapping
-	public DataApiResponse<PostSearchRes> getPosts(
+	public BaseApiResponse<PostSearchRes> getPosts(
 		@ModelAttribute PostSearchReq postSearchReq,
 		@Valid @ModelAttribute PaginationQuery paginationQuery) {
 
 		PostSearchRes res = new PostSearchRes();
 
-		return new DataApiResponse<>(res, HttpStatus.OK, "success");
+		return new BaseApiResponse<>(HttpStatus.OK, "success", res);
 	}
 
 }
