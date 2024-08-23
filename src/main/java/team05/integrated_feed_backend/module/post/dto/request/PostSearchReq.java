@@ -6,10 +6,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import team05.integrated_feed_backend.common.dto.PaginationQuery;
 
-@Getter @Setter
+@Getter
+@Setter
 @AllArgsConstructor
-public class PostSearchReq {
+public class PostSearchReq extends PaginationQuery {
 
 	@Schema(description = "해시태그")
 	private String hashtag;

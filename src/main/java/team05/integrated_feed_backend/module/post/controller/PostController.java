@@ -6,10 +6,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import team05.integrated_feed_backend.common.BaseApiResponse;
-import team05.integrated_feed_backend.common.dto.PaginationQuery;
 import team05.integrated_feed_backend.module.post.dto.request.PostSearchReq;
 import team05.integrated_feed_backend.module.post.dto.response.PostSearchRes;
 
@@ -21,12 +19,12 @@ public class PostController implements PostControllerDocs {
 	@Override
 	@GetMapping
 	public BaseApiResponse<PostSearchRes> getPosts(
-		@ModelAttribute PostSearchReq postSearchReq,
-		@Valid @ModelAttribute PaginationQuery paginationQuery) {
+		@ModelAttribute PostSearchReq postSearchReq
+	) {
 
 		PostSearchRes res = new PostSearchRes();
 
-		return new BaseApiResponse<>(HttpStatus.OK, "success", res);
+		return new BaseApiResponse<>(HttpStatus.OK, "요청이 성공했습니다.", res);
 	}
 
 }

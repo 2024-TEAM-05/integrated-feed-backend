@@ -7,22 +7,23 @@ import jakarta.validation.constraints.Min;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
+enum OrderType {
+	ASC, DESC
+}
+
+@Getter
+@Setter
 @Validated
 public class PaginationQuery {
 
-	@Schema(description = "Pagination - Page", defaultValue = "1")
-	@Min(value = 1, message = "Page number must be at least 1")
+	@Schema(description = "페이지", defaultValue = "1")
+	@Min(value = 1, message = "페이지 값은 1보다 커야합니다.")
 	private int page = 1;
 
-	@Schema(description = "Pagination - Limit", defaultValue = "10")
-	@Min(value = 1, message = "Limit must be at least 1")
+	@Schema(description = "페이지 당 항목 수", defaultValue = "10")
+	@Min(value = 1, message = "페이지 당 항목 수는 1보다 커야합니다.")
 	private int limit = 10;
 
 	@Schema(description = "정렬 기준", allowableValues = {"ASC", "DESC"})
 	private OrderType order = OrderType.ASC;
 }
-
-	enum OrderType {
-		ASC, DESC
-	}
