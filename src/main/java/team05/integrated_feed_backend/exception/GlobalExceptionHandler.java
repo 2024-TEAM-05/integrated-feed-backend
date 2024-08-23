@@ -142,7 +142,7 @@ public class GlobalExceptionHandler {
 	public BaseApiResponse<Void> handleUnknownException(Exception e) {
 		log.error(e.getMessage(), e);
 
-		StatusCode statusCode = StatusCode.getStatusCode(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR);
+		StatusCode statusCode = StatusCode.findStatusCodeByNameSafe(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR);
 
 		return BaseApiResponse.of(statusCode);
 	}

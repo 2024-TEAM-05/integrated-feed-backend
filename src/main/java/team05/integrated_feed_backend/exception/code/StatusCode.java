@@ -31,7 +31,10 @@ public enum StatusCode {
 		this.message = message;
 	}
 
-	public static StatusCode getStatusCode(String name, StatusCode defaultStatusCode) {
+	/**
+	 * 이름으로 StatusCode 찾고, 없다면 defaultStatusCode 로 정의하는 함수
+	 **/
+	public static StatusCode findStatusCodeByNameSafe(String name, StatusCode defaultStatusCode) {
 		try {
 			return StatusCode.valueOf(name);
 		} catch (IllegalArgumentException e) {
