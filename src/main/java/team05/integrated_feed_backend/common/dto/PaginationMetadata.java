@@ -1,9 +1,7 @@
 package team05.integrated_feed_backend.common.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -30,27 +28,21 @@ public class PaginationMetadata {
 		int page,
 		int limit,
 		int total,
-		int lastPage
+		int lastPage,
+		Integer nextPage
 	) {
 
 		this.page = page;
 		this.limit = limit;
 		this.total = total;
-		this.lastPage = Math.max(1, (int) Math.ceil((double) total / limit));
-		this.nextPage = (page < lastPage) ? page + 1 : null;
-
+		this.lastPage = lastPage;
+		this.nextPage = nextPage;
 	}
 
-	@JsonProperty("hasNext")
-	@Schema(description = "Indicates if there is a next page.")
-	public boolean hasNext() {
-		return nextPage != null;
-	}
-
-	@JsonProperty("totalItems")
-	@Schema(description = "The total number of items.")
-	public int getTotal() {
-		return total;
+	public static PaginationMetadata of(int page, int limit, int total) {
+		int lastPage = Math.max(1, (int)Math.ceil((double)total / limit));
+		Integer nextPage = (page < lastPage) ? page + 1 : null;
+		return new PaginationMetadata(page, limit, total, lastPage, nextPage);
 	}
 
 }
