@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -148,6 +149,18 @@ public class GlobalExceptionHandler {
 	}
 
 	/**
+	 * 요청된 사용자를 찾을 수 없는 경우
+	 * ex) 로그인 시 존재하지 않는 사용자를 입력한 경우
+	 **/
+	@ResponseStatus(NOT_FOUND)
+	@ExceptionHandler({UsernameNotFoundException.class})
+	public BaseApiResponse<Void> handleUsernameNotFoundException(UsernameNotFoundException e) {
+		log.warn(e.getMessage(), e);
+
+		return BaseApiResponse.of(StatusCode.USER_NOT_FOUND);
+	}
+
+	/**
 	 * validation 검사 실패한 항목 에러 메세지 만드는 메서드
 	 */
 	private String convertToErrorResponses(MethodArgumentNotValidException e) {
@@ -192,4 +205,5 @@ public class GlobalExceptionHandler {
 
 		return e.getStatusCode();
 	}
+
 }
