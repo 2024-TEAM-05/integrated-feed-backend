@@ -15,3 +15,7 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: validate
+
+jwt:
+  secret: ${JWT_SECRET}   # secret key, 만료 시간 환경 변수로 관리
+  token-validity-in-seconds: ${JWT_EXPIRATION}
