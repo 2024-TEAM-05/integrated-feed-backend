@@ -26,7 +26,7 @@ public class PostController implements PostControllerDocs {
 
 		PostSearchRes res = new PostSearchRes();
 
-		return new BaseApiResponse<>(HttpStatus.OK, "success", res);
+		return new BaseApiResponse<>(HttpStatus.OK, "요청이 성공했습니다.", res);
 	}
 
 }
