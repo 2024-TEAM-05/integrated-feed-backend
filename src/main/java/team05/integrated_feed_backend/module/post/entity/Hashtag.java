@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import team05.integrated_feed_backend.common.BaseEntity;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -21,5 +23,6 @@ public class Hashtag extends BaseEntity {
     private String hashtag;
 
     @OneToMany(mappedBy = "hashtag", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<PostHashtag> postHashtags = new HashSet<PostHashtag>();
+    private List<PostHashtag> postHashtags = new ArrayList<>();
+
 }

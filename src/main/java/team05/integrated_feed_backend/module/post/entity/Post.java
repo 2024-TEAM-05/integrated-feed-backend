@@ -5,7 +5,9 @@ import lombok.*;
 import team05.integrated_feed_backend.common.enums.SocialMediaType;
 import team05.integrated_feed_backend.common.BaseEntity;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -40,5 +42,6 @@ public class Post extends BaseEntity {
     private Long shareCount;
 
     @OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<PostHashtag> postHashtags = new HashSet<PostHashtag>();
+    private List<PostHashtag> postHashtags = new ArrayList<>();
+
 }
