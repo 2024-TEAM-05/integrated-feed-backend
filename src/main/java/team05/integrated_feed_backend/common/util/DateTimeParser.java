@@ -6,7 +6,8 @@ import java.time.format.DateTimeFormatter;
 public class DateTimeParser {
 	public static LocalDateTime parseDateTime(String date) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-		if(date.length() == 10) date += "T00:00:00";
+		if (date.length() == 10)
+			date += "T00:00:00";
 		return LocalDateTime.parse(date, formatter);
 	}
 }
