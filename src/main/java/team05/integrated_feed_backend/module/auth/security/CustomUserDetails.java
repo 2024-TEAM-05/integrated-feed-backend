@@ -1,11 +1,9 @@
-package team05.integrated_feed_backend.module.auth;
+package team05.integrated_feed_backend.module.auth.security;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import team05.integrated_feed_backend.module.user.entity.Member;
+import team05.integrated_feed_backend.module.member.entity.Member;
 
 import java.util.Collection;
 import java.util.Collections;

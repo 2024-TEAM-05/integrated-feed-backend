@@ -9,7 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import team05.integrated_feed_backend.module.auth.CustomUserDetails;
+import team05.integrated_feed_backend.module.auth.security.CustomUserDetails;
 
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;

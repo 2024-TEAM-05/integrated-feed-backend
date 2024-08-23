@@ -1,4 +1,4 @@
-package team05.integrated_feed_backend.module.user.entity;
+package team05.integrated_feed_backend.module.member.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
