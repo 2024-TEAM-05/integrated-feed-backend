@@ -13,7 +13,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import team05.integrated_feed_backend.common.util.JwtUtil;
 import team05.integrated_feed_backend.module.auth.jwt.JwtAuthenticationFilter;
 
-//보안 필터 체인을 구성하고, 어떤 경로에 대해 인증이 필요한지, 어떤 경로는 인증 없이 접근할 수 있는지 설정
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
