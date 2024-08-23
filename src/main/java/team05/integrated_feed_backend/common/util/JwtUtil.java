@@ -3,7 +3,11 @@ package team05.integrated_feed_backend.common.util;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -35,6 +39,21 @@ public class JwtUtil {
                 .setExpiration(validity)    // 만료 시간
                 .signWith(SignatureAlgorithm.HS256, secretKey)  // 서명
                 .compact();
+    }
+
+    // HTTP 요청 헤더에서 JWT 토큰을 추출
+    public String resolveToken(HttpServletRequest request) {
+        String bearerToken = request.getHeader("Authorization");
+        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
+            return bearerToken.substring(7);  // "Bearer " 이후의 토큰 실제부분만 추출
+        }
+        return null;
+    }
+
+    // JWT 토큰에서 Authentication(인증된 사용자) 가져오기
+    public Authentication getAuthentication(String token, UserDetails userDetails) {
+        return new UsernamePasswordAuthenticationToken(
+                userDetails, null, userDetails.getAuthorities());
     }
 
     // JWT 토큰에서 memberId 추출 (Body: 페이로드)
