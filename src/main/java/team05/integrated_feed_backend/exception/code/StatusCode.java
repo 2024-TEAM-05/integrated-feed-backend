@@ -34,4 +34,12 @@ public enum StatusCode {
 		this.httpStatus = httpStatus;
 		this.message = message;
 	}
+
+	public static StatusCode getStatusCode(String name) {
+		try {
+			return StatusCode.valueOf(name);
+		} catch (IllegalArgumentException e) {
+			return null;
+		}
+	}
 }
