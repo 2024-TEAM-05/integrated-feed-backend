@@ -2,7 +2,7 @@ package team05.integrated_feed_backend.module.user.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import team05.integrated_feed_backend.common.BaseEntity;
+import team05.integrated_feed_backend.common.entity.BaseEntity;
 
 @Entity
 @Getter
