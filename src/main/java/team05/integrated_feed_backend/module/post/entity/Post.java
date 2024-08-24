@@ -1,15 +1,25 @@
 package team05.integrated_feed_backend.module.post.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
-import team05.integrated_feed_backend.common.enums.SocialMediaType;
-import team05.integrated_feed_backend.common.BaseEntity;
-
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import team05.integrated_feed_backend.common.BaseEntity;
+import team05.integrated_feed_backend.common.enums.SocialMediaType;
 
 @Entity
 @Getter
@@ -18,30 +28,31 @@ import java.util.Set;
 @Builder
 public class Post extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long postId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long postId;
 
-    @Column(nullable = false)
-    private String title;
+	@Column(nullable = false)
+	private String title;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String content;
+	@Column(nullable = false, columnDefinition = "TEXT")
+	private String content;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private SocialMediaType type;
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private SocialMediaType type;
 
-    @Column(nullable = false)
-    private Long viewCount;
+	@Column(nullable = false)
+	private Long viewCount;
 
-    @Column(nullable = false)
-    private Long likeCount;
+	@Column(nullable = false)
+	private Long likeCount;
 
-    @Column(nullable = false)
-    private Long shareCount;
+	@Column(nullable = false)
+	private Long shareCount;
 
-    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PostHashtag> postHashtags = new ArrayList<>();
+	@OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@Builder.Default
+	private List<PostHashtag> postHashtags = new ArrayList<>();
 
 }
