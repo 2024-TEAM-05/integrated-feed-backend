@@ -17,7 +17,7 @@ import team05.integrated_feed_backend.module.post.service.PostService;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/posts")
-public class PostController {
+public class PostStatisticsController {
 	private final PostService postService;
 
 	@GetMapping("/statistics")
