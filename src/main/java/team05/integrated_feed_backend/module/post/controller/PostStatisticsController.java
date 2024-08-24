@@ -19,7 +19,7 @@ import team05.integrated_feed_backend.module.post.service.PostStatisticsService;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/posts")
-public class PostStatisticsController {
+public class PostStatisticsController implements PostStatisticsControllerDocs {
 
 	private final PostStatisticsService postStatisticsService;
 
