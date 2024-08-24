@@ -25,7 +25,8 @@ public class PostStatisticsController {
 
 	@GetMapping("/statistics")
 	public BaseApiResponse<List<PostStatisticsListRes>> getPostStatistics(
-		@RequestParam(defaultValue = "date") String type, @RequestParam(required = false) String hashtag,
+		@RequestParam(defaultValue = "date") String type,
+		@RequestParam(required = false) String hashtag,
 		@RequestParam(required = false, defaultValue = "count") String value,
 		@RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate start,
 		@RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end) {
