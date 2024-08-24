@@ -1,10 +1,11 @@
 package team05.integrated_feed_backend.module.post.dto.request;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import team05.integrated_feed_backend.common.util.DateTimeParser;
 
 @Getter
 @RequiredArgsConstructor
@@ -15,12 +16,11 @@ public class PostStatisticsListReq {
 	private LocalDateTime start;
 	private LocalDateTime end;
 
-	public PostStatisticsListReq(String type, String hashtag, String value, String start, String end) {
+	public PostStatisticsListReq(String type, String hashtag, String value, LocalDate start, LocalDate end) {
 		this.type = type;
 		this.hashtag = hashtag;
 		this.value = value;
-		this.start = (start == null || start.isEmpty() ? LocalDateTime.now().minusDays(7) :
-			DateTimeParser.parseDateTime(start));
-		this.end = (end == null || end.isEmpty() ? LocalDateTime.now() : DateTimeParser.parseDateTime(end));
+		this.start = (start != null ? start.atStartOfDay() : LocalDate.now().atStartOfDay().minusDays(7));
+		this.end = (end != null ? end.atTime(LocalTime.MAX) : LocalDate.now().atTime(LocalTime.MAX));
 	}
 }
