@@ -11,14 +11,11 @@ import team05.integrated_feed_backend.common.BaseApiResponse;
 import team05.integrated_feed_backend.exception.code.StatusCode;
 import team05.integrated_feed_backend.module.post.dto.request.PostSearchReq;
 import team05.integrated_feed_backend.module.post.dto.response.PostSearchRes;
-import team05.integrated_feed_backend.module.post.service.PostService;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/posts")
 public class PostController implements PostControllerDocs {
-
-	private final PostService postService;
 
 	@Override
 	@GetMapping
