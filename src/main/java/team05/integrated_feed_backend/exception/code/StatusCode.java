@@ -17,6 +17,7 @@ public enum StatusCode {
 	 * 400 번대 CODE
 	 **/
 	METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, "요청 경로가 지원되지 않습니다."),
+	POST_NOT_EXIST(HttpStatus.NOT_FOUND, "존재하지 않는 게시물입니다."),
 
 	/**
 	 * 500 번대 CODE
