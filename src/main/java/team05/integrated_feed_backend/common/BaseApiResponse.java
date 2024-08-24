@@ -18,7 +18,7 @@ public class BaseApiResponse<T> {
 	private HttpStatus status;
 	@Schema(description = "응답 메세지", example = "요청이 성공했습니다.")
 	private String message;
-	@Schema(description = "응답 데이터", nullable = true)
+	@Schema(description = "응답 데이터")
 	private final T data;
 
 	public BaseApiResponse(HttpStatus status, String message, T data) {
