@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
-import team05.integrated_feed_backend.exception.code.StatusCode;
+import team05.integrated_feed_backend.common.code.StatusCode;
 
 /**
  *  code, status, message 기본 응답 형식

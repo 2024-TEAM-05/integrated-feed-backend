@@ -1,7 +1,7 @@
 package team05.integrated_feed_backend.exception.custom;
 
 import lombok.Getter;
-import team05.integrated_feed_backend.exception.code.StatusCode;
+import team05.integrated_feed_backend.common.code.StatusCode;
 
 /**
  * 요청 결과가 없는 경우

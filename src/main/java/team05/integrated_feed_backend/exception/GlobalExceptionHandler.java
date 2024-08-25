@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import team05.integrated_feed_backend.common.BaseApiResponse;
-import team05.integrated_feed_backend.exception.code.StatusCode;
+import team05.integrated_feed_backend.common.code.StatusCode;
 import team05.integrated_feed_backend.exception.custom.BadRequestException;
 import team05.integrated_feed_backend.exception.custom.BusinessException;
 import team05.integrated_feed_backend.exception.custom.DataNotFoundException;
