@@ -2,6 +2,7 @@ package team05.integrated_feed_backend.module.user.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import jakarta.persistence.Embedded;
 import team05.integrated_feed_backend.common.BaseEntity;
 
 @Entity
@@ -20,8 +21,9 @@ public class Member extends BaseEntity {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false, unique = true)
-    private String email;
+	@Embedded
+	@Column(nullable = false, unique = true)
+	private Email email;
 
     @Column(nullable = false)
     private String status;

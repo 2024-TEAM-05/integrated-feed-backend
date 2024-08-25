@@ -18,6 +18,7 @@ public enum StatusCode {
 	 * 400 번대 CODE
 	 **/
 	METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, "요청 경로가 지원되지 않습니다."),
+	INVALID_EMAIL_FORMAT(HttpStatus.BAD_REQUEST, "이메일 형식이 올바르지 않습니다."),
 
 	/**
 	 * 500 번대 CODE
