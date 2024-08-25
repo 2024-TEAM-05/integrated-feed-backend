@@ -1,45 +1,27 @@
 package team05.integrated_feed_backend.common.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.Getter;
-import lombok.ToString;
+import io.swagger.v3.oas.annotations.media.Schema;
 
-@Getter
-@ToString
-public class PaginationMetadata {
+public record PaginationMetadata(@JsonIgnore int page, @JsonIgnore int limit, @JsonIgnore Long total,
+								 @JsonIgnore int lastPage, @JsonIgnore Integer nextPage) {
 
-	@JsonIgnore
-	private final int page;
-
-	@JsonIgnore
-	private final int limit;
-
-	@JsonIgnore
-	private final int total;
-
-	@JsonIgnore
-	private final int lastPage;
-
-	@JsonIgnore
-	private final Integer nextPage;
-
-	public PaginationMetadata(
-		int page,
-		int limit,
-		int total,
-		int lastPage,
-		Integer nextPage
-	) {
-
-		this.page = page;
-		this.limit = limit;
-		this.total = total;
-		this.lastPage = lastPage;
-		this.nextPage = nextPage;
+	@JsonProperty("hasNext")
+	@Schema(description = "Indicates if there is a next page.")
+	public boolean hasNext() {
+		return nextPage != null;
 	}
 
-	public static PaginationMetadata of(int page, int limit, int total) {
+	@Override
+	@JsonProperty("totalItems")
+	@Schema(description = "The total number of items.")
+	public Long total() {
+		return total;
+	}
+
+	public static PaginationMetadata of(int page, int limit, Long total) {
 		int lastPage = Math.max(1, (int)Math.ceil((double)total / limit));
 		Integer nextPage = (page < lastPage) ? page + 1 : null;
 		return new PaginationMetadata(page, limit, total, lastPage, nextPage);
