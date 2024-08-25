@@ -1,4 +1,4 @@
-package team05.integrated_feed_backend.module.user.entity.vo;
+package team05.integrated_feed_backend.module.member.entity.vo;
 
 import static team05.integrated_feed_backend.common.code.StatusCode.*;
 

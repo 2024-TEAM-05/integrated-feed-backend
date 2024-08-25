@@ -1,4 +1,4 @@
-package team05.integrated_feed_backend.module.user.entity.vo;
+package team05.integrated_feed_backend.module.member.entity.vo;
 
 import static team05.integrated_feed_backend.common.code.StatusCode.*;
 
@@ -40,18 +40,21 @@ public class Password {
 	}
 
 	private static void validateLength(String plainPassword) {
+		// 조건 1. 비밀번호는 최소 10자 이상이어야 합니다.
 		if (isShort(plainPassword)) {
 			throw new BadRequestException(SHORT_PASSWORD);
 		}
 	}
 
 	private static void validateTypeOfCharacters(String plainPassword) {
+		// 조건 2. 숫자, 문자, 특수문자 중 2가지 이상을 포함해야 합니다.
 		if (containsSingleTypeCharacters(plainPassword)) {
 			throw new BadRequestException(SIMPLE_PASSWORD);
 		}
 	}
 
 	private static void validateNoRepeatingCharacters(String plainPassword) {
+		// 조건 3. 3회 이상 연속되는 문자 사용이 불가합니다.
 		if (hasRepeatingCharacter(plainPassword)) {
 			throw new BadRequestException(PASSWORD_HAS_REPEATING_CHARACTER);
 		}

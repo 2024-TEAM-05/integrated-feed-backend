@@ -16,7 +16,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import team05.integrated_feed_backend.common.BaseEntity;
-import team05.integrated_feed_backend.module.user.entity.Member;
+import team05.integrated_feed_backend.module.member.entity.Member;
 
 @Entity
 @Getter

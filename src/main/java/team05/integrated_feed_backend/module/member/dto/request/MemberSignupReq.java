@@ -1,4 +1,4 @@
-package team05.integrated_feed_backend.module.user.dto.request;
+package team05.integrated_feed_backend.module.member.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;

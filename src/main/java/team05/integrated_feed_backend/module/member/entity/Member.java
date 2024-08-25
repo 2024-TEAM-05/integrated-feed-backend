@@ -1,6 +1,6 @@
-package team05.integrated_feed_backend.module.user.entity;
+package team05.integrated_feed_backend.module.member.entity;
 
-import static team05.integrated_feed_backend.module.user.entity.enums.MemberStatus.*;
+import static team05.integrated_feed_backend.module.member.entity.enums.MemberStatus.*;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -18,9 +18,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import team05.integrated_feed_backend.common.BaseEntity;
-import team05.integrated_feed_backend.module.user.entity.enums.MemberStatus;
-import team05.integrated_feed_backend.module.user.entity.vo.Email;
-import team05.integrated_feed_backend.module.user.entity.vo.Password;
+import team05.integrated_feed_backend.module.member.entity.enums.MemberStatus;
+import team05.integrated_feed_backend.module.member.entity.vo.Email;
+import team05.integrated_feed_backend.module.member.entity.vo.Password;
 
 @Entity
 @Getter

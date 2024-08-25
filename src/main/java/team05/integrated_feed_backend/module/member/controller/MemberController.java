@@ -1,4 +1,4 @@
-package team05.integrated_feed_backend.module.user.controller;
+package team05.integrated_feed_backend.module.member.controller;
 
 import static org.springframework.http.HttpStatus.*;
 import static team05.integrated_feed_backend.common.code.StatusCode.*;
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import team05.integrated_feed_backend.common.BaseApiResponse;
-import team05.integrated_feed_backend.module.user.dto.request.MemberSignupReq;
-import team05.integrated_feed_backend.module.user.service.MemberService;
+import team05.integrated_feed_backend.module.member.dto.request.MemberSignupReq;
+import team05.integrated_feed_backend.module.member.service.MemberService;
 
 @RestController
 @RequestMapping("/api/members")

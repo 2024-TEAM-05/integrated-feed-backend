@@ -1,4 +1,4 @@
-package team05.integrated_feed_backend.module.user.service;
+package team05.integrated_feed_backend.module.member.service;
 
 import static team05.integrated_feed_backend.common.code.StatusCode.*;
 
@@ -8,11 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import team05.integrated_feed_backend.exception.custom.DuplicateResourceException;
-import team05.integrated_feed_backend.module.user.dto.request.MemberSignupReq;
-import team05.integrated_feed_backend.module.user.entity.Member;
-import team05.integrated_feed_backend.module.user.entity.vo.Email;
-import team05.integrated_feed_backend.module.user.event.publisher.MemberEventPublisher;
-import team05.integrated_feed_backend.module.user.repository.MemberRepository;
+import team05.integrated_feed_backend.module.member.dto.request.MemberSignupReq;
+import team05.integrated_feed_backend.module.member.entity.Member;
+import team05.integrated_feed_backend.module.member.entity.vo.Email;
+import team05.integrated_feed_backend.module.member.event.publisher.MemberEventPublisher;
+import team05.integrated_feed_backend.module.member.repository.MemberRepository;
 
 @Service
 @Transactional(readOnly = true)

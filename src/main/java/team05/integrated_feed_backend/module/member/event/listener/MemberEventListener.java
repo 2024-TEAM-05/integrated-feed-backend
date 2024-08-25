@@ -1,4 +1,4 @@
-package team05.integrated_feed_backend.module.user.event.listener;
+package team05.integrated_feed_backend.module.member.event.listener;
 
 import java.time.LocalDateTime;
 
@@ -10,8 +10,8 @@ import team05.integrated_feed_backend.common.util.VerificationCodeGenerator;
 import team05.integrated_feed_backend.infra.mail.MailService;
 import team05.integrated_feed_backend.module.auth.entity.VerificationCode;
 import team05.integrated_feed_backend.module.auth.repository.VerificationCodeRepository;
-import team05.integrated_feed_backend.module.user.entity.Member;
-import team05.integrated_feed_backend.module.user.event.SignedUpEvent;
+import team05.integrated_feed_backend.module.member.entity.Member;
+import team05.integrated_feed_backend.module.member.event.SignedUpEvent;
 
 @Component
 @RequiredArgsConstructor

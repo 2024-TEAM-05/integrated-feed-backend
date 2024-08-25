@@ -3,7 +3,7 @@ package team05.integrated_feed_backend.infra.mail;
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
-import team05.integrated_feed_backend.module.user.entity.vo.Email;
+import team05.integrated_feed_backend.module.member.entity.vo.Email;
 
 @Component
 @Slf4j
