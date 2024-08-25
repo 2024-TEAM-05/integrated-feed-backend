@@ -4,9 +4,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,7 @@ public class PostStatisticsController implements PostStatisticsControllerDocs {
 
 	private final PostStatisticsService postStatisticsService;
 
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping
 	public BaseApiResponse<List<PostStatisticsListRes>> getPostStatistics(
 		@RequestParam(defaultValue = "date") String type, @RequestParam(required = false) String hashtag,
@@ -31,6 +34,6 @@ public class PostStatisticsController implements PostStatisticsControllerDocs {
 		@RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end) {
 		PostStatisticsListReq request = new PostStatisticsListReq(type, hashtag, value, start, end);
 		List<PostStatisticsListRes> res = postStatisticsService.getPostStatistics(request);
-		return new BaseApiResponse<>(StatusCode.OK.getHttpStatus(), StatusCode.OK.getMessage(), res);
+		return BaseApiResponse.of(StatusCode.OK, res);
 	}
 }
