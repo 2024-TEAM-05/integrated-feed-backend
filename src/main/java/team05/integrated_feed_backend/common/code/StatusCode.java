@@ -1,4 +1,4 @@
-package team05.integrated_feed_backend.exception.code;
+package team05.integrated_feed_backend.common.code;
 
 import org.springframework.http.HttpStatus;
 
@@ -22,6 +22,8 @@ public enum StatusCode {
 	SHORT_PASSWORD(HttpStatus.BAD_REQUEST, "비밀번호는 최소 10자 이상이어야 합니다."),
 	SIMPLE_PASSWORD(HttpStatus.BAD_REQUEST, "비밀번호는 숫자, 문자, 특수문자 중 2가지 이상을 포함해야 합니다."),
 	PASSWORD_HAS_REPEATING_CHARACTER(HttpStatus.BAD_REQUEST, "비밀번호에 3회 이상 연속되는 문자 사용이 불가합니다."),
+	DUPLICATE_ACCOUNT(HttpStatus.CONFLICT, "이미 사용 중인 계정입니다."),
+	DUPLICATE_EMAIL(HttpStatus.CONFLICT, "이미 사용 중인 이메일입니다."),
 
 	/**
 	 * 500 번대 CODE
