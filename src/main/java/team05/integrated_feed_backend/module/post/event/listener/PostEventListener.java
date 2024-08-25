@@ -1,7 +1,6 @@
 package team05.integrated_feed_backend.module.post.event.listener;
 
 import org.springframework.context.event.EventListener;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
@@ -21,7 +20,6 @@ public class PostEventListener {
 	private final TwitterAdapter twitterAdapter;
 	private final InstagramAdapter instagramAdapter;
 
-	@Async
 	@EventListener
 	public void handleLikeCountIncreaseEvent(LikeCountIncreaseEvent event) {
 		Long postId = event.getPostId();
@@ -33,7 +31,6 @@ public class PostEventListener {
 		instagramAdapter.increaseLikeCount(postId);
 	}
 
-	@Async
 	@EventListener
 	public void handleShareCountIncreaseEvent(ShareCountIncreaseEvent event) {
 		Long postId = event.getPostId();
