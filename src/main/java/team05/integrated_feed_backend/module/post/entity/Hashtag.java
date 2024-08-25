@@ -1,13 +1,22 @@
 package team05.integrated_feed_backend.module.post.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
-import team05.integrated_feed_backend.common.BaseEntity;
-
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import team05.integrated_feed_backend.common.BaseEntity;
 
 @Entity
 @Getter
@@ -15,14 +24,14 @@ import java.util.Set;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 public class Hashtag extends BaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long hashtagId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long hashtagId;
 
-    @Column(nullable = false, unique = true)
-    private String hashtag;
+	@Column(nullable = false, unique = true)
+	private String hashtag;
 
-    @OneToMany(mappedBy = "hashtag", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PostHashtag> postHashtags = new ArrayList<>();
+	@OneToMany(mappedBy = "hashtag", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<PostHashtag> postHashtags = new ArrayList<>();
 
 }
