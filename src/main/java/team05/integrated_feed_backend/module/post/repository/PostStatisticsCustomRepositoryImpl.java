@@ -32,7 +32,7 @@ public class PostStatisticsCustomRepositoryImpl implements PostStatisticsCustomR
 		JPAQuery<PostStatisticsListRes> query = jpaQueryFactory.select(
 				Projections.fields(PostStatisticsListRes.class,
 					dateOnly.as("date"),
-					getCountField(request.getValue()).as("count")
+					getCountField(request.getValue()).as("countByValue")
 				))
 			.from(qPost)
 			.join(qPostHashtag).on(qPostHashtag.post.eq(qPost))
