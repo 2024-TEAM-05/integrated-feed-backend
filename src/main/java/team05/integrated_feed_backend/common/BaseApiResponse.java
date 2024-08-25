@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
-import team05.integrated_feed_backend.exception.code.StatusCode;
+import team05.integrated_feed_backend.common.code.StatusCode;
 
 /**
  *  code, status, message 기본 응답 형식
@@ -12,14 +12,14 @@ import team05.integrated_feed_backend.exception.code.StatusCode;
 @Getter
 @Schema(description = "기본 응답 형식")
 public class BaseApiResponse<T> {
-	@Schema(description = "HTTP 상태 코드", example = "200")
-	private int code;
-	@Schema(description = "HTTP 상태", example = "OK")
-	private HttpStatus status;
-	@Schema(description = "응답 메세지", example = "요청이 성공했습니다.")
-	private String message;
 	@Schema(description = "응답 데이터")
 	private final T data;
+	@Schema(description = "HTTP 상태 코드", example = "200")
+	private final int code;
+	@Schema(description = "HTTP 상태", example = "OK")
+	private final HttpStatus status;
+	@Schema(description = "응답 메세지", example = "요청이 성공했습니다.")
+	private final String message;
 
 	public BaseApiResponse(HttpStatus status, String message, T data) {
 		this.code = status.value();

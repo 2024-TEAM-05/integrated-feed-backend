@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import team05.integrated_feed_backend.common.BaseApiResponse;
-import team05.integrated_feed_backend.exception.code.StatusCode;
+import team05.integrated_feed_backend.common.code.StatusCode;
 import team05.integrated_feed_backend.exception.custom.BadRequestException;
 import team05.integrated_feed_backend.exception.custom.BusinessException;
 import team05.integrated_feed_backend.exception.custom.DataNotFoundException;
@@ -28,6 +28,20 @@ import team05.integrated_feed_backend.exception.custom.ForbiddenException;
 @Slf4j
 @RequiredArgsConstructor
 public class GlobalExceptionHandler {
+
+	/**
+	 * BusinessException 및 하위 커스텀 예외 클래스에서 StatusCode 내보내는 메서드
+	 **/
+	private static StatusCode getStatusCodeFromException(BusinessException e) {
+		HttpStatus httpStatus = e.getStatusCode().getHttpStatus();
+
+		// 서버 에러인 경우 stack trace
+		if (httpStatus.value() == 500) {
+			e.printStackTrace();
+		}
+
+		return e.getStatusCode();
+	}
 
 	/**
 	 * 요청이 잘못된 경우
@@ -177,19 +191,5 @@ public class GlobalExceptionHandler {
 			.collect(Collectors.joining(", "));
 
 		return enumTypeName + "는 [" + validValues + "] 중 하나여야 합니다.";
-	}
-
-	/**
-	 * BusinessException 및 하위 커스텀 예외 클래스에서 StatusCode 내보내는 메서드
-	 **/
-	private static StatusCode getStatusCodeFromException(BusinessException e) {
-		HttpStatus httpStatus = e.getStatusCode().getHttpStatus();
-
-		// 서버 에러인 경우 stack trace
-		if (httpStatus.value() == 500) {
-			e.printStackTrace();
-		}
-
-		return e.getStatusCode();
 	}
 }

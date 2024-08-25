@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import team05.integrated_feed_backend.common.dto.PaginationMetadata;
-import team05.integrated_feed_backend.module.post.dto.PostDto;
 
 @Getter
 @AllArgsConstructor
