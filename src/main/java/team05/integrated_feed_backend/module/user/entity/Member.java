@@ -7,6 +7,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import team05.integrated_feed_backend.common.BaseEntity;
 import team05.integrated_feed_backend.module.user.entity.enums.MemberStatus;
+import team05.integrated_feed_backend.module.user.entity.vo.Password;
 
 @Entity
 @Getter
@@ -21,8 +22,9 @@ public class Member extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String account;
 
-    @Column(nullable = false)
-    private String password;
+	@Embedded
+	@Column(nullable = false)
+	private Password password;
 
 	@Embedded
 	@Column(nullable = false, unique = true)
