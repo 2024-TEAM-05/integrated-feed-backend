@@ -5,10 +5,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Getter
-@RequiredArgsConstructor
 public class PostStatisticsListReq {
 	private String type;
 	private String hashtag;
