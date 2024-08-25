@@ -39,7 +39,7 @@ public class PostController implements PostControllerDocs {
 	@PatchMapping("/{postId}/like")
 	public BaseApiResponse<Void> increaseLikeCount(@PathVariable(name = "postId") Long postId) {
 		postService.increaseLikeCount(postId);
-		return BaseApiResponse.of(HttpStatus.OK);
+		return BaseApiResponse.of(StatusCode.OK);
 	}
 
 	// 공유 수 증가시키는 api
@@ -47,7 +47,7 @@ public class PostController implements PostControllerDocs {
 	@PatchMapping("/{postId}/share")
 	public BaseApiResponse<Void> increaseShareCount(@PathVariable(name = "postId") Long postId) {
 		postService.increaseShareCount(postId);
-		return BaseApiResponse.of(HttpStatus.OK);
+		return BaseApiResponse.of(StatusCode.OK);
 	}
 
 }
