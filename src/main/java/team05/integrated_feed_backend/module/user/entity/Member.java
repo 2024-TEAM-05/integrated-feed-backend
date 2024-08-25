@@ -1,9 +1,12 @@
 package team05.integrated_feed_backend.module.user.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
+import static team05.integrated_feed_backend.module.user.entity.enums.MemberStatus.*;
+
 import jakarta.persistence.Embedded;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import team05.integrated_feed_backend.common.BaseEntity;
+import team05.integrated_feed_backend.module.user.entity.enums.MemberStatus;
 
 @Entity
 @Getter
@@ -11,8 +14,8 @@ import team05.integrated_feed_backend.common.BaseEntity;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 public class Member extends BaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	public static final MemberStatus DEFAULT_MEMBER_STATUS = UNVERIFIED;
+
     private Long memberId;
 
     @Column(nullable = false, unique = true)
@@ -25,6 +28,7 @@ public class Member extends BaseEntity {
 	@Column(nullable = false, unique = true)
 	private Email email;
 
-    @Column(nullable = false)
-    private String status;
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private MemberStatus status;
 }
