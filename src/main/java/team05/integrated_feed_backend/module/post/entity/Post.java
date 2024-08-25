@@ -52,6 +52,7 @@ public class Post extends BaseEntity {
 	private Long shareCount;
 
 	@OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@Builder.Default
 	private List<PostHashtag> postHashtags = new ArrayList<>();
 
 }
