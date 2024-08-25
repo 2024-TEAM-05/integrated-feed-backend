@@ -68,6 +68,21 @@ class PostServiceGetPostDetailTest {
 		}
 
 		@Test
+		@DisplayName("[실패] 잘못된 ID 형식이 제공되면 400 Bad Request가 반환된다.")
+		void getPostDetail_shouldThrowException_whenIdIsInvalid() {
+			// Given
+			Long invalidId = -1L;
+
+			// When & Then
+			BusinessException exception = assertThrows(BusinessException.class, () -> {
+				postService.getPostDetail(invalidId);
+			});
+
+			assertEquals(StatusCode.BAD_REQUEST, exception.getStatusCode());
+			assertEquals("잘못된 요청입니다.", exception.getMessage());
+		}
+
+		@Test
 		@DisplayName("[실패] 게시물이 없을 때 예외를 던진다.")
 		void getPostDetail_shouldThrowException_whenPostDoesNotExist() {
 			// Given
@@ -84,6 +99,22 @@ class PostServiceGetPostDetailTest {
 
 			// 레포지토리 메서드가 한 번 호출되었는지 확인
 			verify(postRepository, times(1)).findDetailPostById(nonExistentPostId);
+		}
+
+		@Test
+		@DisplayName("[성공] 조회된 게시물의 view_count가 1 증가한다.")
+		void getPostDetail_shouldIncreaseViewCount_whenPostExists() {
+			// Given
+			when(postRepository.findDetailPostById(mockPost.getPostId())).thenReturn(mockPost);
+
+			// When
+			postService.getPostDetail(mockPost.getPostId());
+
+			// Then
+			assertEquals(101L, mockPost.getViewCount());
+
+			// 레포지토리 메서드가 한 번 호출되었는지 확인
+			verify(postRepository, times(1)).findDetailPostById(mockPost.getPostId());
 		}
 	}
 }
