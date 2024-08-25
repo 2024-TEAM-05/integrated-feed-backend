@@ -5,15 +5,14 @@ import org.springframework.validation.annotation.Validated;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Min;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-enum OrderType {
-	ASC, DESC
-}
+import team05.integrated_feed_backend.common.enums.OrderType;
 
 @Getter
 @Setter
 @Validated
+@NoArgsConstructor
 public class PaginationQuery {
 
 	@Schema(description = "페이지", defaultValue = "1")

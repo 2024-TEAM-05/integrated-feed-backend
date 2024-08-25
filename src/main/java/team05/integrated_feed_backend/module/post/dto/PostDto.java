@@ -7,13 +7,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import team05.integrated_feed_backend.module.post.entity.Post;
 
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
+@Builder
 public class PostDto {
 
 	@Schema(description = "게시물 id")
@@ -52,5 +51,24 @@ public class PostDto {
 
 	@Schema(description = "해시태그 리스트")
 	private List<HashtagDto> hashtags;
+
+	public static PostDto from(Post post) {
+		List<HashtagDto> hashtags = post.getPostHashtags().stream()
+			.map(postHashtag -> HashtagDto.of(postHashtag.getHashtag().getHashtagId(),
+				postHashtag.getHashtag().getHashtagName()))
+			.toList();
+
+		return PostDto.builder()
+			.postId(post.getPostId())
+			.title(post.getTitle())
+			.content(post.getContent())
+			.viewCount(post.getViewCount())
+			.likeCount(post.getLikeCount())
+			.shareCount(post.getShareCount())
+			.createdAt(post.getCreatedAt())
+			.updatedAt(post.getUpdatedAt())
+			.hashtags(hashtags)
+			.build();
+	}
 
 }
