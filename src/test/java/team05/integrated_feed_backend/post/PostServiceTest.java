@@ -1,7 +1,6 @@
 package team05.integrated_feed_backend.post;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.*;
 
 import java.util.Optional;
@@ -14,13 +13,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.context.ApplicationEventPublisher;
 
 import team05.integrated_feed_backend.MockEntityFactory;
 import team05.integrated_feed_backend.exception.custom.DataNotFoundException;
 import team05.integrated_feed_backend.module.post.entity.Post;
-import team05.integrated_feed_backend.module.post.event.LikeCountIncreaseEvent;
-import team05.integrated_feed_backend.module.post.event.ShareCountIncreaseEvent;
+import team05.integrated_feed_backend.module.post.event.publisher.PostEventPublisher;
 import team05.integrated_feed_backend.module.post.repository.PostRepository;
 import team05.integrated_feed_backend.module.post.service.PostService;
 
@@ -31,7 +28,7 @@ public class PostServiceTest {
 	private PostRepository postRepository;
 
 	@Mock
-	private ApplicationEventPublisher eventPublisher;
+	private PostEventPublisher postEventPublisher;
 
 	@InjectMocks
 	private PostService postService;
@@ -58,7 +55,7 @@ public class PostServiceTest {
 
 			// then
 			verify(postRepository, times(1)).findById(mockPost.getPostId());
-			verify(eventPublisher, times(1)).publishEvent(any(LikeCountIncreaseEvent.class));
+			verify(postEventPublisher, times(1)).publishLikeCountIncreaseEvent(mockPost.getPostId());
 			assert (mockPost.getLikeCount() == 11L);
 
 		}
@@ -75,7 +72,7 @@ public class PostServiceTest {
 			});
 
 			verify(postRepository, times(1)).findById(mockPost.getPostId());
-			verify(eventPublisher, times(0)).publishEvent(any(LikeCountIncreaseEvent.class));
+			verify(postEventPublisher, times(0)).publishLikeCountIncreaseEvent(mockPost.getPostId());
 		}
 	}
 
@@ -94,7 +91,7 @@ public class PostServiceTest {
 
 			// then
 			verify(postRepository, times(1)).findById(mockPost.getPostId());
-			verify(eventPublisher, times(1)).publishEvent(any(ShareCountIncreaseEvent.class));
+			verify(postEventPublisher, times(1)).publishShareCountIncreaseEvent(mockPost.getPostId());
 			assert (mockPost.getShareCount() == 6L);
 
 		}
