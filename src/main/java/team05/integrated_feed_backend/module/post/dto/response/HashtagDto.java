@@ -1,4 +1,4 @@
-package team05.integrated_feed_backend.module.post.dto;
+package team05.integrated_feed_backend.module.post.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
