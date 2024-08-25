@@ -20,6 +20,10 @@ public class PostService {
 	@Transactional
 	public PostDetailRes getPostDetail(Long id) {
 
+		if (id == null || id <= 0) {
+			throw new BusinessException(StatusCode.BAD_REQUEST, StatusCode.BAD_REQUEST.getMessage());
+		}
+
 		Post post = postRepository.findDetailPostById(id);
 
 		if (post == null) {

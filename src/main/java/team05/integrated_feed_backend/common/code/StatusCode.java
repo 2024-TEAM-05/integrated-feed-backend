@@ -17,6 +17,7 @@ public enum StatusCode {
 	/**
 	 * 400 번대 CODE
 	 **/
+	BAD_REQUEST(HttpStatus.BAD_REQUEST, "잘못된 요청입니다."),
 	NOT_FOUND(HttpStatus.NOT_FOUND, "요청하신 리소스를 찾을 수 없습니다."),
 	METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, "요청 경로가 지원되지 않습니다."),
 
