@@ -3,9 +3,9 @@ spring:
     name: integrated-feed-backend
 
   datasource:
-    url: database-url
-    username: database-user
-    password: password
+    url: ${POSTGRES_DB_URL}
+    username: ${POSTGRES_DB_USERNAME}
+    password: ${POSTGRES_DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
   jpa:

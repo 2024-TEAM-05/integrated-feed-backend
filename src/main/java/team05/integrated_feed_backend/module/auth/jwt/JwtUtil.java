@@ -16,8 +16,10 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import team05.integrated_feed_backend.module.auth.security.CustomUserDetails;
 
+@Slf4j
 @Component
 public class JwtUtil {
 
@@ -46,12 +48,15 @@ public class JwtUtil {
 		Date now = new Date();
 		Date validity = new Date(now.getTime() + tokenValidityInseconds * 1000);
 
-		return Jwts.builder()
+		String token = Jwts.builder()
 			.setClaims(claims)
 			.setIssuedAt(now)   // 발급 시간
 			.setExpiration(validity)    // 만료 시간
 			.signWith(secretKey, SignatureAlgorithm.HS256)  // 서명
 			.compact();
+
+		log.info("JWT 토큰 생성: 사용자 계정 = {}, 만료시간 = {}", account, validity);
+		return token;
 	}
 
 	// HTTP 요청 헤더에서 JWT 토큰을 추출
@@ -90,15 +95,16 @@ public class JwtUtil {
 	}
 
 	// JWT 토큰 유효성 검증
-	// JWT 토큰 유효성 검증
 	public boolean validateToken(String token) {
 		try {
 			Jwts.parserBuilder()
 				.setSigningKey(secretKey)
 				.build()
 				.parseClaimsJws(token);
+			log.debug("JWT 토큰 유효성 검사 통과: {}", token);
 			return true;
 		} catch (Exception e) {
+			log.error("JWT 토큰 유효성 검사 실패: {}", token, e);
 			return false;
 		}
 	}

@@ -13,20 +13,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import lombok.RequiredArgsConstructor;
 import team05.integrated_feed_backend.module.auth.jwt.JwtAuthenticationFilter;
 import team05.integrated_feed_backend.module.auth.jwt.JwtUtil;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
 	private final JwtUtil jwtUtil;
 	private final UserDetailsService userDetailsService;
-
-	public SecurityConfig(JwtUtil jwtUtil, UserDetailsService userDetailsService) {
-		this.jwtUtil = jwtUtil;
-		this.userDetailsService = userDetailsService;
-	}
 
 	@Bean
 	public JwtAuthenticationFilter jwtAuthenticationFilter() {
