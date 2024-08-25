@@ -26,6 +26,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 		throws ServletException, IOException {
 
+		// Swagger ui 관련 요청은 필터링하지 않음
+		String path = request.getRequestURI();
+		if (path.startsWith("/swagger-ui") || path.startsWith("/webjars/") || path.startsWith("/v3/api-docs")) {
+			filterChain.doFilter(request, response);
+			return;
+		}
+		// request에서 토큰 파싱, 토큰 문자열 반환해 이후 인증 확인
 		String token = jwtUtil.resolveToken(request);
 
 		if (token != null && jwtUtil.validateToken(token)) {
@@ -41,9 +48,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 			// SecurityContext에 객체 설정
 			SecurityContextHolder.getContext().setAuthentication(authentication);
-
-			// 다음 필터로 요청 전달
-			filterChain.doFilter(request, response);
 		}
+		// 다음 필터로 요청 전달
+		filterChain.doFilter(request, response);
 	}
 }

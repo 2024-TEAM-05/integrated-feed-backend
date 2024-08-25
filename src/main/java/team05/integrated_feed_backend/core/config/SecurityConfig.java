@@ -2,6 +2,7 @@ package team05.integrated_feed_backend.core.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -35,12 +36,21 @@ public class SecurityConfig {
 
 		http
 			.csrf(csrf -> csrf.disable()) // CSRF 보호를 비활성화 (JWT를 사용하기 때문에)
-			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // 세션 사용X
 			.authorizeHttpRequests(authorize -> authorize
-				.requestMatchers("/auth/**").permitAll() // 인증 없이 접근할 수 있는 경로 설정하기 (회원가입, 로그인 등)
+				.requestMatchers(
+					"/swagger-ui/**",
+					"/v3/api-docs/**",
+					"/swagger-ui.html",
+					"/api-docs/**",
+					"/webjars/**"
+				).permitAll()  // Swagger UI 관련 경로에 인증 없이 접근 허용
+				.requestMatchers("/auth/**").permitAll() // 인증 없이 접근할 수 있는 경로 설정 (회원가입, 로그인 등)
+				.requestMatchers(HttpMethod.POST, "/api/members").permitAll()
 				.anyRequest().authenticated() // 그 외의 모든 요청 인증 필요
 			)
-			.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class); // JWT 필터 추가
+			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // 세션 사용 X
+			.addFilterBefore(jwtAuthenticationFilter(),
+				UsernamePasswordAuthenticationFilter.class); // JWT 필터를 UsernamePasswordAuthenticationFilter 앞에 추가
 
 		return http.build();
 	}

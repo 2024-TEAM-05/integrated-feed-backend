@@ -25,14 +25,14 @@ public class JwtUtil {
 
 	private final Key secretKey;
 
+	@Value("${jwt.token-validity-in-seconds}")
+	private long tokenValidityInseconds;
+
 	//jjwt: String secretKey -> Key 객체 방식으로 대체됨
 	public JwtUtil(@Value("${jwt.secret}") String secret) {
 		byte[] keyBytes = Base64.getDecoder().decode(secret);
 		this.secretKey = new SecretKeySpec(keyBytes, SignatureAlgorithm.HS256.getJcaName());
 	}
-
-	@Value("${jwt.token-validity-in-seconds}")
-	private long tokenValidityInseconds;
 
 	// JWT 토큰 생성
 	public String generateToken(Authentication authentication) {
