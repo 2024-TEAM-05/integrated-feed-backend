@@ -12,6 +12,7 @@ public enum StatusCode {
 	 **/
 	OK(HttpStatus.OK, "요청이 성공했습니다."),
 	CREATED(HttpStatus.CREATED, "생성되었습니다."),
+	SIGN_UP_ACCEPTED(HttpStatus.ACCEPTED, "회원가입이 완료되었습니다. 이메일 인증을 진행해 주세요."),
 
 	/**
 	 * 400 번대 CODE
