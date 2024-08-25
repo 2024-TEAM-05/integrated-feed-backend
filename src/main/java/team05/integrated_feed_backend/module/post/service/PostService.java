@@ -17,6 +17,7 @@ public class PostService {
 
 	private final PostRepository postRepository;
 
+	@Transactional
 	public PostDetailRes getPostDetail(Long id) {
 
 		Post post = postRepository.findDetailPostById(id);
@@ -24,6 +25,8 @@ public class PostService {
 		if (post == null) {
 			throw new BusinessException(StatusCode.NOT_FOUND, StatusCode.NOT_FOUND.getMessage());
 		}
+
+		post.incrementViewCount();
 
 		return new PostDetailRes(PostMapper.toDto(post));
 

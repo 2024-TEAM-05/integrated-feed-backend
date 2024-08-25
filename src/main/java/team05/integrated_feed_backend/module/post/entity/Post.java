@@ -55,4 +55,8 @@ public class Post extends BaseEntity {
 	@Builder.Default
 	private List<PostHashtag> postHashtags = new ArrayList<>();
 
+	// 조회 수 증가 메서드
+	public void incrementViewCount() {
+		this.viewCount += 1;
+	}
 }
