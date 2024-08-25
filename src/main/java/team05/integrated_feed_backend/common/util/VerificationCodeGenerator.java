@@ -11,14 +11,11 @@ public final class VerificationCodeGenerator {
 	private static final SecureRandom random = new SecureRandom();
 
 	public static String generateCode() {
-		// 인증 코드로 가능한 최소 숫자 (ex. 6자리라면 100_000)
-		int min = (int)Math.pow(10, CODE_LENGTH - 1);
-		// 인증 코드로 가능한 최대 숫자 (ex. 6자리라면 999_999)
-		int max = (int)Math.pow(10, CODE_LENGTH) - 1;
-
-		// min ~ max 사이의 숫자 중 하나를 랜덤하게 선택
-		int code = min + random.nextInt(max - min);
-
-		return String.valueOf(code);
+		StringBuilder codeBuilder = new StringBuilder();
+		for (int i = 0; i < CODE_LENGTH; i++) {
+			int digit = random.nextInt(10); // 0부터 9까지 랜덤한 숫자 선택
+			codeBuilder.append(digit);
+		}
+		return codeBuilder.toString();
 	}
 }
