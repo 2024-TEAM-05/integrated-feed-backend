@@ -24,6 +24,6 @@ public class MemberController implements MemberControllerDocs {
 	@ResponseStatus(ACCEPTED)
 	public BaseApiResponse<Void> signUp(@Valid MemberSignupReq request) {
 		memberService.signUp(request);
-		return BaseApiResponse.of(ACCEPTED, SIGN_UP_ACCEPTED.getMessage());
+		return BaseApiResponse.of(SIGN_UP_ACCEPTED);
 	}
 }
