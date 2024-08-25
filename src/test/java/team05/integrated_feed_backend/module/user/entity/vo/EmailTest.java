@@ -2,6 +2,7 @@ package team05.integrated_feed_backend.module.user.entity.vo;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.ThrowableAssert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static team05.integrated_feed_backend.common.code.StatusCode.*;
 
 import org.junit.jupiter.api.DisplayName;
@@ -21,7 +22,7 @@ class EmailTest {
 		Email actual = Email.from(email);
 
 		// then
-		assertThat(actual.getValue()).isEqualTo(email);
+		assertEquals(actual.getValue(), email);
 	}
 
 	@ParameterizedTest
