@@ -18,15 +18,14 @@ import team05.integrated_feed_backend.module.post.service.PostStatisticsService;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/posts")
+@RequestMapping("/api/posts/statistics")
 public class PostStatisticsController implements PostStatisticsControllerDocs {
 
 	private final PostStatisticsService postStatisticsService;
 
-	@GetMapping("/statistics")
+	@GetMapping
 	public BaseApiResponse<List<PostStatisticsListRes>> getPostStatistics(
-		@RequestParam(defaultValue = "date") String type,
-		@RequestParam(required = false) String hashtag,
+		@RequestParam(defaultValue = "date") String type, @RequestParam(required = false) String hashtag,
 		@RequestParam(required = false, defaultValue = "count") String value,
 		@RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate start,
 		@RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end) {
