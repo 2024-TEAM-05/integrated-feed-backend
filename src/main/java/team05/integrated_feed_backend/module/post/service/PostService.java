@@ -1,6 +1,5 @@
 package team05.integrated_feed_backend.module.post.service;
 
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,8 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import team05.integrated_feed_backend.exception.code.StatusCode;
 import team05.integrated_feed_backend.exception.custom.DataNotFoundException;
 import team05.integrated_feed_backend.module.post.entity.Post;
-import team05.integrated_feed_backend.module.post.event.LikeCountIncreaseEvent;
-import team05.integrated_feed_backend.module.post.event.ShareCountIncreaseEvent;
+import team05.integrated_feed_backend.module.post.event.publisher.PostEventPublisher;
 import team05.integrated_feed_backend.module.post.repository.PostRepository;
 
 @Service
@@ -20,7 +18,7 @@ import team05.integrated_feed_backend.module.post.repository.PostRepository;
 public class PostService {
 
 	private final PostRepository postRepository;
-	private final ApplicationEventPublisher eventPublisher;
+	private final PostEventPublisher postEventPublisher;
 
 	@Transactional
 	public void increaseLikeCount(Long postId) {
@@ -31,8 +29,8 @@ public class PostService {
 		// 내부 DB count 올리기
 		post.increaseLikeCount();
 
-		// 이벤트 발행
-		eventPublisher.publishEvent(new LikeCountIncreaseEvent(postId));
+		// 이벤트 비동기 발행
+		postEventPublisher.publishLikeCountIncreaseEvent(postId);
 
 	}
 
@@ -45,7 +43,7 @@ public class PostService {
 		// 내부 db count 올리기
 		post.increaseShareCount();
 
-		// 이벤트 발행
-		eventPublisher.publishEvent(new ShareCountIncreaseEvent(postId));
+		// 이벤트 비동기 발행
+		postEventPublisher.publishShareCountIncreaseEvent(postId);
 	}
 }
