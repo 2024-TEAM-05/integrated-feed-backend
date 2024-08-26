@@ -17,7 +17,9 @@ import team05.integrated_feed_backend.module.post.repository.PostRepository;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class PostStatisticsService {
-
+	private static final int MAX_DATE_RANGE_DAYS = 31;
+	private static final int MAX_DATE_RANGE_DAYS_WITH_HOUR = 8;
+	
 	private final PostRepository postRepository;
 
 	public List<PostStatisticsListRes> getPostStatistics(PostStatisticsListReq request) {
@@ -30,14 +32,14 @@ public class PostStatisticsService {
 		LocalDateTime currentEnd = request.getEnd();
 
 		if ("date".equals(currentType)) {
-			if (!currentEnd.minusDays(31).isBefore(currentStart)) {
+			if (!currentEnd.minusDays(MAX_DATE_RANGE_DAYS).isBefore(currentStart)) {
 				throw new BadRequestException(StatusCode.EXCEEDED_STATISTICS_DATE_RANGE);
 			}
 			return postRepository.findPostStatisticsByQueryParameter(request);
 		}
 		if ("hour".equals(currentType)) {
 			System.out.println(currentEnd + " " + currentStart);
-			if (!currentEnd.minusDays(8).isBefore(currentStart)) {
+			if (!currentEnd.minusDays(MAX_DATE_RANGE_DAYS_WITH_HOUR).isBefore(currentStart)) {
 				throw new BadRequestException(StatusCode.EXCEEDED_STATISTICS_DATE_RANGE);
 			}
 			return postRepository.findPostStatisticsByQueryParameterWithHour(request);
