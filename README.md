@@ -50,6 +50,284 @@ http://15.164.10.5:9020/swagger-ui/index.html#/
 ## 📄 요구사항 정리 및 기술 명세서
 
 <details>
+	<summary> 회원가입 API </summary>
+
+### **요약 (Summary)**
+
+유저는 계정, 비밀번호, 이메일로 가입요청을 진행합니다.  
+가입 요청 시, 이메일로 발송된 코드를 입력하여 가입승인을 받고 서비스 이용이 가능합니다.
+
+### **목표 (Goals)**
+
+- `계정` 은 **unique** 합니다.
+- `이메일` 은 올바른 이메일 구조인지 **검증**되어야 합니다.
+- `비밀번호` 는 아래 중 **2가지 이상의 제약 조건**을 가지며, **암호화**되어 저장됩니다.
+    - 제약조건
+        - 다른 개인 정보와 유사한 비밀번호는 사용할 수 없습니다.
+        - 비밀번호는 최소 10자 이상이어야 합니다.
+        - 통상적으로 자주 사용되는 비밀번호는 사용할 수 없습니다.
+        - 숫자로만 이루어진 비밀번호는 사용할 수 없습니다.
+        - 숫자, 문자, 특수문자 중 2가지 이상을 포함해야 합니다.
+        - 이전 비밀번호와 동일하게 설정할 수 없습니다.
+        - 3회 이상 연속되는 문자 사용이 불가합니다.
+- 위 조건을 만족한 상태에서 가입요청 시, 유저가 생성되고 6자리의 랜덤한 코드가 입력한 이메일로 발송됩니다.
+- `계정` , `비밀번호`, `인증코드` 가 올바르게 입력되었을 시 가입승인이 되어 서비스 이용이 가능합니다.
+
+### **목표가 아닌 것 (Non-Goals)**
+
+- 실제 이메일 발송
+
+### **계획 (Plan)**
+
+#### Step 1. 회원가입
+
+<details>
+	<summary> 〰️ 플로우 차트 </summary>
+
+```mermaid
+flowchart TD
+   A((회원 가입 요청\nwith 계정, 이메일, 비밀번호)) --> B{계정이 이미 존재하는가?}
+   B --> |NO| C{이메일이 유효한가?}
+   B --> |YES| D((409 실패 응답 반환)) 
+   C --> |YES| E{이메일이 이미 존재하는가?}
+   C --> |NO| F((400 실패 응답 반환))
+   E --> |NO| G{비밀번호가 유효한가?}
+   E --> |YES| H((409 실패 응답 반환)) 
+   G --> |YES| I[유저 생성 후 DB에 저장]
+   G --> |NO| J((400 실패 응답 반환))
+   I --> K[유저 생성 이벤트 발송]
+   K --> L((202 성공 응답 반환)) 
+   K --> M[인증 번호 생성 후 DB에 저장]
+   M --> N[이메일 발송]
+   N --> O((요청 로그 기록))
+```
+
+</details>
+
+<details>
+	<summary> 💾 회원가입에 필요한 유저(멤버) ERD </summary>
+
+```mermaid
+erDiagram
+member {
+	member_id BIGINT PK "BIGSERIAL"
+	account VARCHAR(50) UK "NOT NULL"
+	email VARCHAR(320) UK "NOT NULL"
+	password VARCHAR(255) "NOT NULL"
+	status VARCHAR(15) "NOT NULL DEFAULT UNVERIFIED"
+    created_at TIMESTAMP "NOT NULL DEFAULT CURRENT_TIMESTAMP"
+	updated_at TIMESTAMP "NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+}
+```
+
+**Account 필드**  
+username 길이 제한  
+✔ 인스타그램: `30자`  
+✔ 쓰레드: `30자` (인스타그램과 같음)  
+✔ 트위터: `15자`  
+✔ 페이스북: `50자`
+
+**Email 필드**  
+이메일 주소는 **최대 320자**입니다. 이 값은 로컬 파트(64자)와 도메인 파트(255자)를 합친 후 “@” 기호를 추가한 것입니다. (by. 챗지피티)
+
+**Password 필드**  
+비밀번호는 암호화되어 저장됨으로 고정 길이임. Argon2 알고리즘을 사용하면 일반적으로 **90자 ~ 130자** (by. 챗지피티)
+
+**Status 필드**  
+`UNVERIFIED`: 이메일 인증 전 상태  
+`VERIFIED`: 이메일 인증 완료 상태
+
+</details>
+
+<details>
+	<summary> 🔐 비밀번호 암호화 알고리즘 </summary>  
+
+1️⃣ BCryptPasswordEncoder </br>
+✔ 오래전부터 사용된 알고리즘으로, 비밀번호 해시에 대한 가장 일반적인 선택 중 하나
+✔ bcrypt는 최대 입력 길이가 72바이트로 제한되기 때문에 긴 비밀번호는 잘릴 수 있음
+
+2️⃣ Argon2PasswordEncoder 🌟 </br>
+✔ 비밀번호 해시에 대한 **최신 표준** (2015년 암호 해싱 대회에서 우승)
+
+3️⃣ Pbkdf2PasswordEncoder </br>
+✔ FIPS 인증이 필요할 때 좋은 알고리즘
+✔ bcrypt나 Argon2보다는 조금 더 느리고, 설정에 따라 매우 높은 보안성을 제공하지 못할 수도 있음
+
+4️⃣ SCryptPasswordEncoder </br>
+✔ bcrypt나 Argon2에 비해 설정이 복잡할 수 있으며, 메모리 사용량이 높아 일부 환경에서 부적합
+
+**👩🏻‍⚖️ 결론은 보안 표준이면서, 가장 강력한 보안을 제공하는 Argon2PasswordEncoder를 사용하자!**
+
+</details>
+
+<details>
+	<summary> 🧮 이메일 형식 확인을 위한 정규식 </summary>
+
+Hibernate Validator에서 @Email 애너테이션을 사용할 때 기본적으로 적용되는 정규식
+
+```plaintext
+^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$
+```
+
+</details>
+
+<details>
+	<summary> 📋 비밀번호 제약조건 전략 </summary>
+<h4> 📌 다른 개인 정보와 유사한 비밀번호는 사용할 수 없습니다. </h4>
+
+🔍 질문 1. 다른 개인 정보에는 뭐가 있을까?
+: 보통 사용자 이름, 이메일, 전화번호, 생년월일이 있지만, 현재 서비스에서는 이메일만 존재
+
+🔍 질문 2. 유사한지는 어떻게 판단하지?
+: 직접 문자열 비교, 부분 문자열 비교, Levenshtein 거리 알고리즘
+
+🔍 질문 3. Levenshtein 거리 알고리즘이 뭐지?
+: 문자열 간의 편집 거리를 계산하는 알고리즘을 사용하여 비밀번호와 개인 정보의 유사성을 판단할 수 있습니다. 이 알고리즘을 사용하면 문자열이 얼마나 유사한지를 수치적으로 계산할 수 있습니다. 편집 거리가 짧으면
+비밀번호가 개인 정보와 유사하다고 판단할 수 있습니다. (by. 챗지피티)
+
+💡 tip) 비교 시 대소문자를 무시하고, 공백이나 특수문자를 제거한 후 비교하는 것이 좋음
+
+
+<h4> 📌 통상적으로 자주 사용되는 비밀번호는 사용할 수 없습니다. </h4>
+
+✔ 자주 사용되는 비밀번호 목록이 필요! (ex. most common password in Korea)  
+✔ 목록을 DB에 저장 (변경이 거의 없기 때문에 캐싱 or 파일 시스템 활용 가능)  
+✔ 비밀번호 검사 시 사용 (Set 자료구조를 사용할 수 있을 듯)
+
+</details>
+
+<details>
+	<summary> 🎰 인증 코드 생성 방식 </summary>
+
+1️⃣ 랜덤한 6자리 숫자 코드  
+✔ 숫자만으로 구성된 코드는 사용자가 쉽게 입력할 수 있음  
+✔ 브루트포스 공격에 취약 (6자리 숫자 코드는 1,000,000(10^6)가지 경우의 수만 있음)
+
+**🛠️ 구현방법**  
+**`java.security.SecureRandom`** 모듈을 사용하면, 보안적으로 안전한 난수를 생성할 수 있음
+> ❓ 보안적으로 안전한 난수  
+> 일반적인 Random 클래스는 시드(seed)를 기반으로 난수를 생성하지만, SecureRandom은 운영체제에서 제공하는 강력한 난수 생성기를 사용하여 보다 예측 불가능한 난수를 생성합니다.
+>
+
+</br>
+2️⃣ 랜덤한 6자리 코드 (숫자 + 문자)  
+✔ 경우의 수가 급격히 증가 (보안↑)  
+✔ 사용자가 입력하기 불편  
+✔ ‘1’, ‘I’ 등 사용자들이 혼동할 수 있음
+
+**👩🏻‍⚖️ 결론, 사용성을 위해 숫자만 사용하는 1️⃣번 방식으로 하되, 부르트포스 공격을 막기 위해 처리율을 제한할 수 있음**
+
+</details>
+
+<details>
+	<summary> 🎰 인증 코드 저장 방식 </summary>
+
+```mermaid
+erDiagram
+verification_code {
+	verification_code_id BIGINT PK "BIGSERIAL"
+	user_id BIGINT FK "NOT NULL"
+	code CHAR(6) "NOT NULL"
+	expire_at TIMESTAMP "NOT NULL"
+}
+```
+
+1️⃣ DB에 저장 </br>
+✔ 가장 일반적인 방식
+
+🤔 그럼 user 테이블과 합쳐야 할까? 분리해야 할까?  
+✔ user 테이블과 합치면, 하나의 트랜잭션으로 모든 작업을 처리할 수 있기 때문에 성능면에서 장점이 있음 👍🏻  
+✔ 인증 코드는 일시적인 데이터이기 때문에 인증 번호가 유효하지 않게 되거나 만료된 후에도 계속해서 유저 테이블에 남아 있을 수 있기 때문에 데이터 관리가 어려워짐 👎🏻  
+✔ 인증 코드를 위해 만료시간 등 추가적인 데이터가 필요할 수 있는데, 이러한 정보를 모두 user 테이블에 넣게 되면 user 테이블이 불필요하게 커질 수 있음 👎🏻
+
+**👩🏻‍⚖️ 결론은 분리하자!**
+
+2️⃣ 캐시(Redis)에 저장 </br>
+**장점**  
+✔ 조회 성능 ↑  
+✔ TTL 관리가 쉬움
+
+**단점**  
+✔ 데이터 휘발 가능성  
+💡 데이터가 휘발된 경우 유저에게 재인증 요청  
+💡 데이터 영속화 → 캐시
+
+**👩🏻‍⚖️ 결론은 일단 RDB에 저장한 뒤, 성능 개선이 필요하다면 캐시를 활용하자!**
+
+</details>
+
+<details>
+	<summary> 📂 클래스 다이어그램 </summary>
+
+```mermaid
+classDiagram
+		class VerificationCodeRepository {
+        +VerificationCode save(VerificationCode verificationCode)
+    }
+    
+    class VerificationCodeGenerator {
+        +String generateCode()
+    }
+
+    class MailService {
+        +void sendVerificationCode(String sendTo, String code)
+        +void send(String sendTo, String subject, String content)
+    }
+    
+    class MemberEventListener {
+        +void handleSignedUpEvent(SignedUpEvent event)
+    }
+    
+    class SignedUpEvent {
+    }
+    
+    class MemberEventPublisher {
+        +void publishSignedUpEvent(Member member)
+    }
+
+    class MemberService {
+        +void signup(MemberSignupReq request)
+    }
+    
+    class MemberRepository {
+        +boolean exitsByEmail(String email)
+        +boolean exitsByAccount(String account)
+        +Member save(Member member)
+    }
+    
+
+    class MemberController {
+        +BaseApiResponse<Void> signup(MemberSignupReq request)
+    }
+		
+		MemberEventListener --> MailService
+		MemberEventListener --> VerificationCodeRepository
+		MemberEventListener --> VerificationCodeGenerator
+		MemberEventListener --> SignedUpEvent
+		MemberEventPublisher --> SignedUpEvent
+    MemberService --> MemberEventPublisher
+    MemberService --> MemberRepository
+    MemberController --> MemberService
+```
+
+</details>
+
+### **이외 추가 고려 사항들 (Other Considerations)**
+
+🤔 DB에 저장된 인증 코드의 만료 관리  
+🤔 가입 승인 요청에 대한 처리율 제한 (ex. 10분 동안 10번 넘게 요청 X)  
+🤔 이메일 발송 실패 시 대응
+
+### **마일스톤 (Milestones)**
+
+> ~ 8.21(수): 비밀번호 제약 조건 관련 리서치  
+> ~ 8.23(금): 회원가입 기능 구현 및 이메일 발송 관련 리서치  
+> ~ 8.25(일): 가입 승인 기능 구현  
+> ~ 8.26(월): 코드 리팩토링 및 미진한 내용 보충
+
+</details>
+
+<details>
 	<summary> 로그인 API</summary>
 
 ### **요약 (Summary)**
