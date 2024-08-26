@@ -28,7 +28,7 @@ public class PostService {
 		post.increaseLikeCount();
 
 		// 이벤트 비동기 발행
-		postEventPublisher.publishLikeCountIncreaseEvent(postId);
+		postEventPublisher.publishLikeCountIncreasedEvent(postId, post.getType());
 
 	}
 
@@ -42,6 +42,6 @@ public class PostService {
 		post.increaseShareCount();
 
 		// 이벤트 비동기 발행
-		postEventPublisher.publishShareCountIncreaseEvent(postId);
+		postEventPublisher.publishShareCountIncreasedEvent(postId, post.getType());
 	}
 }

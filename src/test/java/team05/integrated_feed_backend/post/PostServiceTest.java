@@ -55,7 +55,8 @@ public class PostServiceTest {
 
 			// then
 			verify(postRepository, times(1)).findById(mockPost.getPostId());
-			verify(postEventPublisher, times(1)).publishLikeCountIncreaseEvent(mockPost.getPostId());
+			verify(postEventPublisher, times(1)).publishLikeCountIncreasedEvent(mockPost.getPostId(),
+				mockPost.getType());
 			assert (mockPost.getLikeCount() == 11L);
 
 		}
@@ -72,7 +73,8 @@ public class PostServiceTest {
 			});
 
 			verify(postRepository, times(1)).findById(mockPost.getPostId());
-			verify(postEventPublisher, times(0)).publishLikeCountIncreaseEvent(mockPost.getPostId());
+			verify(postEventPublisher, times(0)).publishLikeCountIncreasedEvent(mockPost.getPostId(),
+				mockPost.getType());
 		}
 	}
 
@@ -91,7 +93,8 @@ public class PostServiceTest {
 
 			// then
 			verify(postRepository, times(1)).findById(mockPost.getPostId());
-			verify(postEventPublisher, times(1)).publishShareCountIncreaseEvent(mockPost.getPostId());
+			verify(postEventPublisher, times(1)).publishShareCountIncreasedEvent(mockPost.getPostId(),
+				mockPost.getType());
 			assert (mockPost.getShareCount() == 6L);
 
 		}
