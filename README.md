@@ -192,10 +192,10 @@ sequenceDiagram
     participant R as Repository
     
     C->>Co: Request (GET /api/posts/{id})
-    Co->>S: getPostDetails(id)
-    S->>R: findDetailedPostById(id)
+    Co->>S: getPostDetail(id)
+    S->>R: findDetailById(id)
     R-->>S: Post
-    S-->>Co: PostDto
+    S-->>Co: PostDetailRes
     Co-->>C: Response (JSON)
 ```
 
