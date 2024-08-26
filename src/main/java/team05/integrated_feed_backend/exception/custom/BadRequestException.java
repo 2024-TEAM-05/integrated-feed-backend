@@ -13,5 +13,5 @@ public class BadRequestException extends BusinessException {
 	public BadRequestException(StatusCode statusCode) {
 		super(statusCode);
 	}
-
+	
 }

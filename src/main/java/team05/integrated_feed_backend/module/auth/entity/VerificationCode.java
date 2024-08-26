@@ -15,15 +15,16 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import team05.integrated_feed_backend.common.entity.BaseEntity;
+import team05.integrated_feed_backend.common.BaseEntity;
 import team05.integrated_feed_backend.module.member.entity.Member;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder
+@Builder(access = AccessLevel.PRIVATE)
 public class VerificationCode extends BaseEntity {
+	private static final int EXPIRE_IN_DAYS = 1;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long verificationCodeId;
@@ -37,4 +38,16 @@ public class VerificationCode extends BaseEntity {
 
 	@Column(nullable = false)
 	private LocalDateTime expiredAt;
+
+	public static VerificationCode of(Member member, String code, LocalDateTime issuedAt) {
+		return VerificationCode.builder()
+			.member(member)
+			.code(code)
+			.expiredAt(calculateExpiredAt(issuedAt))
+			.build();
+	}
+
+	private static LocalDateTime calculateExpiredAt(LocalDateTime issuedAt) {
+		return issuedAt.plusDays(EXPIRE_IN_DAYS);
+	}
 }

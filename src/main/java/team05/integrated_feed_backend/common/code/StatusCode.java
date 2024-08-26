@@ -17,15 +17,13 @@ public enum StatusCode {
 	/**
 	 * 400 번대 CODE
 	 **/
-	BAD_REQUEST(HttpStatus.BAD_REQUEST, "잘못된 요청입니다."),
-	NOT_FOUND(HttpStatus.NOT_FOUND, "요청하신 리소스를 찾을 수 없습니다."),
 	METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, "요청 경로가 지원되지 않습니다."),
-	POST_NOT_EXIST(HttpStatus.NOT_FOUND, "존재하지 않는 게시물입니다."),
-	USER_NOT_FOUND(HttpStatus.NOT_FOUND, "요청된 사용자를 찾을 수 없습니다."),
-	UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "인증 오류가 발생했습니다."),
-	NOT_SUPPORTED_STATISTICS_TYPE(HttpStatus.BAD_REQUEST, "type을 다시 설정해주세요. date와 hour이 가능합니다."),
-	EXCEEDED_STATISTICS_DATE_RANGE(HttpStatus.BAD_REQUEST, "조회 가능 기간을 초과했습니다. 조회 시간을 다시 설정해주세요"),
-	INVALID_STATISTICS_DATE(HttpStatus.BAD_REQUEST, "조회 시작 일자는 조회 종료 일자보다 이전이어야 합니다."),
+	INVALID_EMAIL_FORMAT(HttpStatus.BAD_REQUEST, "이메일 형식이 올바르지 않습니다."),
+	SHORT_PASSWORD(HttpStatus.BAD_REQUEST, "비밀번호는 최소 10자 이상이어야 합니다."),
+	SIMPLE_PASSWORD(HttpStatus.BAD_REQUEST, "비밀번호는 숫자, 문자, 특수문자 중 2가지 이상을 포함해야 합니다."),
+	PASSWORD_HAS_REPEATING_CHARACTER(HttpStatus.BAD_REQUEST, "비밀번호에 3회 이상 연속되는 문자 사용이 불가합니다."),
+	DUPLICATE_ACCOUNT(HttpStatus.CONFLICT, "이미 사용 중인 계정입니다."),
+	DUPLICATE_EMAIL(HttpStatus.CONFLICT, "이미 사용 중인 이메일입니다."),
 
 	/**
 	 * 500 번대 CODE
