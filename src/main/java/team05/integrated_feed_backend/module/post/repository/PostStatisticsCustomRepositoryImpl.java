@@ -29,7 +29,7 @@ public class PostStatisticsCustomRepositoryImpl implements PostStatisticsCustomR
 	private final JPAQueryFactory jpaQueryFactory;
 	private final QPost qPost = QPost.post;
 	private final QPostHashtag qPostHashtag = QPostHashtag.postHashtag;
-	private final QHashtag qHashtag = QHashtag.hashtag1;
+	private final QHashtag qHashtag = QHashtag.hashtag;
 
 	public List<PostStatisticsListRes> findPostStatisticsByQueryParameter(PostStatisticsListReq request) {
 		DateTimeTemplate<String> dateOnly = Expressions.dateTimeTemplate(String.class, "TO_CHAR({0}, 'YYYY-MM-DD')",
@@ -48,7 +48,7 @@ public class PostStatisticsCustomRepositoryImpl implements PostStatisticsCustomR
 
 		// 해시태그가 있을 경우 필터링 --> 일단 디폴트 값을 안 받았으므로 필요한 부분
 		if (request.getHashtag() != null && !request.getHashtag().isEmpty()) {
-			query.where(qHashtag.hashtag.eq(request.getHashtag()));
+			query.where(qHashtag.hashtagName.eq(request.getHashtag()));
 		}
 
 		return query.fetch();
@@ -75,7 +75,7 @@ public class PostStatisticsCustomRepositoryImpl implements PostStatisticsCustomR
 
 		// 해시태그가 있을 경우 필터링 --> 일단 디폴트 값을 안 받았으므로 필요한 부분
 		if (request.getHashtag() != null && !request.getHashtag().isEmpty()) {
-			query.where(qHashtag.hashtag.eq(request.getHashtag()));
+			query.where(qHashtag.hashtagName.eq(request.getHashtag()));
 		}
 
 		// 3. 쿼리 fetch

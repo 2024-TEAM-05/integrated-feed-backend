@@ -2,7 +2,7 @@ package team05.integrated_feed_backend.exception.custom;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import team05.integrated_feed_backend.exception.code.StatusCode;
+import team05.integrated_feed_backend.common.code.StatusCode;
 
 /**
  * 비즈니스 로직 중에서 나는 에러 정의
