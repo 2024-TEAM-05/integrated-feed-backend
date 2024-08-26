@@ -30,13 +30,14 @@ public class PostStatisticsService {
 		LocalDateTime currentEnd = request.getEnd();
 
 		if ("date".equals(currentType)) {
-			if (!currentEnd.minusDays(30).isBefore(currentStart)) {
+			if (!currentEnd.minusDays(31).isBefore(currentStart)) {
 				throw new BadRequestException(StatusCode.EXCEEDED_STATISTICS_DATE_RANGE);
 			}
 			return postRepository.findPostStatisticsByQueryParameter(request);
 		}
 		if ("hour".equals(currentType)) {
-			if (!currentEnd.minusDays(7).isBefore(currentStart)) {
+			System.out.println(currentEnd + " " + currentStart);
+			if (!currentEnd.minusDays(8).isBefore(currentStart)) {
 				throw new BadRequestException(StatusCode.EXCEEDED_STATISTICS_DATE_RANGE);
 			}
 			return postRepository.findPostStatisticsByQueryParameterWithHour(request);
