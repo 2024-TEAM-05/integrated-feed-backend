@@ -1,6 +1,7 @@
 package team05.integrated_feed_backend.module.auth.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
+import team05.integrated_feed_backend.common.BaseApiResponse;
 import team05.integrated_feed_backend.module.auth.dto.JwtResponse;
 import team05.integrated_feed_backend.module.auth.dto.LoginRequest;
 import team05.integrated_feed_backend.module.auth.jwt.JwtManager;
@@ -17,7 +19,7 @@ import team05.integrated_feed_backend.module.auth.jwt.JwtManager;
 @Slf4j
 @RestController
 @RequestMapping("/api/auth")
-public class AuthController {
+public class AuthController implements AuthControllerDocs {
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
@@ -26,7 +28,7 @@ public class AuthController {
 	private JwtManager jwtManager;
 
 	@PostMapping("/login")
-	public JwtResponse login(@RequestBody LoginRequest loginRequest) {
+	public BaseApiResponse<JwtResponse> login(@RequestBody LoginRequest loginRequest) {
 
 		log.info("로그인 시도: {}", loginRequest.getAccount());
 
@@ -40,7 +42,8 @@ public class AuthController {
 		String token = jwtManager.generateToken(authentication);
 
 		log.info("로그인 성공: {}", loginRequest.getAccount());
-		return new JwtResponse(token);
+		JwtResponse jwtRes = new JwtResponse(token);
+		return BaseApiResponse.of(HttpStatus.OK, "로그인에 성공했습니다.", jwtRes);
 
 		// 예외 처리 핸들러에 추가
 	}
