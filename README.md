@@ -1,10 +1,10 @@
-
 # 소셜 미디어 통합 Feed 서비스
 
-![인스타그램](https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white) ![쓰레드](https://img.shields.io/badge/Threads-000000?style=for-the-badge&logo=Threads&logoColor=white) ![페이스북](https://img.shields.io/badge/Facebook-%231877F2.svg?style=for-the-badge&logo=Facebook&logoColor=white) ![트위터](https://img.shields.io/badge/X-%23000000.svg?style=for-the-badge&logo=X&logoColor=white) 등 다양한 SNS에 게시된 컨텐츠를 한 곳에 모아 보여주는 서비스
+![인스타그램](https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white) ![쓰레드](https://img.shields.io/badge/Threads-000000?style=for-the-badge&logo=Threads&logoColor=white) ![페이스북](https://img.shields.io/badge/Facebook-%231877F2.svg?style=for-the-badge&logo=Facebook&logoColor=white) ![트위터](https://img.shields.io/badge/X-%23000000.svg?style=for-the-badge&logo=X&logoColor=white)
+등 다양한 SNS에 게시된 컨텐츠를 한 곳에 모아 보여주는 서비스
 
+## 목차
 
-##  목차
 - [✨ 개요](#-개요)
 - [🧩 Skills](#-skills)
 - [Installation](#Installation)
@@ -14,42 +14,331 @@
 - [🕝 프로젝트 진행 및 이슈 관리](#-프로젝트-진행-및-이슈-관리)
 - [👾 Authors](#-authors)
 
-
 ## ✨ 개요
 
-다양한 소셜 미디어 플랫폼을 통해 수많은 정보를 접할 수 있게 되었지만, 여러 SNS 상에서 산발적으로 게시되는 컨텐츠를 일일이 확인하고 관리하는 건 굉장히 번거로운 일입니다. 어떤 주제나 브랜드에 대해 다양한 사용자 입장에서 모니터링하려면 각 플랫폼을 따로 관리해야 하는 불편함이 있습니다. 이런 문제를 해결할 수 있는 소셜 미디어 통합 Feed 애플리케이션입니다. 
+다양한 소셜 미디어 플랫폼을 통해 수많은 정보를 접할 수 있게 되었지만, 여러 SNS 상에서 산발적으로 게시되는 컨텐츠를 일일이 확인하고 관리하는 건 굉장히 번거로운 일입니다. 어떤 주제나 브랜드에 대해 다양한
+사용자 입장에서 모니터링하려면 각 플랫폼을 따로 관리해야 하는 불편함이 있습니다. 이런 문제를 해결할 수 있는 소셜 미디어 통합 Feed 애플리케이션입니다.
 
-`소셜 미디어 통합 Feed 서비스`는 `유저 계정` 또는 브랜드의 `#해시태그`를 기반으로 인스타그램, 쓰레드, 페이스북, 트위터(X) 등 다양한 SNS에 게시된 관련 컨텐츠를 하나의 피드로 통합하여 제공합니다. 이를 통해 관심 있는 주제나 브랜드의 SNS 노출 현황과 통계를 한눈에 쉽게 확인할 수 있습니다.
+`소셜 미디어 통합 Feed 서비스`는 `유저 계정` 또는 브랜드의 `#해시태그`를 기반으로 인스타그램, 쓰레드, 페이스북, 트위터(X) 등 다양한 SNS에 게시된 관련 컨텐츠를 하나의 피드로 통합하여 제공합니다.
+이를 통해 관심 있는 주제나 브랜드의 SNS 노출 현황과 통계를 한눈에 쉽게 확인할 수 있습니다.
 
 ## 🧩 Skills
 
-언어 및 프레임워크: `Java 17`, `Spring Boot 3.x.x`
+<img src="https://img.shields.io/badge/Java17-007396?style=flat-square&logo=Java&logoColor=white&style=flat"/></a>
+<img src="https://img.shields.io/badge/Spring Boot 3.3.2-6DB33F?style=flat-square&logo=Spring&logoColor=white&style=flat"/></a>
 
-데이터베이스: `Postgresql 16`
+<img src="https://img.shields.io/badge/postgresql-4169e1?style=flat-squar&logo=postgresql&logoColor=white"/></a>
 
-배포: `AWS EC2`, `Github Actions`
+<img src="https://img.shields.io/badge/Amazon EC2-FF9900?style=flat-square&logo=amazonec2&logoColor=white"/>
+<img src="https://img.shields.io/badge/Github Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white"/>
 
-ETC: `QueryDsl`, `Swagger`, `Lombok`, `Junit`
+<img src="https://img.shields.io/badge/Query DSL-0078D4?style=flat-square&logo=Spring Data JPA&logoColor=white&style=flat"/></a>
+<img src="https://img.shields.io/badge/-Swagger-%23Clojure?style=flat-square&logo=swagger&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/Lombok-68BC71?style=flat-square&logo=Lombok&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/Junit-25A162?style=flat-&logo=JUnit5&logoColor=white&style=flat"/></a>
 
-협업툴: `GitHub`, `Discord`, `Notion`
+<img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/Discord-5865F2?style=flat-square&logo=Discord&logoColor=white"/>
+<img src="https://img.shields.io/badge/Notion-FFFFFF?style=flat-square&logo=Notion&logoColor=black"/></a>
 
 ## 💌 API 명세서
+
 #### 스웨거 주소
+
 http://15.164.10.5:9020/swagger-ui/index.html#/
+
 ## 📄 요구사항 정리 및 기술 명세서
 
 <details>
-	<summary> 로그인 API</summary>
-	
+	<summary> 회원가입 API </summary>
+
 ### **요약 (Summary)**
 
-유저는 가입한 계정, 비밀번호로 로그인합니다. 서비스 로그인 시 메뉴는 **통합 Feed** 단일 입니다. 
+유저는 계정, 비밀번호, 이메일로 가입요청을 진행합니다.  
+가입 요청 시, 이메일로 발송된 코드를 입력하여 가입승인을 받고 서비스 이용이 가능합니다.
+
+### **목표 (Goals)**
+
+- `계정` 은 **unique** 합니다.
+- `이메일` 은 올바른 이메일 구조인지 **검증**되어야 합니다.
+- `비밀번호` 는 아래 중 **2가지 이상의 제약 조건**을 가지며, **암호화**되어 저장됩니다.
+    - 제약조건
+        - 다른 개인 정보와 유사한 비밀번호는 사용할 수 없습니다.
+        - 비밀번호는 최소 10자 이상이어야 합니다.
+        - 통상적으로 자주 사용되는 비밀번호는 사용할 수 없습니다.
+        - 숫자로만 이루어진 비밀번호는 사용할 수 없습니다.
+        - 숫자, 문자, 특수문자 중 2가지 이상을 포함해야 합니다.
+        - 이전 비밀번호와 동일하게 설정할 수 없습니다.
+        - 3회 이상 연속되는 문자 사용이 불가합니다.
+- 위 조건을 만족한 상태에서 가입요청 시, 유저가 생성되고 6자리의 랜덤한 코드가 입력한 이메일로 발송됩니다.
+- `계정` , `비밀번호`, `인증코드` 가 올바르게 입력되었을 시 가입승인이 되어 서비스 이용이 가능합니다.
+
+### **목표가 아닌 것 (Non-Goals)**
+
+- 실제 이메일 발송
+
+### **계획 (Plan)**
+
+#### Step 1. 회원가입
+
+<details>
+	<summary> 〰️ 플로우 차트 </summary>
+
+```mermaid
+flowchart TD
+   A((회원 가입 요청\nwith 계정, 이메일, 비밀번호)) --> B{계정이 이미 존재하는가?}
+   B --> |NO| C{이메일이 유효한가?}
+   B --> |YES| D((409 실패 응답 반환)) 
+   C --> |YES| E{이메일이 이미 존재하는가?}
+   C --> |NO| F((400 실패 응답 반환))
+   E --> |NO| G{비밀번호가 유효한가?}
+   E --> |YES| H((409 실패 응답 반환)) 
+   G --> |YES| I[유저 생성 후 DB에 저장]
+   G --> |NO| J((400 실패 응답 반환))
+   I --> K[유저 생성 이벤트 발송]
+   K --> L((202 성공 응답 반환)) 
+   K --> M[인증 번호 생성 후 DB에 저장]
+   M --> N[이메일 발송]
+   N --> O((요청 로그 기록))
+```
+
+</details>
+
+<details>
+	<summary> 💾 회원가입에 필요한 유저(멤버) ERD </summary>
+
+```mermaid
+erDiagram
+member {
+	member_id BIGINT PK "BIGSERIAL"
+	account VARCHAR(50) UK "NOT NULL"
+	email VARCHAR(320) UK "NOT NULL"
+	password VARCHAR(255) "NOT NULL"
+	status VARCHAR(15) "NOT NULL DEFAULT UNVERIFIED"
+    created_at TIMESTAMP "NOT NULL DEFAULT CURRENT_TIMESTAMP"
+	updated_at TIMESTAMP "NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+}
+```
+
+**Account 필드**  
+username 길이 제한  
+✔ 인스타그램: `30자`  
+✔ 쓰레드: `30자` (인스타그램과 같음)  
+✔ 트위터: `15자`  
+✔ 페이스북: `50자`
+
+**Email 필드**  
+이메일 주소는 **최대 320자**입니다. 이 값은 로컬 파트(64자)와 도메인 파트(255자)를 합친 후 “@” 기호를 추가한 것입니다. (by. 챗지피티)
+
+**Password 필드**  
+비밀번호는 암호화되어 저장됨으로 고정 길이임. Argon2 알고리즘을 사용하면 일반적으로 **90자 ~ 130자** (by. 챗지피티)
+
+**Status 필드**  
+`UNVERIFIED`: 이메일 인증 전 상태  
+`VERIFIED`: 이메일 인증 완료 상태
+
+</details>
+
+<details>
+	<summary> 🔐 비밀번호 암호화 알고리즘 </summary>  
+
+1️⃣ BCryptPasswordEncoder </br>
+✔ 오래전부터 사용된 알고리즘으로, 비밀번호 해시에 대한 가장 일반적인 선택 중 하나
+✔ bcrypt는 최대 입력 길이가 72바이트로 제한되기 때문에 긴 비밀번호는 잘릴 수 있음
+
+2️⃣ Argon2PasswordEncoder 🌟 </br>
+✔ 비밀번호 해시에 대한 **최신 표준** (2015년 암호 해싱 대회에서 우승)
+
+3️⃣ Pbkdf2PasswordEncoder </br>
+✔ FIPS 인증이 필요할 때 좋은 알고리즘
+✔ bcrypt나 Argon2보다는 조금 더 느리고, 설정에 따라 매우 높은 보안성을 제공하지 못할 수도 있음
+
+4️⃣ SCryptPasswordEncoder </br>
+✔ bcrypt나 Argon2에 비해 설정이 복잡할 수 있으며, 메모리 사용량이 높아 일부 환경에서 부적합
+
+**👩🏻‍⚖️ 결론은 보안 표준이면서, 가장 강력한 보안을 제공하는 Argon2PasswordEncoder를 사용하자!**
+
+</details>
+
+<details>
+	<summary> 🧮 이메일 형식 확인을 위한 정규식 </summary>
+
+Hibernate Validator에서 @Email 애너테이션을 사용할 때 기본적으로 적용되는 정규식
+
+```plaintext
+^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$
+```
+
+</details>
+
+<details>
+	<summary> 📋 비밀번호 제약조건 전략 </summary>
+<h4> 📌 다른 개인 정보와 유사한 비밀번호는 사용할 수 없습니다. </h4>
+
+🔍 질문 1. 다른 개인 정보에는 뭐가 있을까?
+: 보통 사용자 이름, 이메일, 전화번호, 생년월일이 있지만, 현재 서비스에서는 이메일만 존재
+
+🔍 질문 2. 유사한지는 어떻게 판단하지?
+: 직접 문자열 비교, 부분 문자열 비교, Levenshtein 거리 알고리즘
+
+🔍 질문 3. Levenshtein 거리 알고리즘이 뭐지?
+: 문자열 간의 편집 거리를 계산하는 알고리즘을 사용하여 비밀번호와 개인 정보의 유사성을 판단할 수 있습니다. 이 알고리즘을 사용하면 문자열이 얼마나 유사한지를 수치적으로 계산할 수 있습니다. 편집 거리가 짧으면
+비밀번호가 개인 정보와 유사하다고 판단할 수 있습니다. (by. 챗지피티)
+
+💡 tip) 비교 시 대소문자를 무시하고, 공백이나 특수문자를 제거한 후 비교하는 것이 좋음
+
+
+<h4> 📌 통상적으로 자주 사용되는 비밀번호는 사용할 수 없습니다. </h4>
+
+✔ 자주 사용되는 비밀번호 목록이 필요! (ex. most common password in Korea)  
+✔ 목록을 DB에 저장 (변경이 거의 없기 때문에 캐싱 or 파일 시스템 활용 가능)  
+✔ 비밀번호 검사 시 사용 (Set 자료구조를 사용할 수 있을 듯)
+
+</details>
+
+<details>
+	<summary> 🎰 인증 코드 생성 방식 </summary>
+
+1️⃣ 랜덤한 6자리 숫자 코드  
+✔ 숫자만으로 구성된 코드는 사용자가 쉽게 입력할 수 있음  
+✔ 브루트포스 공격에 취약 (6자리 숫자 코드는 1,000,000(10^6)가지 경우의 수만 있음)
+
+**🛠️ 구현방법**  
+**`java.security.SecureRandom`** 모듈을 사용하면, 보안적으로 안전한 난수를 생성할 수 있음
+> ❓ 보안적으로 안전한 난수  
+> 일반적인 Random 클래스는 시드(seed)를 기반으로 난수를 생성하지만, SecureRandom은 운영체제에서 제공하는 강력한 난수 생성기를 사용하여 보다 예측 불가능한 난수를 생성합니다.
+>
+
+</br>
+2️⃣ 랜덤한 6자리 코드 (숫자 + 문자)  
+✔ 경우의 수가 급격히 증가 (보안↑)  
+✔ 사용자가 입력하기 불편  
+✔ ‘1’, ‘I’ 등 사용자들이 혼동할 수 있음
+
+**👩🏻‍⚖️ 결론, 사용성을 위해 숫자만 사용하는 1️⃣번 방식으로 하되, 부르트포스 공격을 막기 위해 처리율을 제한할 수 있음**
+
+</details>
+
+<details>
+	<summary> 🎰 인증 코드 저장 방식 </summary>
+
+```mermaid
+erDiagram
+verification_code {
+	verification_code_id BIGINT PK "BIGSERIAL"
+	user_id BIGINT FK "NOT NULL"
+	code CHAR(6) "NOT NULL"
+	expire_at TIMESTAMP "NOT NULL"
+}
+```
+
+1️⃣ DB에 저장 </br>
+✔ 가장 일반적인 방식
+
+🤔 그럼 user 테이블과 합쳐야 할까? 분리해야 할까?  
+✔ user 테이블과 합치면, 하나의 트랜잭션으로 모든 작업을 처리할 수 있기 때문에 성능면에서 장점이 있음 👍🏻  
+✔ 인증 코드는 일시적인 데이터이기 때문에 인증 번호가 유효하지 않게 되거나 만료된 후에도 계속해서 유저 테이블에 남아 있을 수 있기 때문에 데이터 관리가 어려워짐 👎🏻  
+✔ 인증 코드를 위해 만료시간 등 추가적인 데이터가 필요할 수 있는데, 이러한 정보를 모두 user 테이블에 넣게 되면 user 테이블이 불필요하게 커질 수 있음 👎🏻
+
+**👩🏻‍⚖️ 결론은 분리하자!**
+
+2️⃣ 캐시(Redis)에 저장 </br>
+**장점**  
+✔ 조회 성능 ↑  
+✔ TTL 관리가 쉬움
+
+**단점**  
+✔ 데이터 휘발 가능성  
+💡 데이터가 휘발된 경우 유저에게 재인증 요청  
+💡 데이터 영속화 → 캐시
+
+**👩🏻‍⚖️ 결론은 일단 RDB에 저장한 뒤, 성능 개선이 필요하다면 캐시를 활용하자!**
+
+</details>
+
+<details>
+	<summary> 📂 클래스 다이어그램 </summary>
+
+```mermaid
+classDiagram
+		class VerificationCodeRepository {
+        +VerificationCode save(VerificationCode verificationCode)
+    }
+    
+    class VerificationCodeGenerator {
+        +String generateCode()
+    }
+
+    class MailService {
+        +void sendVerificationCode(String sendTo, String code)
+        +void send(String sendTo, String subject, String content)
+    }
+    
+    class MemberEventListener {
+        +void handleSignedUpEvent(SignedUpEvent event)
+    }
+    
+    class SignedUpEvent {
+    }
+    
+    class MemberEventPublisher {
+        +void publishSignedUpEvent(Member member)
+    }
+
+    class MemberService {
+        +void signup(MemberSignupReq request)
+    }
+    
+    class MemberRepository {
+        +boolean exitsByEmail(String email)
+        +boolean exitsByAccount(String account)
+        +Member save(Member member)
+    }
+    
+
+    class MemberController {
+        +BaseApiResponse<Void> signup(MemberSignupReq request)
+    }
+		
+		MemberEventListener --> MailService
+		MemberEventListener --> VerificationCodeRepository
+		MemberEventListener --> VerificationCodeGenerator
+		MemberEventListener --> SignedUpEvent
+		MemberEventPublisher --> SignedUpEvent
+    MemberService --> MemberEventPublisher
+    MemberService --> MemberRepository
+    MemberController --> MemberService
+```
+
+</details>
+
+### **이외 추가 고려 사항들 (Other Considerations)**
+
+🤔 DB에 저장된 인증 코드의 만료 관리  
+🤔 가입 승인 요청에 대한 처리율 제한 (ex. 10분 동안 10번 넘게 요청 X)  
+🤔 이메일 발송 실패 시 대응
+
+### **마일스톤 (Milestones)**
+
+> ~ 8.21(수): 비밀번호 제약 조건 관련 리서치  
+> ~ 8.23(금): 회원가입 기능 구현 및 이메일 발송 관련 리서치  
+> ~ 8.25(일): 가입 승인 기능 구현  
+> ~ 8.26(월): 코드 리팩토링 및 미진한 내용 보충
+
+</details>
+
+<details>
+	<summary> 로그인 API</summary>
+
+### **요약 (Summary)**
+
+유저는 가입한 계정, 비밀번호로 로그인합니다. 서비스 로그인 시 메뉴는 **통합 Feed** 단일 입니다.
 
 ### **목표 (Goals)**
 
 - `계정`, `비밀번호` 로 로그인 시 `JWT` 가 발급됩니다.
 - **이후 모든 API 요청 Header 에 `JWT` 가 항시 포함되며, `JWT` 유효성을 검증합니다.**
-- 서비스 로그인 시, 메뉴는 **통합 Feed** 단일 입니다. 
+- 서비스 로그인 시, 메뉴는 **통합 Feed** 단일 입니다.
 
 ### **목표가 아닌 것 (Non-Goals)**
 
@@ -57,6 +346,7 @@ http://15.164.10.5:9020/swagger-ui/index.html#/
 - 계정 잠금, 자동 로그아웃 등 사용자 경험 관련 추가 로직
 
 ### 로그인 api 요구사항 상세
+
 - **설명**
     - 사용자는 계정과 비밀번호를 입력하여 로그인할 수 있으며, 로그인 성공 시 JWT 토큰을 발급받습니다. (**Authentication)**
     - 이후 모든 API에서 JWT 토큰을 사용하여 인가 요청을 보낼 수 있습니다. **(Authorization)**
@@ -75,9 +365,9 @@ http://15.164.10.5:9020/swagger-ui/index.html#/
     - 입력한 계정(아이디)이나 비밀번호가 잘못된 경우, 오류 메시지와 함께 인증 실패 응답을 반환합니다.
     - 만료된 JWT 토큰으로 요청한 경우, 인증 오류 응답을 반환합니다.
     - JWT 토큰이 없는 경우, 인증되지 않은 상태로 처리하여 오류 응답을 반환합니다.
-  
+
  </br>
- 
+
 <details>
 	<summary> 플로우 차트 </summary>
 
@@ -98,6 +388,7 @@ flowchart TD
         H -->|유효하지 않음| K[Unauthorized error]
     end
 ```
+
 </details>
 
 <details>
@@ -115,6 +406,7 @@ member {
 	updated_at TIMESTAMP "NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
 }
 ```
+
 </details>
 
 ### **계획 (Plan)**
@@ -139,9 +431,10 @@ member {
 - 잘못된 로그인 정보, 만료된 토큰, 권한 부족 등 에러 처리
 
 ### **마일스톤 (Milestones)**
+
 ![image](https://github.com/user-attachments/assets/dbd228fd-2e98-4f61-aff3-bb2bde808265)
 
- 
+
 </details>
 
 <details>
@@ -207,11 +500,11 @@ sequenceDiagram
 ### **마일스톤 (Milestones)**
 
 > `~ 8.21(수)`: 요구사항 분석
-> 
+>
 > `~ 8.22(목)`: 테크 스펙 작성
-> 
+>
 > `~ 8.23(금)`: 기능 구현 및 단위 테스트 작성
-> 
+>
 > `~ 8.25(일)`: 테스트 수정 및 리드미 작성
 
 </details>
@@ -394,11 +687,11 @@ sequenceDiagram
 ### **마일스톤 (Milestones)**
 
 > `~ 8.22(목)`: controller 계층 구현
-> 
+>
 > `~ 8.23(금)`: infra 계층의 adapter,client 구현
-> 
+>
 > `~ 8.24(토)`: service 구현, 단위 테스트 작성
-> 
+>
 > `~ 8.25(일)`: Rollout
 
 </details>
@@ -406,19 +699,21 @@ sequenceDiagram
 
 <details>
 	<summary> 게시물 목록 API</summary>
-        
+
 ### **요약 (Summary)**
 
-사용자가 Feed에서 볼 수 있는 게시물 목록을 조회하는 기능을 제공합니다. 다양한 쿼리 파라미터를 지원하여 해시태그, 게시물 유형, 정렬 순서, 검색 키워드 등 사용자가 원하는 방식으로 게시물을 필터링하고 정렬할 수 있게 합니다.
+사용자가 Feed에서 볼 수 있는 게시물 목록을 조회하는 기능을 제공합니다. 다양한 쿼리 파라미터를 지원하여 해시태그, 게시물 유형, 정렬 순서, 검색 키워드 등 사용자가 원하는 방식으로 게시물을 필터링하고 정렬할
+수 있게 합니다.
 
 ### **목표 (Goals)**
 
 - 유저가 자신의 `account`가 해시태그로 포함된 게시물 목록을 확인할 수 있게 한다.
 - 유저가 지정한 한 개 `hashtag` 가 게시물의 해시태그 중 한 개와정확히 일치하는 게시물 목록을 확인할 수 있게 한다.
 - 유저가 지정한 소셜 미디어 플랫폼의 게시물 목록을 확인할 수 있게 한다.
-- 유저가 오름차순 및 내림차순을 모두 지원하여 `좋아요개수`, `공유 개수`, `조회수`, `생성 날짜`, `업데이트 날짜`와 같은 여러 필드를 기준으로 `오름차순`, `내림차순`으로 정렬된 게시물 목록을 확인할 수 있게 한다.
+- 유저가 오름차순 및 내림차순을 모두 지원하여 `좋아요개수`, `공유 개수`, `조회수`, `생성 날짜`, `업데이트 날짜`와 같은 여러 필드를 기준으로 `오름차순`, `내림차순`으로 정렬된 게시물 목록을 확인할
+  수 있게 한다.
 - 유저가 게시물의 제목과 내용을 검색하여 포함된 게시물 목록을 확인할 수 있게 한다.
-  - 내용은 최대 20자까지만 포함되게 한다.
+    - 내용은 최대 20자까지만 포함되게 한다.
 
 ### **목표가 아닌 것 (Non-Goals)**
 
@@ -433,7 +728,7 @@ sequenceDiagram
 
 - 공통으로 요청을 받을 수 있는 `PaginationQuery` 생성
 - 공통으로 응답을 받을 수 있는 `PaginationMetadata` 생성
-  - 응답 예시
+    - 응답 예시
   ```json
   {
     "hasNext": true,
@@ -495,13 +790,12 @@ sequenceDiagram
 
 </details>
 
-
 ### **마일스톤 (Milestones)**
 
 > `~ 8.24(목)`: 요구사항 정리 및 문서화, controller, repository 계층 구현, queryDSL 공부
-> 
+>
 > `~ 8.25(금)`: service 계층 구현 , 테스트 코드 추가
-> 
+>
 > `~ 8.26일(토)`: 코드 리팩토링
 
 </details>
@@ -537,19 +831,21 @@ sequenceDiagram
 - `Expressions.dateTimeTemplate`을 사용하여 날짜 및 시간 반환 타입 변환
 
 #### API 응답 형식
+
 ```json
 # type이 date / value는 지정되지 않았으므로 count / hashtag는 springboot / star와 end는 지정되지 않았으므로 오늘로부터 7일 전 ~ 오늘
 [
-    {
-      "date": "2024-08-19",
-      "countByValue": 3
-    },
-    {
-      "date": "2024-08-20",
-      "countByValue": 10
-    } # ... "2024-08-26"까지 data 반환
-  ]
+{
+"date": "2024-08-19",
+"countByValue": 3
+},
+{
+"date": "2024-08-20",
+"countByValue": 10
+} # ... "2024-08-26"까지 data 반환
+]
 ```
+
 <details>
 	<summary> 플로우 차트</summary>
 
@@ -603,26 +899,24 @@ classDiagram
 ### **마일스톤 (Milestones)**
 
 > `~ 8.22(목)`: 요구 사항 분석, 테크 스펙 작성
-> 
+>
 > `~ 8.23(금)`: 더미 데이터 생성. api 명세 구상
-> 
+>
 > `~ 8.24(토)`: `dto`, `controller` 계층 작성
-> 
+>
 > `~ 8.25(일)`: `service`, `repository`계층 기능 개발
-> 
+>
 > `~ 8.26(월)`: Rollout
 </details>
 
 ## 🏗️ ERD
-<img src="https://github.com/user-attachments/assets/62f89985-2ddc-482e-a244-3ded19b240b6" width=600 />
 
-  
+<img src="https://github.com/user-attachments/assets/62f89985-2ddc-482e-a244-3ded19b240b6" width=600 />
 
 ## 🕝 프로젝트 진행 및 이슈 관리
 
 - Github Project 칸반보드 활용
 - 각 기능별 이슈 작성 후 하위 이슈 추가
-
 
 <table>
     <tr align="center">
