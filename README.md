@@ -2,8 +2,15 @@
 
 소셜 미디어 통합 Feed 서비스
 
+##  목차
+- [✨ 개요](#-개요)
+- [📄 요구사항 정리 및 기술 명세서](#-요구사항-정리-및-기술-명세서)
+- [🏗️ ERD](#%EF%B8%8F-erd)
+- [🕝 프로젝트 진행 및 이슈 관리](#-프로젝트-진행-및-이슈-관리)
+- [👾 Authors](#-authors)
 
-## 개요
+
+## ✨ 개요
 
 다양한 소셜 미디어 플랫폼을 통해 수많은 정보를 접할 수 있게 되었지만 여러 SNS 상에서 산발적으로 게시되는 컨텐츠를 모두 놓치지 않고 확인하기는 쉽지 않습니다. 예를 들어 어떤 주제나 브랜드와 관련해 모니터링하고 싶은 경우, 여러 플랫폼에서 따로따로 관리하는 것은 굉장히 번거로운 일입니다.
 
@@ -11,7 +18,7 @@
 
 <br/>
 
-## 요구사항 정리 및 기술 명세서
+## 📄 요구사항 정리 및 기술 명세서
 
 <details>
 	<summary> 게시물 상세 조회 API</summary>
@@ -468,11 +475,11 @@ classDiagram
 >
 </details>
 
-## ERD
+## 🏗️ ERD
 <img src="https://github.com/user-attachments/assets/62f89985-2ddc-482e-a244-3ded19b240b6" width=600 />
 
 
-## 프로젝트 진행 및 이슈 관리
+## 🕝 프로젝트 진행 및 이슈 관리
 
 - Github Project 칸반보드 활용
 - 각 기능별 이슈 작성 후 하위 이슈 추가
@@ -484,7 +491,7 @@ classDiagram
         <td><img width="1455" alt="스크린샷 2024-08-26 18 06 58" src="https://github.com/user-attachments/assets/ecc23acf-1850-4a87-8abc-97953ba1d8d0"></td>
 </table>
 
-## Authors
+## 👾 Authors
 
 <table>
     <tr align="center">
