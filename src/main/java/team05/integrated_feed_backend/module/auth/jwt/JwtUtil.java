@@ -95,7 +95,7 @@ public class JwtUtil {
 	}
 
 	// JWT 토큰 유효성 검증
-	public boolean validateToken(String token) {
+	public boolean isValidToken(String token) {
 		try {
 			Jwts.parserBuilder()
 				.setSigningKey(secretKey)

@@ -35,7 +35,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		// request에서 토큰 파싱, 토큰 문자열 반환해 이후 인증 확인
 		String token = jwtUtil.resolveToken(request);
 
-		if (token != null && jwtUtil.validateToken(token)) {
+		if (token != null && jwtUtil.isValidToken(token)) {
 			String account = jwtUtil.getAccount(token);
 
 			// UserDetailsService를 통해 UserDetails를 로드
