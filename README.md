@@ -297,6 +297,9 @@ sequenceDiagram
 
 </details>
 
+## ERD
+<img src="https://github.com/user-attachments/assets/62f89985-2ddc-482e-a244-3ded19b240b6" width=600 />
+
 
 ## 프로젝트 진행 및 이슈 관리
 
