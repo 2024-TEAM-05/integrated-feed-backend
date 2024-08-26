@@ -24,11 +24,8 @@ public class PostService {
 			throw new BusinessException(StatusCode.BAD_REQUEST, StatusCode.BAD_REQUEST.getMessage());
 		}
 
-		Post post = postRepository.findDetailPostById(id);
-
-		if (post == null) {
-			throw new BusinessException(StatusCode.NOT_FOUND, StatusCode.NOT_FOUND.getMessage());
-		}
+		Post post = postRepository.findDetailPostById(id)
+			.orElseThrow(() -> new BusinessException(StatusCode.NOT_FOUND, StatusCode.NOT_FOUND.getMessage()));
 
 		post.incrementViewCount();
 
