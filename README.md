@@ -289,12 +289,114 @@ sequenceDiagram
 
 </details>
 
+
 # **마일스톤 (Milestones)**
 
 > `~8월 24(목)` : 요구사항 정리 및 문서화, controller, repository 계층 구현, queryDSL 공부
 > `~8월 25일(금)` : , service 계층 구현 , 테스트 코드 추가
 > `~8월 26일(토)` :코드 리팩토링
 
+</details>
+
+<details>
+	<summary>통계 API</summary>
+
+### **요약 (Summary)**
+
+사용자가 지정한 파라미터에 맞는 게시물을 반환합니다.
+
+사용자는 `type`, `hashtag`, `value`, `start(조회 시작일)`, `end(조회 종료일)`를 지정할 수 있습니다.
+
+### **목표 (Goals)**
+
+- 쿼리 파라미터 사용
+    - API에서 제공하는 쿼리 파라미터를 통해 통계 데이터를 요청하고, 유효성을 검사하여 올바른 결과를 반환합니다.
+- 유효성 검사
+    - `start`와 `end`의 날짜 유효성 확인 및 `type`에 따른 날짜 간격 제한을`(30일, 7일)` 설정합니다.
+- 데이터 집계
+    - 요청된 기간 내에 게시물의 조회수, 좋아요 수, 공유 수 등을 집계하여 반환하는 기능을 구현합니다.
+
+### **목표가 아닌 것 (Non-Goals)**
+
+- 통계 기능을 위한 테이블은 생성하지 않습니다.
+
+### **계획 (Plan)**
+
+#### QueryDSl을 사용한 조회
+
+- 많은 쿼리 파라미터를 처리할 동적 쿼리 생성을 위해 `QueryDSL` 사용
+- `type`이 `date`인 경우와 `hour`인 경우를 나눠서 메소드 작성
+- `Expressions.dateTimeTemplate`을 사용하여 날짜 및 시간 반환 타입 변환
+
+#### API 응답 형식
+```json
+# type이 date / value는 지정되지 않았으므로 count / hashtag는 springboot / star와 end는 지정되지 않았으므로 오늘로부터 7일 전 ~ 오늘
+[
+    {
+      "date": "2024-08-19",
+      "countByValue": 3
+    },
+    {
+      "date": "2024-08-20",
+      "countByValue": 10
+    } # ... "2024-08-26"까지 data 반환
+  ]
+```
+<details>
+	<summary> 플로우 차트</summary>
+
+```mermaid
+graph TD
+    A((쿼리 파라미터 요청)) --> B{유효성 검사}
+    B --> |start가 end보다 나중| C((400 BAD_REQUEST 반환))
+    B --> |type이 date이고 간격 30일 초과| D((400 BAD_REQUEST 반환))
+    B --> |type이 hour이고 간격 7일 초과| E((400 BAD_REQUEST 반환))
+    B --> |유효| F{post에서 데이터 반환}
+    F --> G((데이터 반환))
+
+```
+
+</details>
+
+<details>
+	<summary> 클래스 다이어그램 </summary>
+
+```mermaid
+classDiagram
+    class PostStatisticsController {
+        + List<PostStatisticsListRes> getPostStatistics(String type, String hashtag, String value, LocalDate start, LocalDate end)
+    }
+
+    class PostStatisticsService {
+        + List<PostStatisticsListRes> getPostStatistics(PostStatisticsListReq request)
+    }
+
+    class PostRepository {
+        +PostStatistics findByPostId(Long postId)
+        +void save(PostStatistics postStatistics)
+    }
+
+    class PostStatisticsCustomRepository {
+        +List<PostStatisticsListRes> findPostStatisticsByQueryParameter(PostStatisticsListReq request)
+        +List<PostStatisticsListRes> findPostStatisticsByQueryParameterWithHour(PostStatisticsListReq request);
+    }
+
+    PostStatisticsController --> PostStatisticsService
+    PostStatisticsService --> PostRepository
+    PostRepository --> PostStatisticsCustomRepository
+
+```
+
+</details>
+
+# **마일스톤 (Milestones)**
+
+> `~ 8.22(목)`: 요구 사항 분석, 테크 스펙 작성
+`~ 8.23(금)`: 더미 데이터 생성. api 명세 구상
+`~ 8.24(토)`: `dto`, `controller` 계층 작성
+`~ 8.25(일)`: `service`, `repository`계층 기능 개발
+`~ 8.26(월)`: Rollout
+>
 </details>
 
 ## ERD
@@ -343,7 +445,7 @@ sequenceDiagram
         <td>
             <img src="https://github.com/uijin-j.png?size=100">
             <br>
-            <a href="https://github.com/uijin-js"><I>uijin-js</I></a>
+            <a href="https://github.com/uijin-j"><I>uijin-j</I></a>
         </td>
         <td>
           <img src="https://github.com/hye-on.png?size=100">
