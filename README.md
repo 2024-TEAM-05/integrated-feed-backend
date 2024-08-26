@@ -1,6 +1,15 @@
 # integrated-feed-backend
 소셜 미디어 통합 Feed 서비스
 
+
+## 개요
+
+다양한 소셜 미디어 플랫폼을 통해 수많은 정보를 접할 수 있게 되었지만 여러 SNS 상에서 산발적으로 게시되는 컨텐츠를 모두 놓치지 않고 확인하기는 쉽지 않습니다. 예를 들어 어떤 주제나 브랜드와 관련해 모니터링하고 싶은 경우, 여러 플랫폼에서 따로따로 관리하는 것은 굉장히 번거로운 일입니다.
+
+`소셜 미디어 통합 Feed 서비스`는 이러한 문제를 해결하기 위한 서비스로, `유저 계정` 또는 브랜드의 `#해시태그`를 기반으로 ![인스타그램](https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white), ![쓰레드](https://img.shields.io/badge/Threads-000000?style=for-the-badge&logo=Threads&logoColor=white), ![페이스북](https://img.shields.io/badge/Facebook-%231877F2.svg?style=for-the-badge&logo=Facebook&logoColor=white), ![트위터](https://img.shields.io/badge/X-%23000000.svg?style=for-the-badge&logo=X&logoColor=white) 등 다양한 SNS에 게시된 관련 컨텐츠를 한 곳에서 모아볼 수 있는 소셜 미디어 통합 Feed 어플리케이션입니다. 유저들은 자신이 관심 있는 주제나 브랜드의 SNS 노출 현황과 통계를 한눈에 확인할 수 있습니다.
+
+<br/>
+
 ## 요구사항 정리 및 기술 명세서
 
 <details>
