@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-	private final JwtUtil jwtUtil;
+	private final JwtManager jwtManager;
 	private final UserDetailsService userDetailsService;
 
 	@Override
@@ -33,16 +33,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 			return;
 		}
 		// request에서 토큰 파싱, 토큰 문자열 반환해 이후 인증 확인
-		String token = jwtUtil.resolveToken(request);
+		String token = jwtManager.resolveToken(request);
 
-		if (token != null && jwtUtil.isValidToken(token)) {
-			String account = jwtUtil.getAccount(token);
+		if (token != null && jwtManager.isValidToken(token)) {
+			String account = jwtManager.getAccount(token);
 
 			// UserDetailsService를 통해 UserDetails를 로드
 			var userDetails = userDetailsService.loadUserByUsername(account);
 
 			// 토큰이 유효한 경우 Authentication 생성
-			UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken)jwtUtil.getAuthentication(
+			UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken)jwtManager.getAuthentication(
 				token, userDetails);
 			authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 

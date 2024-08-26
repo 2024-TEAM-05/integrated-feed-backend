@@ -16,19 +16,19 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import lombok.RequiredArgsConstructor;
 import team05.integrated_feed_backend.module.auth.jwt.JwtAuthenticationFilter;
-import team05.integrated_feed_backend.module.auth.jwt.JwtUtil;
+import team05.integrated_feed_backend.module.auth.jwt.JwtManager;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-	private final JwtUtil jwtUtil;
+	private final JwtManager jwtManager;
 	private final UserDetailsService userDetailsService;
 
 	@Bean
 	public JwtAuthenticationFilter jwtAuthenticationFilter() {
-		return new JwtAuthenticationFilter(jwtUtil, userDetailsService);
+		return new JwtAuthenticationFilter(jwtManager, userDetailsService);
 	}
 
 	@Bean
