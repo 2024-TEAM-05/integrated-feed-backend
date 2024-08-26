@@ -33,6 +33,20 @@ import team05.integrated_feed_backend.exception.custom.ForbiddenException;
 public class GlobalExceptionHandler {
 
 	/**
+	 * BusinessException 및 하위 커스텀 예외 클래스에서 StatusCode 내보내는 메서드
+	 **/
+	private static StatusCode getStatusCodeFromException(BusinessException e) {
+		HttpStatus httpStatus = e.getStatusCode().getHttpStatus();
+
+		// 서버 에러인 경우 stack trace
+		if (httpStatus.value() == 500) {
+			e.printStackTrace();
+		}
+
+		return e.getStatusCode();
+	}
+
+	/**
 	 * 요청이 잘못된 경우
 	 * ex) 필수 입력 값을 전달하지 않은 경우
 	 **/
@@ -155,7 +169,7 @@ public class GlobalExceptionHandler {
 	 * ex) JWT 토큰에 포함된 사용자 이름으로 사용자를 로드할 때 해당 사용자가 존재하지 않는 경우
 	 **/
 	@ResponseStatus(UNAUTHORIZED)
-	@ExceptionHandler({UsernameNotFoundException.class})
+	@ExceptionHandler(UsernameNotFoundException.class)
 	public BaseApiResponse<Void> handleUsernameNotFoundException(UsernameNotFoundException e) {
 		log.warn(e.getMessage(), e);
 
@@ -192,20 +206,6 @@ public class GlobalExceptionHandler {
 			.collect(Collectors.joining(", "));
 
 		return enumTypeName + "는 [" + validValues + "] 중 하나여야 합니다.";
-	}
-
-	/**
-	 * BusinessException 및 하위 커스텀 예외 클래스에서 StatusCode 내보내는 메서드
-	 **/
-	private static StatusCode getStatusCodeFromException(BusinessException e) {
-		HttpStatus httpStatus = e.getStatusCode().getHttpStatus();
-
-		// 서버 에러인 경우 stack trace
-		if (httpStatus.value() == 500) {
-			e.printStackTrace();
-		}
-
-		return e.getStatusCode();
 	}
 
 }

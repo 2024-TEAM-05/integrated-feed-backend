@@ -1,4 +1,5 @@
 # integrated-feed-backend
+
 소셜 미디어 통합 Feed 서비스
 
 
@@ -13,11 +14,80 @@
 ## 요구사항 정리 및 기술 명세서
 
 <details>
-	<summary> 게시물 “좋아요수”, “공유수” 증가 API</summary>
-        
+	<summary> 게시물 상세 조회 API</summary>
+
 ### **요약 (Summary)**
 
-해당 서비스에서 `좋아요`, `공유` 버튼을 클릭할 시 각 게시물의 원래 소셜 미디어의 `좋아요` , `공유` 수를 증가시킬 수 있게 합니다. 
+게시물 상세 조회 API는 사용자에게 특정 게시물의 상세 정보를 제공하는 기능입니다. 사용자는 이 API를 통해 게시물의 제목, 내용 및 게시물 관련 메타데이터를 조회할 수 있습니다.
+
+### **목표 (Goals)**
+
+- 사용자가 특정 게시물의 모든 세부 정보를 한 번의 API 호출로 가져올 수 있도록 한다.
+- 사용자가 요청한 게시물이 존재하지 않는 경우, 적절한 에러 메시지를 반환한다.
+- 특정 게시물의 상세 정보 반환에 성공할 경우, 해당 게시물의 view_count를 1 증가시킨다.
+
+### **계획 (Plan)**
+
+<details>
+	<summary> 플로우 차트</summary>
+
+```mermaid 
+graph TD
+    A((게시물 id)) --> B{유효성 검증}
+
+    B -->|실패| C((400 Bad Request 반환))
+    
+    B -->|성공| D{게시물 존재 확인}
+    
+    D -->|부재| E((404 Not Found 반환))
+    
+    D -->|존재| H((200 성공 응답 반환))
+```
+
+</details>
+
+<details>
+	<summary> 시퀀스 다이어그램 </summary>
+
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant Co as Controller
+    participant S as Service
+    participant R as Repository
+    
+    C->>Co: Request (GET /api/posts/{id})
+    Co->>S: getPostDetails(id)
+    S->>R: findDetailedPostById(id)
+    R-->>S: Post
+    S-->>Co: PostDto
+    Co-->>C: Response (JSON)
+```
+
+</details>
+
+### **유닛 테스트**
+
+- [성공] 게시물 상세 정보가 정상적으로 반환된다.
+- [실패] 게시물이 없을 때 예외를 던진다.
+- [성공] 조회된 게시물의 view_count가 1 증가한다.
+- [실패] 잘못된 형식의 ID가 제공되면 400 Bad Request가 반환된다.
+
+### **마일스톤 (Milestones)**
+
+> 8월 21일 (수): 요구사항 분석 <br>
+> 8월 22일 (목): 테크 스펙 작성 <br>
+> 8월 23일 (금): 기능 구현 및 단위 테스트 작성 <br>
+> 8월 25일 (일): 테스트 수정 및 리드미 작성 <br>
+
+</details>
+
+<details>
+	<summary> 게시물 “좋아요수”, “공유수” 증가 API</summary>
+
+### **요약 (Summary)**
+
+해당 서비스에서 `좋아요`, `공유` 버튼을 클릭할 시 각 게시물의 원래 소셜 미디어의 `좋아요` , `공유` 수를 증가시킬 수 있게 합니다.
 
 ### **목표 (Goals)**
 
@@ -131,7 +201,6 @@ classDiagram
 
 <details>
 	<summary> 시퀀스 다이어그램 </summary>
-
 
 ```mermaid
 sequenceDiagram
