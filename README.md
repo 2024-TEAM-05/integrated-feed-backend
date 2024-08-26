@@ -1,10 +1,10 @@
-
 # 소셜 미디어 통합 Feed 서비스
 
-![인스타그램](https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white) ![쓰레드](https://img.shields.io/badge/Threads-000000?style=for-the-badge&logo=Threads&logoColor=white) ![페이스북](https://img.shields.io/badge/Facebook-%231877F2.svg?style=for-the-badge&logo=Facebook&logoColor=white) ![트위터](https://img.shields.io/badge/X-%23000000.svg?style=for-the-badge&logo=X&logoColor=white) 등 다양한 SNS에 게시된 컨텐츠를 한 곳에 모아 보여주는 서비스
+![인스타그램](https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white) ![쓰레드](https://img.shields.io/badge/Threads-000000?style=for-the-badge&logo=Threads&logoColor=white) ![페이스북](https://img.shields.io/badge/Facebook-%231877F2.svg?style=for-the-badge&logo=Facebook&logoColor=white) ![트위터](https://img.shields.io/badge/X-%23000000.svg?style=for-the-badge&logo=X&logoColor=white)
+등 다양한 SNS에 게시된 컨텐츠를 한 곳에 모아 보여주는 서비스
 
+## 목차
 
-##  목차
 - [✨ 개요](#-개요)
 - [🧩 Skills](#-skills)
 - [Installation](#Installation)
@@ -14,42 +14,53 @@
 - [🕝 프로젝트 진행 및 이슈 관리](#-프로젝트-진행-및-이슈-관리)
 - [👾 Authors](#-authors)
 
-
 ## ✨ 개요
 
-다양한 소셜 미디어 플랫폼을 통해 수많은 정보를 접할 수 있게 되었지만, 여러 SNS 상에서 산발적으로 게시되는 컨텐츠를 일일이 확인하고 관리하는 건 굉장히 번거로운 일입니다. 어떤 주제나 브랜드에 대해 다양한 사용자 입장에서 모니터링하려면 각 플랫폼을 따로 관리해야 하는 불편함이 있습니다. 이런 문제를 해결할 수 있는 소셜 미디어 통합 Feed 애플리케이션입니다. 
+다양한 소셜 미디어 플랫폼을 통해 수많은 정보를 접할 수 있게 되었지만, 여러 SNS 상에서 산발적으로 게시되는 컨텐츠를 일일이 확인하고 관리하는 건 굉장히 번거로운 일입니다. 어떤 주제나 브랜드에 대해 다양한
+사용자 입장에서 모니터링하려면 각 플랫폼을 따로 관리해야 하는 불편함이 있습니다. 이런 문제를 해결할 수 있는 소셜 미디어 통합 Feed 애플리케이션입니다.
 
-`소셜 미디어 통합 Feed 서비스`는 `유저 계정` 또는 브랜드의 `#해시태그`를 기반으로 인스타그램, 쓰레드, 페이스북, 트위터(X) 등 다양한 SNS에 게시된 관련 컨텐츠를 하나의 피드로 통합하여 제공합니다. 이를 통해 관심 있는 주제나 브랜드의 SNS 노출 현황과 통계를 한눈에 쉽게 확인할 수 있습니다.
+`소셜 미디어 통합 Feed 서비스`는 `유저 계정` 또는 브랜드의 `#해시태그`를 기반으로 인스타그램, 쓰레드, 페이스북, 트위터(X) 등 다양한 SNS에 게시된 관련 컨텐츠를 하나의 피드로 통합하여 제공합니다.
+이를 통해 관심 있는 주제나 브랜드의 SNS 노출 현황과 통계를 한눈에 쉽게 확인할 수 있습니다.
 
 ## 🧩 Skills
 
-언어 및 프레임워크: `Java 17`, `Spring Boot 3.x.x`
+<img src="https://img.shields.io/badge/Java17-007396?style=flat-square&logo=Java&logoColor=white&style=flat"/></a>
+<img src="https://img.shields.io/badge/Spring Boot 3.3.2-6DB33F?style=flat-square&logo=Spring&logoColor=white&style=flat"/></a>
 
-데이터베이스: `Postgresql 16`
+<img src="https://img.shields.io/badge/postgresql-4169e1?style=flat-squar&logo=postgresql&logoColor=white"/></a>
 
-배포: `AWS EC2`, `Github Actions`
+<img src="https://img.shields.io/badge/Amazon EC2-FF9900?style=flat-square&logo=amazonec2&logoColor=white"/>
+<img src="https://img.shields.io/badge/Github Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white"/>
 
-ETC: `QueryDsl`, `Swagger`, `Lombok`, `Junit`
+<img src="https://img.shields.io/badge/Query DSL-0078D4?style=flat-square&logo=Spring Data JPA&logoColor=white&style=flat"/></a>
+<img src="https://img.shields.io/badge/-Swagger-%23Clojure?style=flat-square&logo=swagger&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/Lombok-68BC71?style=flat-square&logo=Lombok&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/Junit-25A162?style=flat-&logo=JUnit5&logoColor=white&style=flat"/></a>
 
-협업툴: `GitHub`, `Discord`, `Notion`
+<img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/Discord-5865F2?style=flat-square&logo=Discord&logoColor=white"/>
+<img src="https://img.shields.io/badge/Notion-FFFFFF?style=flat-square&logo=Notion&logoColor=black"/></a>
 
 ## 💌 API 명세서
+
 #### 스웨거 주소
+
 http://15.164.10.5:9020/swagger-ui/index.html#/
+
 ## 📄 요구사항 정리 및 기술 명세서
 
 <details>
 	<summary> 로그인 API</summary>
-	
+
 ### **요약 (Summary)**
 
-유저는 가입한 계정, 비밀번호로 로그인합니다. 서비스 로그인 시 메뉴는 **통합 Feed** 단일 입니다. 
+유저는 가입한 계정, 비밀번호로 로그인합니다. 서비스 로그인 시 메뉴는 **통합 Feed** 단일 입니다.
 
 ### **목표 (Goals)**
 
 - `계정`, `비밀번호` 로 로그인 시 `JWT` 가 발급됩니다.
 - **이후 모든 API 요청 Header 에 `JWT` 가 항시 포함되며, `JWT` 유효성을 검증합니다.**
-- 서비스 로그인 시, 메뉴는 **통합 Feed** 단일 입니다. 
+- 서비스 로그인 시, 메뉴는 **통합 Feed** 단일 입니다.
 
 ### **목표가 아닌 것 (Non-Goals)**
 
@@ -57,6 +68,7 @@ http://15.164.10.5:9020/swagger-ui/index.html#/
 - 계정 잠금, 자동 로그아웃 등 사용자 경험 관련 추가 로직
 
 ### 로그인 api 요구사항 상세
+
 - **설명**
     - 사용자는 계정과 비밀번호를 입력하여 로그인할 수 있으며, 로그인 성공 시 JWT 토큰을 발급받습니다. (**Authentication)**
     - 이후 모든 API에서 JWT 토큰을 사용하여 인가 요청을 보낼 수 있습니다. **(Authorization)**
@@ -75,9 +87,9 @@ http://15.164.10.5:9020/swagger-ui/index.html#/
     - 입력한 계정(아이디)이나 비밀번호가 잘못된 경우, 오류 메시지와 함께 인증 실패 응답을 반환합니다.
     - 만료된 JWT 토큰으로 요청한 경우, 인증 오류 응답을 반환합니다.
     - JWT 토큰이 없는 경우, 인증되지 않은 상태로 처리하여 오류 응답을 반환합니다.
-  
+
  </br>
- 
+
 <details>
 	<summary> 플로우 차트 </summary>
 
@@ -98,6 +110,7 @@ flowchart TD
         H -->|유효하지 않음| K[Unauthorized error]
     end
 ```
+
 </details>
 
 <details>
@@ -115,6 +128,7 @@ member {
 	updated_at TIMESTAMP "NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
 }
 ```
+
 </details>
 
 ### **계획 (Plan)**
@@ -139,9 +153,10 @@ member {
 - 잘못된 로그인 정보, 만료된 토큰, 권한 부족 등 에러 처리
 
 ### **마일스톤 (Milestones)**
+
 ![image](https://github.com/user-attachments/assets/dbd228fd-2e98-4f61-aff3-bb2bde808265)
 
- 
+
 </details>
 
 <details>
@@ -207,11 +222,11 @@ sequenceDiagram
 ### **마일스톤 (Milestones)**
 
 > `~ 8.21(수)`: 요구사항 분석
-> 
+>
 > `~ 8.22(목)`: 테크 스펙 작성
-> 
+>
 > `~ 8.23(금)`: 기능 구현 및 단위 테스트 작성
-> 
+>
 > `~ 8.25(일)`: 테스트 수정 및 리드미 작성
 
 </details>
@@ -394,11 +409,11 @@ sequenceDiagram
 ### **마일스톤 (Milestones)**
 
 > `~ 8.22(목)`: controller 계층 구현
-> 
+>
 > `~ 8.23(금)`: infra 계층의 adapter,client 구현
-> 
+>
 > `~ 8.24(토)`: service 구현, 단위 테스트 작성
-> 
+>
 > `~ 8.25(일)`: Rollout
 
 </details>
@@ -406,19 +421,21 @@ sequenceDiagram
 
 <details>
 	<summary> 게시물 목록 API</summary>
-        
+
 ### **요약 (Summary)**
 
-사용자가 Feed에서 볼 수 있는 게시물 목록을 조회하는 기능을 제공합니다. 다양한 쿼리 파라미터를 지원하여 해시태그, 게시물 유형, 정렬 순서, 검색 키워드 등 사용자가 원하는 방식으로 게시물을 필터링하고 정렬할 수 있게 합니다.
+사용자가 Feed에서 볼 수 있는 게시물 목록을 조회하는 기능을 제공합니다. 다양한 쿼리 파라미터를 지원하여 해시태그, 게시물 유형, 정렬 순서, 검색 키워드 등 사용자가 원하는 방식으로 게시물을 필터링하고 정렬할
+수 있게 합니다.
 
 ### **목표 (Goals)**
 
 - 유저가 자신의 `account`가 해시태그로 포함된 게시물 목록을 확인할 수 있게 한다.
 - 유저가 지정한 한 개 `hashtag` 가 게시물의 해시태그 중 한 개와정확히 일치하는 게시물 목록을 확인할 수 있게 한다.
 - 유저가 지정한 소셜 미디어 플랫폼의 게시물 목록을 확인할 수 있게 한다.
-- 유저가 오름차순 및 내림차순을 모두 지원하여 `좋아요개수`, `공유 개수`, `조회수`, `생성 날짜`, `업데이트 날짜`와 같은 여러 필드를 기준으로 `오름차순`, `내림차순`으로 정렬된 게시물 목록을 확인할 수 있게 한다.
+- 유저가 오름차순 및 내림차순을 모두 지원하여 `좋아요개수`, `공유 개수`, `조회수`, `생성 날짜`, `업데이트 날짜`와 같은 여러 필드를 기준으로 `오름차순`, `내림차순`으로 정렬된 게시물 목록을 확인할
+  수 있게 한다.
 - 유저가 게시물의 제목과 내용을 검색하여 포함된 게시물 목록을 확인할 수 있게 한다.
-  - 내용은 최대 20자까지만 포함되게 한다.
+    - 내용은 최대 20자까지만 포함되게 한다.
 
 ### **목표가 아닌 것 (Non-Goals)**
 
@@ -433,7 +450,7 @@ sequenceDiagram
 
 - 공통으로 요청을 받을 수 있는 `PaginationQuery` 생성
 - 공통으로 응답을 받을 수 있는 `PaginationMetadata` 생성
-  - 응답 예시
+    - 응답 예시
   ```json
   {
     "hasNext": true,
@@ -495,13 +512,12 @@ sequenceDiagram
 
 </details>
 
-
 ### **마일스톤 (Milestones)**
 
 > `~ 8.24(목)`: 요구사항 정리 및 문서화, controller, repository 계층 구현, queryDSL 공부
-> 
+>
 > `~ 8.25(금)`: service 계층 구현 , 테스트 코드 추가
-> 
+>
 > `~ 8.26일(토)`: 코드 리팩토링
 
 </details>
@@ -537,19 +553,21 @@ sequenceDiagram
 - `Expressions.dateTimeTemplate`을 사용하여 날짜 및 시간 반환 타입 변환
 
 #### API 응답 형식
+
 ```json
 # type이 date / value는 지정되지 않았으므로 count / hashtag는 springboot / star와 end는 지정되지 않았으므로 오늘로부터 7일 전 ~ 오늘
 [
-    {
-      "date": "2024-08-19",
-      "countByValue": 3
-    },
-    {
-      "date": "2024-08-20",
-      "countByValue": 10
-    } # ... "2024-08-26"까지 data 반환
-  ]
+{
+"date": "2024-08-19",
+"countByValue": 3
+},
+{
+"date": "2024-08-20",
+"countByValue": 10
+} # ... "2024-08-26"까지 data 반환
+]
 ```
+
 <details>
 	<summary> 플로우 차트</summary>
 
@@ -603,26 +621,24 @@ classDiagram
 ### **마일스톤 (Milestones)**
 
 > `~ 8.22(목)`: 요구 사항 분석, 테크 스펙 작성
-> 
+>
 > `~ 8.23(금)`: 더미 데이터 생성. api 명세 구상
-> 
+>
 > `~ 8.24(토)`: `dto`, `controller` 계층 작성
-> 
+>
 > `~ 8.25(일)`: `service`, `repository`계층 기능 개발
-> 
+>
 > `~ 8.26(월)`: Rollout
 </details>
 
 ## 🏗️ ERD
-<img src="https://github.com/user-attachments/assets/62f89985-2ddc-482e-a244-3ded19b240b6" width=600 />
 
-  
+<img src="https://github.com/user-attachments/assets/62f89985-2ddc-482e-a244-3ded19b240b6" width=600 />
 
 ## 🕝 프로젝트 진행 및 이슈 관리
 
 - Github Project 칸반보드 활용
 - 각 기능별 이슈 작성 후 하위 이슈 추가
-
 
 <table>
     <tr align="center">
