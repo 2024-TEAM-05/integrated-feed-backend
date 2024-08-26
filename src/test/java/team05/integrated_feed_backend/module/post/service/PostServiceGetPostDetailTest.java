@@ -89,7 +89,7 @@ class PostServiceGetPostDetailTest {
 		void getPostDetail_shouldThrowException_whenPostDoesNotExist() {
 			// Given
 			Long nonExistentPostId = 2L;
-			when(postRepository.findDetailPostById(nonExistentPostId)).thenReturn(null);
+			when(postRepository.findDetailPostById(nonExistentPostId)).thenReturn(Optional.empty());
 
 			// When & Then
 			BusinessException exception = assertThrows(BusinessException.class, () -> {
