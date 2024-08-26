@@ -357,3 +357,48 @@ sequenceDiagram
 
 </details>
 
+## Authors
+
+<table>
+    <tr align="center">
+        <td><B>주다애<B></td>
+        <td><B>강경원<B></td>
+        <td><B>이도은<B></td>
+        <td><B>정의진<B></td>
+        <td><B>조혜온<B></td>
+        <td><B>이예림<B></td>
+    </tr>
+    <tr align="center">
+            <td>
+            <img src="https://github.com/jooda00.png?size=100">
+            <br>
+            <a href="https://github.com/jooda00"><I>jooda00</I></a>
+        </td>
+            <td>
+            <img src="https://github.com/toughCircle.png?size=100">
+            <br>
+            <a href="https://github.com/toughCircle"><I>toughCircle<I></a>
+        </td>
+        <td>
+            <img src="https://github.com/medoeun.png?size=100">
+            <br>
+            <a href="https://github.com/medoeun"><I>medoeun</I></a>
+        </td>
+        <td>
+            <img src="https://github.com/uijin-j.png?size=100">
+            <br>
+            <a href="https://github.com/uijin-js"><I>uijin-js</I></a>
+        </td>
+        <td>
+          <img src="https://github.com/hye-on.png?size=100">
+            <br>
+            <a href="https://github.com/hye-on"><I>hye-on</I></a>
+        </td>
+        <td>
+          <img src="https://github.com/yerim123456.png?size=100">
+            <br>
+            <a href="https://github.com/yerim123456"><I>yerim123456</I></a>
+        </td>
+    </tr>
+
+</table>
