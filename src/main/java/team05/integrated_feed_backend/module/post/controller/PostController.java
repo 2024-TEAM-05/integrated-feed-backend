@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import team05.integrated_feed_backend.common.BaseApiResponse;
 import team05.integrated_feed_backend.common.code.StatusCode;
@@ -39,7 +38,7 @@ public class PostController implements PostControllerDocs {
 	@Override
 	@GetMapping("/{id}")
 	public BaseApiResponse<PostDetailRes> getPostDetail(
-		@PathVariable @NotNull Long id
+		@PathVariable Long id
 	) {
 
 		PostDetailRes res = postService.getPostDetail(id);
