@@ -1,7 +1,7 @@
 package team05.integrated_feed_backend.module.user.controller;
 
 import static org.springframework.http.HttpStatus.*;
-import static team05.integrated_feed_backend.exception.code.StatusCode.*;
+import static team05.integrated_feed_backend.common.code.StatusCode.*;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
