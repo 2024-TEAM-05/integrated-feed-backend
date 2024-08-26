@@ -51,7 +51,7 @@ class PostServiceGetPostDetailTest {
 		@DisplayName("[성공] 게시물 상세 정보가 정상적으로 반환된다.")
 		void getPostDetail_shouldReturnPostDetailRes_whenPostExists() {
 			// Given
-			when(postRepository.findById(mockPost.getPostId())).thenReturn(Optional.of(mockPost));
+			when(postRepository.findDetailById(mockPost.getPostId())).thenReturn(Optional.of(mockPost));
 
 			// When
 			PostDetailRes postDetailRes = postService.getPostDetail(mockPost.getPostId());
@@ -66,7 +66,7 @@ class PostServiceGetPostDetailTest {
 			assertEquals(mockPost.getShareCount(), postDetailRes.getShareCount());
 
 			// 레포지토리 메서드가 한 번 호출되었는지 확인
-			verify(postRepository, times(1)).findById(mockPost.getPostId());
+			verify(postRepository, times(1)).findDetailById(mockPost.getPostId());
 		}
 
 		@Test
@@ -88,7 +88,7 @@ class PostServiceGetPostDetailTest {
 		void getPostDetail_shouldThrowException_whenPostDoesNotExist() {
 			// Given
 			Long nonExistentPostId = 2L;
-			when(postRepository.findById(nonExistentPostId)).thenReturn(Optional.empty());
+			when(postRepository.findDetailById(nonExistentPostId)).thenReturn(Optional.empty());
 
 			// When & Then
 			BusinessException exception = assertThrows(BusinessException.class, () ->
@@ -98,14 +98,14 @@ class PostServiceGetPostDetailTest {
 			assertEquals(StatusCode.NOT_FOUND.getMessage(), exception.getMessage());
 
 			// 레포지토리 메서드가 한 번 호출되었는지 확인
-			verify(postRepository, times(1)).findById(nonExistentPostId);
+			verify(postRepository, times(1)).findDetailById(nonExistentPostId);
 		}
 
 		@Test
 		@DisplayName("[성공] 조회된 게시물의 view_count가 1 증가한다.")
 		void getPostDetail_shouldIncreaseViewCount_whenPostExists() {
 			// Given
-			when(postRepository.findById(mockPost.getPostId())).thenReturn(Optional.of(mockPost));
+			when(postRepository.findDetailById(mockPost.getPostId())).thenReturn(Optional.of(mockPost));
 
 			// When
 			postService.getPostDetail(mockPost.getPostId());
@@ -114,7 +114,7 @@ class PostServiceGetPostDetailTest {
 			assertEquals(101L, mockPost.getViewCount());
 
 			// 레포지토리 메서드가 한 번 호출되었는지 확인
-			verify(postRepository, times(1)).findById(mockPost.getPostId());
+			verify(postRepository, times(1)).findDetailById(mockPost.getPostId());
 		}
 	}
 }

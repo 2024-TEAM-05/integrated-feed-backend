@@ -8,12 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import team05.integrated_feed_backend.common.code.StatusCode;
 import team05.integrated_feed_backend.common.dto.PaginationMetadata;
-import team05.integrated_feed_backend.exception.custom.DataNotFoundException;
-import team05.integrated_feed_backend.module.post.dto.request.PostSearchReq;
-import team05.integrated_feed_backend.module.post.dto.response.PostSearchRes;
 import team05.integrated_feed_backend.common.util.ValidationUtil;
 import team05.integrated_feed_backend.exception.custom.BusinessException;
+import team05.integrated_feed_backend.exception.custom.DataNotFoundException;
+import team05.integrated_feed_backend.module.post.dto.request.PostSearchReq;
 import team05.integrated_feed_backend.module.post.dto.response.PostDetailRes;
+import team05.integrated_feed_backend.module.post.dto.response.PostSearchRes;
 import team05.integrated_feed_backend.module.post.entity.Post;
 import team05.integrated_feed_backend.module.post.event.publisher.PostEventPublisher;
 import team05.integrated_feed_backend.module.post.repository.PostRepository;
@@ -31,7 +31,7 @@ public class PostService {
 
 		ValidationUtil.validateId(id);
 
-		Post post = postRepository.findById(id)
+		Post post = postRepository.findDetailById(id)
 			.orElseThrow(() -> new BusinessException(StatusCode.NOT_FOUND, StatusCode.NOT_FOUND.getMessage()));
 
 		post.incrementViewCount();
