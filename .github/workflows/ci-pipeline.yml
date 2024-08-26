@@ -5,6 +5,12 @@ on:
     branches:
       - main
 
+env:
+  PROJECT_NAME: feed-project
+  BUCKET_NAME: feed-cd-bucket
+  CODE_DEPLOY_APP_NAME: feed_cicd
+  DEPLOYMENT_GROUP_NAME: feed_instance
+
 permissions:
   contents: read
   checks: write
@@ -49,3 +55,24 @@ jobs:
         with:
           webhook-url: ${{ secrets.WEBHOOK_URL }}
           content: ":love_letter: 새로운 PR이 날아왔습니다 ~ :love_letter:\n:link: 리뷰하러 가기: ${{ github.event.pull_request.html_url }}"
+
+      - name: ZIP 파일 생성
+        run: zip -qq -r ./$GITHUB_SHA.zip .
+        shell: bash
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_PRIVATE_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
+      - name: Upload to S3
+        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://$BUCKET_NAME/$PROJECT_NAME/$GITHUB_SHA.zip
+
+      - name: Code Deploy To EC2 instance
+        run: aws deploy create-deployment
+          --application-name $CODE_DEPLOY_APP_NAME
+          --deployment-config-name CodeDeployDefault.AllAtOnce
+          --deployment-group-name $DEPLOYMENT_GROUP_NAME
+          --s3-location bucket=$BUCKET_NAME,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
