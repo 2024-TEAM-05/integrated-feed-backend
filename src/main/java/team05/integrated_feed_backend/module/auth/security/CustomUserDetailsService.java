@@ -25,6 +25,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 			.orElseThrow(() -> new UsernameNotFoundException(StatusCode.UNAUTHORIZED.name()));
 
 		log.info("유저 조회 성공: {}", member.getAccount());
+		log.info("저장된 비밀번호: {}", member.getPassword());
+		
 		return new CustomUserDetails(member);
 	}
 }

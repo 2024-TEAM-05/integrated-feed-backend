@@ -26,6 +26,7 @@ public enum StatusCode {
 	NOT_SUPPORTED_STATISTICS_TYPE(HttpStatus.BAD_REQUEST, "type을 다시 설정해주세요. date와 hour이 가능합니다."),
 	EXCEEDED_STATISTICS_DATE_RANGE(HttpStatus.BAD_REQUEST, "조회 가능 기간을 초과했습니다. 조회 시간을 다시 설정해주세요"),
 	INVALID_STATISTICS_DATE(HttpStatus.BAD_REQUEST, "조회 시작 일자는 조회 종료 일자보다 이전이어야 합니다."),
+	FORBIDDEN(HttpStatus.FORBIDDEN, "접근 권한이 없습니다."),
 
 	/**
 	 * 500 번대 CODE

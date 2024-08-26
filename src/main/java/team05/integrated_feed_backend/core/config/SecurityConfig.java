@@ -9,12 +9,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import lombok.RequiredArgsConstructor;
+import team05.integrated_feed_backend.exception.custom.CustomAccessDeniedHandler;
+import team05.integrated_feed_backend.exception.custom.CustomAuthenticationEntryPoint;
 import team05.integrated_feed_backend.module.auth.jwt.JwtAuthenticationFilter;
 import team05.integrated_feed_backend.module.auth.jwt.JwtManager;
 
@@ -25,6 +27,8 @@ public class SecurityConfig {
 
 	private final JwtManager jwtManager;
 	private final UserDetailsService userDetailsService;
+	private final CustomAccessDeniedHandler customAccessDeniedHandler;
+	private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 
 	@Bean
 	public JwtAuthenticationFilter jwtAuthenticationFilter() {
@@ -44,9 +48,12 @@ public class SecurityConfig {
 					"/api-docs/**",
 					"/webjars/**"
 				).permitAll()  // Swagger UI 관련 경로에 인증 없이 접근 허용
-				.requestMatchers("/auth/**").permitAll() // 인증 없이 접근할 수 있는 경로 설정 (회원가입, 로그인 등)
+				.requestMatchers("/api/auth/**").permitAll() // 인증 없이 접근할 수 있는 경로 설정 (회원가입, 로그인 등)
 				.requestMatchers(HttpMethod.POST, "/api/members").permitAll()
 				.anyRequest().authenticated() // 그 외의 모든 요청 인증 필요
+			)
+			.exceptionHandling(exceptionHandling -> exceptionHandling
+				.authenticationEntryPoint(customAuthenticationEntryPoint)  // 인증 실패 시 처리
 			)
 			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // 세션 사용 X
 			.addFilterBefore(jwtAuthenticationFilter(),
@@ -57,7 +64,7 @@ public class SecurityConfig {
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
+		return NoOpPasswordEncoder.getInstance(); // 비밀번호 인코딩을 사용하지 않음
 	}
 
 	@Bean
