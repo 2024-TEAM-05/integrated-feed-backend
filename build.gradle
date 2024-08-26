@@ -67,16 +67,6 @@ dependencies {
     testImplementation 'com.h2database:h2'
 }
 
-// 생성된 Q-타입 클래스가 소스 코드로 사용될 수 있도록 설정
-sourceSets {
-    main.java.srcDir 'src/main/generated'
-}
-
-// Q-타입 클래스가 생성되도록 보장하는 설정
-compileJava {
-    options.generatedSourceOutputDirectory.set(file("src/main/generated"))
-}
-
 clean {
     delete file('src/main/generated')
 }
