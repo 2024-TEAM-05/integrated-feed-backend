@@ -8,7 +8,7 @@ on:
 env:
   PROJECT_NAME: feed-project
   BUCKET_NAME: feed-cd-bucket
-  CODE_DEPLOY_APP_NAME: feed_cicd
+  CODE_DEPLOY_APP_NAME: feed_cd
   DEPLOYMENT_GROUP_NAME: feed_instance
 
 permissions:
