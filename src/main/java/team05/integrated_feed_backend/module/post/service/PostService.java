@@ -23,12 +23,12 @@ public class PostService {
 
 		ValidationUtil.validateId(id);
 
-		Post post = postRepository.findDetailPostById(id)
+		Post post = postRepository.findById(id)
 			.orElseThrow(() -> new BusinessException(StatusCode.NOT_FOUND, StatusCode.NOT_FOUND.getMessage()));
 
 		post.incrementViewCount();
 
-		return new PostDetailRes(PostMapper.toDto(post));
+		return PostMapper.toDetailRes(post);
 
 	}
 }
