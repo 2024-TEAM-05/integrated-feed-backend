@@ -8,4 +8,9 @@ import lombok.RequiredArgsConstructor;
 public class PostStatisticsListRes {
 	private String date;
 	private Long countByValue;
+
+	public PostStatisticsListRes(String date, Long countByValue) {
+		this.date = date;
+		this.countByValue = countByValue;
+	}
 }

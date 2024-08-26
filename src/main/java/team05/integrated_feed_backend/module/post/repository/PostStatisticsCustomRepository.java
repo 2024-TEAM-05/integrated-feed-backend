@@ -7,4 +7,6 @@ import team05.integrated_feed_backend.module.post.dto.response.PostStatisticsLis
 
 public interface PostStatisticsCustomRepository {
 	List<PostStatisticsListRes> findPostStatisticsByQueryParameter(PostStatisticsListReq request);
+
+	List<PostStatisticsListRes> findPostStatisticsByQueryParameterWithHour(PostStatisticsListReq request);
 }
