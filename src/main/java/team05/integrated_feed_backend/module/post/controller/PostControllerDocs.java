@@ -19,6 +19,7 @@ public interface PostControllerDocs {
 
 	@Operation(summary = "게시물 상세 조회", description = "특정 게시물의 상세 정보를 조회합니다.")
 	@ApiResponse(responseCode = "200", description = "요청이 성공했습니다.", useReturnTypeSchema = true)
+	@ApiResponse(responseCode = "404", description = "요청하신 리소스를 찾을 수 없습니다.")
 	BaseApiResponse<PostDetailRes> getPostDetail(
 		Long id
 	);
