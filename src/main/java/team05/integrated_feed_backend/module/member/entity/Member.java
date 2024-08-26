@@ -17,7 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import team05.integrated_feed_backend.common.BaseEntity;
+import team05.integrated_feed_backend.common.entity.BaseEntity;
 import team05.integrated_feed_backend.module.member.entity.enums.MemberStatus;
 import team05.integrated_feed_backend.module.member.entity.vo.Email;
 import team05.integrated_feed_backend.module.member.entity.vo.Password;
@@ -29,7 +29,6 @@ import team05.integrated_feed_backend.module.member.entity.vo.Password;
 @Builder(access = AccessLevel.PRIVATE)
 public class Member extends BaseEntity {
 	public static final MemberStatus DEFAULT_MEMBER_STATUS = UNVERIFIED;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long memberId;
@@ -39,10 +38,12 @@ public class Member extends BaseEntity {
 
 	@Embedded
 	@Column(nullable = false)
+	@Getter(AccessLevel.NONE)
 	private Password password;
 
 	@Embedded
 	@Column(nullable = false, unique = true)
+	@Getter(AccessLevel.NONE)
 	private Email email;
 
 	@Enumerated(EnumType.STRING)
@@ -56,5 +57,13 @@ public class Member extends BaseEntity {
 			.email(Email.from(email))
 			.status(DEFAULT_MEMBER_STATUS)
 			.build();
+	}
+
+	public String getPassword() {
+		return password.getValue();
+	}
+
+	public String getEmail() {
+		return email.getValue();
 	}
 }

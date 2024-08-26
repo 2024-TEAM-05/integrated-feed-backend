@@ -3,7 +3,6 @@ package team05.integrated_feed_backend.infra.mail;
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
-import team05.integrated_feed_backend.module.member.entity.vo.Email;
 
 @Component
 @Slf4j
@@ -11,9 +10,9 @@ public class SimpleMailService implements MailService {
 	private static final String VERIFICATION_EMAIL_TITLE = "Integrated Feed 회원가입 인증코드";
 
 	@Override
-	public void sendVerificationCode(Email sendTo, String code) {
+	public void sendVerificationCode(String sendTo, String code) {
 		String content = buildVerificationEmailContent(code);
-		send(sendTo.getValue(), VERIFICATION_EMAIL_TITLE, content);
+		send(sendTo, VERIFICATION_EMAIL_TITLE, content);
 	}
 
 	@Override
