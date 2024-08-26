@@ -5,7 +5,7 @@ import org.springframework.validation.annotation.Validated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,8 +41,14 @@ public class PostSearchReq extends PaginationQuery {
 	private String searchBy = "title,content";
 
 	@Schema(description = "검색어")
-	@Max(value = 20, message = "20글자보다 작아야 합니다.")
+	@Size(max = 20, message = "20글자보다 작아야 합니다.")
 	private String search;
+
+	public void setDefaultHashtagIfEmpty(String memberAccount) {
+		if (hashtag == null || hashtag.isEmpty()) {
+			this.hashtag = memberAccount;
+		}
+	}
 
 }
 
