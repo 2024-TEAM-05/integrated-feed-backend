@@ -52,15 +52,7 @@ public class Post extends BaseEntity {
 	private Long shareCount;
 
 	@OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@Builder.Default
 	private List<PostHashtag> postHashtags = new ArrayList<>();
 
-	// 좋아요 수 증가시키는 메서드
-	public void increaseLikeCount() {
-		this.likeCount += 1;
-	}
-
-	// 공유 수 증가시키는 메서드
-	public void increaseShareCount() {
-		this.shareCount += 1;
-	}
 }
