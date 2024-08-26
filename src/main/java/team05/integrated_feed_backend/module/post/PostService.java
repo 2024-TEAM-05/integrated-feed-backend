@@ -10,18 +10,18 @@ import team05.integrated_feed_backend.common.dto.PaginationMetadata;
 import team05.integrated_feed_backend.module.post.dto.request.PostSearchReq;
 import team05.integrated_feed_backend.module.post.dto.response.PostSearchRes;
 import team05.integrated_feed_backend.module.post.entity.Post;
-import team05.integrated_feed_backend.module.post.repository.PostCustomRepository;
+import team05.integrated_feed_backend.module.post.repository.PostRepository;
 
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class PostService {
 
-	private final PostCustomRepository postCustomRepository;
+	private final PostRepository postRepository;
 
 	public PostSearchRes getPosts(PostSearchReq req) {
-		List<Post> posts = postCustomRepository.searchPosts(req);
-		Long totalCount = postCustomRepository.countPosts(req);
+		List<Post> posts = postRepository.searchPosts(req);
+		Long totalCount = postRepository.countPosts(req);
 
 		PaginationMetadata pageMetadata = PaginationMetadata.of(
 			req.getPage(),
