@@ -1,7 +1,6 @@
 package team05.integrated_feed_backend.module.post.entity;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -18,7 +17,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import team05.integrated_feed_backend.common.entity.BaseEntity;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -26,6 +24,7 @@ import java.util.Set;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 public class Hashtag extends BaseEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long hashtagId;
