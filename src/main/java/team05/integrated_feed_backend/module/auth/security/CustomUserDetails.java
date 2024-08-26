@@ -7,8 +7,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import team05.integrated_feed_backend.module.member.entity.Member;
 
+@Slf4j
 @Getter
 public class CustomUserDetails implements UserDetails {
 
@@ -25,6 +27,7 @@ public class CustomUserDetails implements UserDetails {
 
 	@Override
 	public String getPassword() {
+		log.info("CustomUserDetails.getPassword() 호출 - 반환된 비밀번호: {}", member.getPassword());
 		return member.getPassword();
 	}
 
@@ -48,7 +51,7 @@ public class CustomUserDetails implements UserDetails {
 
 	@Override
 	public boolean isEnabled() {
-		return "verified".equals(member.getStatus());  // 인증된 상태만 활성화
+		return "VERIFIED".equals(member.getStatus());  // 인증된 상태만 활성화
 	}
 
 	@Override

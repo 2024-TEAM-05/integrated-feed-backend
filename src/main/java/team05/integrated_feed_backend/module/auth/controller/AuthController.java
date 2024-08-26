@@ -37,9 +37,11 @@ public class AuthController implements AuthControllerDocs {
 				loginRequest.getAccount(), loginRequest.getPassword()
 			)
 		);
+		log.info("AuthenticationManager 호출 후 - 인증 성공");
 
 		// 문제 없을 시 JWT 토큰 생성
 		String token = jwtManager.generateToken(authentication);
+		log.info("JWT 생성: {}", token);
 
 		log.info("로그인 성공: {}", loginRequest.getAccount());
 		JwtResponse jwtRes = new JwtResponse(token);
