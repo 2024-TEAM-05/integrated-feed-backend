@@ -22,6 +22,8 @@ import team05.integrated_feed_backend.module.auth.security.CustomUserDetails;
 @Slf4j
 @Component
 public class JwtUtil {
+	private static final String CLAIM_MEMBER_ID = "memberId";
+	private static final String CLAIM_ACCOUNT = "account";
 
 	private final Key secretKey;
 
@@ -42,8 +44,8 @@ public class JwtUtil {
 
 		// JWT 토큰에 포함되는 정보(페이로드): jwt의 주체 memberId로
 		Claims claims = Jwts.claims().setSubject(String.valueOf(memberId));
-		claims.put("memberId", memberId);
-		claims.put("account", account);
+		claims.put(CLAIM_MEMBER_ID, memberId);
+		claims.put(CLAIM_ACCOUNT, account);
 
 		Date now = new Date();
 		Date validity = new Date(now.getTime() + tokenValidityInseconds * 1000);
@@ -91,7 +93,7 @@ public class JwtUtil {
 			.build()
 			.parseClaimsJws(token)
 			.getBody()
-			.get("account", String.class);
+			.get(CLAIM_ACCOUNT, String.class);
 	}
 
 	// JWT 토큰 유효성 검증
