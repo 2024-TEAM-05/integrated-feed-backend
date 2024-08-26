@@ -3,7 +3,6 @@ package team05.integrated_feed_backend.module.post.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,7 +34,7 @@ public class PostController implements PostControllerDocs {
 	}
 
 	@Override
-	@PostMapping("/{id}")
+	@GetMapping("/{id}")
 	public BaseApiResponse<PostDetailRes> getPostDetail(
 		@PathVariable @NotNull Long id
 	) {
