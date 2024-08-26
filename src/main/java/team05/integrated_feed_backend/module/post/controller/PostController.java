@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import team05.integrated_feed_backend.common.BaseApiResponse;
@@ -28,12 +29,11 @@ public class PostController implements PostControllerDocs {
 	@Override
 	@GetMapping
 	public BaseApiResponse<PostSearchRes> getPosts(
-		@ModelAttribute PostSearchReq postSearchReq
+		@ModelAttribute @Valid PostSearchReq postSearchReq
 	) {
-
-		PostSearchRes res = new PostSearchRes();
-
-		return BaseApiResponse.of(StatusCode.OK, res);
+		String memberAccount = "원티드";
+		postSearchReq.setDefaultHashtagIfEmpty(memberAccount);
+		return BaseApiResponse.of(StatusCode.OK, postService.getPosts(postSearchReq));
 	}
 
 	@Override

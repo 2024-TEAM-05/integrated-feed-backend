@@ -205,5 +205,7 @@ gradle-app.setting
 
 # Custom ignores
 .idea/
-src/main/**/application.yml
-src/main/generated
+application.yml
+**/src/main/generated/**
+
+
