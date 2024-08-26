@@ -1,21 +1,22 @@
+
 # 소셜 미디어 통합 Feed 서비스
 
 ![인스타그램](https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white) ![쓰레드](https://img.shields.io/badge/Threads-000000?style=for-the-badge&logo=Threads&logoColor=white) ![페이스북](https://img.shields.io/badge/Facebook-%231877F2.svg?style=for-the-badge&logo=Facebook&logoColor=white) ![트위터](https://img.shields.io/badge/X-%23000000.svg?style=for-the-badge&logo=X&logoColor=white) 등 다양한 SNS에 게시된 컨텐츠를 한 곳에 모아 보여주는 서비스
 
-## 목차
 
-- [개요](#heavy_check_mark-개요)
+##  목차
+- [✨ 개요](#-개요)
 - [Skils](#Skills)
 - [Installation](#Installation)
-- [요구사항 정리 및 기술 명세서](#요구사항-정리-및-기술-명세서)
-- [API Reference](#api-reference)
-- [프로젝트 진행 및 이슈 관리](#프로젝트-진행-및-이슈-관리)
-- [디렉토리 구조](#디렉토리-구조)
-- [Authors](#authors)
+- [📄 요구사항 정리 및 기술 명세서](#-요구사항-정리-및-기술-명세서)
+- [🏗️ ERD](#%EF%B8%8F-erd)
+- [🕝 프로젝트 진행 및 이슈 관리](#-프로젝트-진행-및-이슈-관리)
+- [👾 Authors](#-authors)
+
 
 </br>
 
-## :heavy_check_mark: 개요
+## ✨ 개요
 
 다양한 소셜 미디어 플랫폼을 통해 수많은 정보를 접할 수 있게 되었지만, 여러 SNS 상에서 산발적으로 게시되는 컨텐츠를 일일이 확인하고 관리하는 건 굉장히 번거로운 일입니다. 어떤 주제나 브랜드에 대해 다양한 사용자 입장에서 모니터링하려면 각 플랫폼을 따로 관리해야 하는 불편함이 있습니다. 이런 문제를 해결할 수 있는 소셜 미디어 통합 Feed 애플리케이션입니다. 
 
@@ -23,7 +24,7 @@
 
 <br/>
 
-## 요구사항 정리 및 기술 명세서
+## 📄 요구사항 정리 및 기술 명세서
 
 <details>
 	<summary> 로그인 API</summary>
@@ -131,13 +132,82 @@ member {
  
 </details>
 
+<details>
+	<summary> 게시물 상세 조회 API</summary>
+
+### **요약 (Summary)**
+
+게시물 상세 조회 API는 사용자에게 특정 게시물의 상세 정보를 제공하는 기능입니다. 사용자는 이 API를 통해 게시물의 제목, 내용 및 게시물 관련 메타데이터를 조회할 수 있습니다.
+
+### **목표 (Goals)**
+
+- 사용자가 특정 게시물의 모든 세부 정보를 한 번의 API 호출로 가져올 수 있도록 한다.
+- 사용자가 요청한 게시물이 존재하지 않는 경우, 적절한 에러 메시지를 반환한다.
+- 특정 게시물의 상세 정보 반환에 성공할 경우, 해당 게시물의 view_count를 1 증가시킨다.
+
+### **계획 (Plan)**
+
+<details>
+	<summary> 플로우 차트</summary>
+
+```mermaid 
+graph TD
+    A((게시물 id)) --> B{유효성 검증}
+
+    B -->|실패| C((400 Bad Request 반환))
+    
+    B -->|성공| D{게시물 존재 확인}
+    
+    D -->|부재| E((404 Not Found 반환))
+    
+    D -->|존재| H((200 성공 응답 반환))
+```
+
+</details>
+
+<details>
+	<summary> 시퀀스 다이어그램 </summary>
+
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant Co as Controller
+    participant S as Service
+    participant R as Repository
+    
+    C->>Co: Request (GET /api/posts/{id})
+    Co->>S: getPostDetails(id)
+    S->>R: findDetailedPostById(id)
+    R-->>S: Post
+    S-->>Co: PostDto
+    Co-->>C: Response (JSON)
+```
+
+</details>
+
+### **유닛 테스트**
+
+- [성공] 게시물 상세 정보가 정상적으로 반환된다.
+- [실패] 게시물이 없을 때 예외를 던진다.
+- [성공] 조회된 게시물의 view_count가 1 증가한다.
+- [실패] 잘못된 형식의 ID가 제공되면 400 Bad Request가 반환된다.
+
+### **마일스톤 (Milestones)**
+
+> 8월 21일 (수): 요구사항 분석 <br>
+> 8월 22일 (목): 테크 스펙 작성 <br>
+> 8월 23일 (금): 기능 구현 및 단위 테스트 작성 <br>
+> 8월 25일 (일): 테스트 수정 및 리드미 작성 <br>
+
+</details>
+
 
 <details>
 	<summary> 게시물 “좋아요수”, “공유수” 증가 API</summary>
-        
+
 ### **요약 (Summary)**
 
-해당 서비스에서 `좋아요`, `공유` 버튼을 클릭할 시 각 게시물의 원래 소셜 미디어의 `좋아요` , `공유` 수를 증가시킬 수 있게 합니다. 
+해당 서비스에서 `좋아요`, `공유` 버튼을 클릭할 시 각 게시물의 원래 소셜 미디어의 `좋아요` , `공유` 수를 증가시킬 수 있게 합니다.
 
 ### **목표 (Goals)**
 
@@ -252,7 +322,6 @@ classDiagram
 <details>
 	<summary> 시퀀스 다이어그램 </summary>
 
-
 ```mermaid
 sequenceDiagram
     participant Client
@@ -307,13 +376,15 @@ sequenceDiagram
 
 </details>
 
-# **마일스톤 (Milestones)**
+### **마일스톤 (Milestones)**
 
-> `~ 8.22(목)`:  controller 계층 구현 <br>
-`~ 8.23(금)`:  infra 계층의 adapter,client 구현 <br>
-`~ 8.24(토)`: service 구현, 단위 테스트 작성 <br>
-`~ 8.25(일)`: Rollout
->
+> `~ 8.22(목)`: controller 계층 구현
+> 
+> `~ 8.23(금)`: infra 계층의 adapter,client 구현
+> 
+> `~ 8.24(토)`: service 구현, 단위 테스트 작성
+> 
+> `~ 8.25(일)`: Rollout
 
 </details>
 
@@ -409,17 +480,130 @@ sequenceDiagram
 
 </details>
 
-# **마일스톤 (Milestones)**
 
-> `~8월 24(목)` : 요구사항 정리 및 문서화, controller, repository 계층 구현, queryDSL 공부
-> `~8월 25일(금)` : , service 계층 구현 , 테스트 코드 추가
-> `~8월 26일(토)` :코드 리팩토링
+### **마일스톤 (Milestones)**
+
+> `~8월 24(목)`: 요구사항 정리 및 문서화, controller, repository 계층 구현, queryDSL 공부
+> 
+> `~8월 25일(금)`: service 계층 구현 , 테스트 코드 추가
+> 
+> `~8월 26일(토)`: 코드 리팩토링
 
 </details>
 
+<details>
+	<summary>통계 API</summary>
+
+### **요약 (Summary)**
+
+사용자가 지정한 파라미터에 맞는 게시물을 통계를 내어 반환합니다.
+
+사용자는 `type`, `hashtag`, `value`, `start(조회 시작일)`, `end(조회 종료일)`를 지정할 수 있습니다.
+
+### **목표 (Goals)**
+
+- 쿼리 파라미터 사용
+    - API에서 제공하는 쿼리 파라미터를 통해 통계 데이터를 요청하고, 유효성을 검사하여 올바른 결과를 반환합니다.
+- 유효성 검사
+    - `start`와 `end`의 날짜 유효성 확인 및 `type`에 따른 날짜 간격 제한을`(30일, 7일)` 설정합니다.
+- 데이터 집계
+    - 요청된 기간 내에 게시물의 조회수, 좋아요 수, 공유 수 등을 집계하여 반환하는 기능을 구현합니다.
+
+### **목표가 아닌 것 (Non-Goals)**
+
+- 통계 기능을 위한 테이블은 생성하지 않습니다.
+
+### **계획 (Plan)**
+
+#### QueryDSl을 사용한 조회
+
+- 많은 쿼리 파라미터를 처리할 동적 쿼리 생성을 위해 `QueryDSL` 사용
+- `type`이 `date`인 경우와 `hour`인 경우를 나눠서 메소드 작성
+- `Expressions.dateTimeTemplate`을 사용하여 날짜 및 시간 반환 타입 변환
+
+#### API 응답 형식
+```json
+# type이 date / value는 지정되지 않았으므로 count / hashtag는 springboot / star와 end는 지정되지 않았으므로 오늘로부터 7일 전 ~ 오늘
+[
+    {
+      "date": "2024-08-19",
+      "countByValue": 3
+    },
+    {
+      "date": "2024-08-20",
+      "countByValue": 10
+    } # ... "2024-08-26"까지 data 반환
+  ]
+```
+<details>
+	<summary> 플로우 차트</summary>
+
+```mermaid
+graph TD
+    A((쿼리 파라미터 요청)) --> B{유효성 검사}
+    B --> |start가 end보다 나중| C((400 BAD_REQUEST 반환))
+    B --> |type이 date이고 간격 30일 초과| D((400 BAD_REQUEST 반환))
+    B --> |type이 hour이고 간격 7일 초과| E((400 BAD_REQUEST 반환))
+    B --> |유효| F{post에서 데이터 반환}
+    F --> G((데이터 반환))
+
+```
+
+</details>
+
+<details>
+	<summary> 클래스 다이어그램 </summary>
+
+```mermaid
+classDiagram
+    class PostStatisticsController {
+        + List<PostStatisticsListRes> getPostStatistics(String type, String hashtag, String value, LocalDate start, LocalDate end)
+    }
+
+    class PostStatisticsService {
+        + List<PostStatisticsListRes> getPostStatistics(PostStatisticsListReq request)
+    }
+
+    class PostRepository {
+        +PostStatistics findByPostId(Long postId)
+        +void save(PostStatistics postStatistics)
+    }
+
+    class PostStatisticsCustomRepository {
+        +List<PostStatisticsListRes> findPostStatisticsByQueryParameter(PostStatisticsListReq request)
+        +List<PostStatisticsListRes> findPostStatisticsByQueryParameterWithHour(PostStatisticsListReq request);
+    }
+
+    PostStatisticsController --> PostStatisticsService
+    PostStatisticsService --> PostRepository
+    PostRepository --> PostStatisticsCustomRepository
+
+```
+
+</details>
+
+
 </br>
 
-## 프로젝트 진행 및 이슈 관리
+### **마일스톤 (Milestones)**
+
+> `~ 8.22(목)`: 요구 사항 분석, 테크 스펙 작성
+> 
+> `~ 8.23(금)`: 더미 데이터 생성. api 명세 구상
+> 
+> `~ 8.24(토)`: `dto`, `controller` 계층 작성
+> 
+> `~ 8.25(일)`: `service`, `repository`계층 기능 개발
+> 
+> `~ 8.26(월)`: Rollout
+</details>
+
+## 🏗️ ERD
+<img src="https://github.com/user-attachments/assets/62f89985-2ddc-482e-a244-3ded19b240b6" width=600 />
+
+  
+
+## 🕝 프로젝트 진행 및 이슈 관리
 
 - Github Project 칸반보드 활용
 - 각 기능별 이슈 작성 후 하위 이슈 추가
@@ -431,7 +615,7 @@ sequenceDiagram
         <td><img width="1455" alt="스크린샷 2024-08-26 18 06 58" src="https://github.com/user-attachments/assets/ecc23acf-1850-4a87-8abc-97953ba1d8d0"></td>
 </table>
 
-## Authors
+## 👾 Authors
 
 <table>
     <tr align="center">
@@ -461,7 +645,7 @@ sequenceDiagram
         <td>
             <img src="https://github.com/uijin-j.png?size=100">
             <br>
-            <a href="https://github.com/uijin-js"><I>uijin-js</I></a>
+            <a href="https://github.com/uijin-j"><I>uijin-j</I></a>
         </td>
         <td>
           <img src="https://github.com/hye-on.png?size=100">

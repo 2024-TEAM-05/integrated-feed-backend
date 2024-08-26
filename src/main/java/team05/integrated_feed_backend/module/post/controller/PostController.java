@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import team05.integrated_feed_backend.common.BaseApiResponse;
 import team05.integrated_feed_backend.common.code.StatusCode;
 import team05.integrated_feed_backend.module.post.dto.request.PostSearchReq;
+import team05.integrated_feed_backend.module.post.dto.response.PostDetailRes;
 import team05.integrated_feed_backend.module.post.dto.response.PostSearchRes;
 import team05.integrated_feed_backend.module.post.service.PostService;
 
@@ -32,6 +33,18 @@ public class PostController implements PostControllerDocs {
 		String memberAccount = "원티드";
 		postSearchReq.setDefaultHashtagIfEmpty(memberAccount);
 		return BaseApiResponse.of(StatusCode.OK, postService.getPosts(postSearchReq));
+	}
+
+	@Override
+	@GetMapping("/{id}")
+	public BaseApiResponse<PostDetailRes> getPostDetail(
+		@PathVariable Long id
+	) {
+
+		PostDetailRes res = postService.getPostDetail(id);
+
+		return BaseApiResponse.of(StatusCode.OK, res);
+
 	}
 
 	// 좋아요 수 증가시키는 api
