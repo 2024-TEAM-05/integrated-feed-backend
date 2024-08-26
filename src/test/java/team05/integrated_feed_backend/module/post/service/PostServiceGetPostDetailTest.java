@@ -3,6 +3,8 @@ package team05.integrated_feed_backend.module.post.service;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -49,7 +51,7 @@ class PostServiceGetPostDetailTest {
 		@DisplayName("[성공] 게시물 상세 정보가 정상적으로 반환된다.")
 		void getPostDetail_shouldReturnPostDetailRes_whenPostExists() {
 			// Given
-			when(postRepository.findDetailPostById(mockPost.getPostId())).thenReturn(mockPost);
+			when(postRepository.findDetailPostById(mockPost.getPostId())).thenReturn(Optional.of(mockPost));
 
 			// When
 			PostDetailRes postDetailRes = postService.getPostDetail(mockPost.getPostId());
@@ -105,7 +107,7 @@ class PostServiceGetPostDetailTest {
 		@DisplayName("[성공] 조회된 게시물의 view_count가 1 증가한다.")
 		void getPostDetail_shouldIncreaseViewCount_whenPostExists() {
 			// Given
-			when(postRepository.findDetailPostById(mockPost.getPostId())).thenReturn(mockPost);
+			when(postRepository.findDetailPostById(mockPost.getPostId())).thenReturn(Optional.of(mockPost));
 
 			// When
 			postService.getPostDetail(mockPost.getPostId());
