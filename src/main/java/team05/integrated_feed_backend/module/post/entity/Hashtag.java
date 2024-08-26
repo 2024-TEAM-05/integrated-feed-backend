@@ -24,12 +24,13 @@ import team05.integrated_feed_backend.common.entity.BaseEntity;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 public class Hashtag extends BaseEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long hashtagId;
 
-	@Column(nullable = false, unique = true)
-	private String hashtag;
+	@Column(name = "hashtag_name", nullable = false, unique = true)
+	private String hashtagName;
 
 	@OneToMany(mappedBy = "hashtag", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	@Builder.Default
