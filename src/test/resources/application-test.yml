@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: integrated-feed-backend
+  sql:
+    init:
+      mode: always # data.sql
+
+  datasource:
+    url: ${POSTGRES_DB_URL}
+    username: ${POSTGRES_DB_USERNAME}
+    password: ${POSTGRES_DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    defer-datasource-initialization: true # data.sql
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+
+springdoc:
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+  swagger-ui:
+    tags-sorter: alpha
+    operations-sorter: method
+
+jwt:
+  secret: ${JWT_SECRET}   # secret key, 만료 시간 환경 변수로 관리
+  token-validity-in-seconds: ${JWT_EXPIRATION}

@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import team05.integrated_feed_backend.common.BaseApiResponse;
-import team05.integrated_feed_backend.exception.code.StatusCode;
+import team05.integrated_feed_backend.common.code.StatusCode;
 import team05.integrated_feed_backend.exception.custom.BadRequestException;
 import team05.integrated_feed_backend.exception.custom.BusinessException;
 import team05.integrated_feed_backend.exception.custom.DataNotFoundException;
@@ -149,15 +149,15 @@ public class GlobalExceptionHandler {
 	}
 
 	/**
-	 * 요청된 사용자를 찾을 수 없는 경우
-	 * ex) 로그인 시 존재하지 않는 사용자를 입력한 경우
+	 * 인증 과정에서 사용자를 찾을 수 없는 경우 발생
+	 * ex) JWT 토큰에 포함된 사용자 이름으로 사용자를 로드할 때 해당 사용자가 존재하지 않는 경우
 	 **/
-	@ResponseStatus(NOT_FOUND)
+	@ResponseStatus(UNAUTHORIZED)
 	@ExceptionHandler({UsernameNotFoundException.class})
 	public BaseApiResponse<Void> handleUsernameNotFoundException(UsernameNotFoundException e) {
 		log.warn(e.getMessage(), e);
 
-		return BaseApiResponse.of(StatusCode.USER_NOT_FOUND);
+		return BaseApiResponse.of(StatusCode.UNAUTHORIZED);
 	}
 
 	/**
