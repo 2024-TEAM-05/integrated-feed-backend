@@ -51,22 +51,22 @@ class PostServiceGetPostDetailTest {
 		@DisplayName("[성공] 게시물 상세 정보가 정상적으로 반환된다.")
 		void getPostDetail_shouldReturnPostDetailRes_whenPostExists() {
 			// Given
-			when(postRepository.findDetailPostById(mockPost.getPostId())).thenReturn(Optional.of(mockPost));
+			when(postRepository.findById(mockPost.getPostId())).thenReturn(Optional.of(mockPost));
 
 			// When
 			PostDetailRes postDetailRes = postService.getPostDetail(mockPost.getPostId());
 
 			// Then
 			assertNotNull(postDetailRes);
-			assertEquals(mockPost.getPostId(), postDetailRes.getPost().getPostId());
-			assertEquals(mockPost.getTitle(), postDetailRes.getPost().getTitle());
-			assertEquals(mockPost.getContent(), postDetailRes.getPost().getContent());
-			assertEquals(mockPost.getViewCount(), postDetailRes.getPost().getViewCount());
-			assertEquals(mockPost.getLikeCount(), postDetailRes.getPost().getLikeCount());
-			assertEquals(mockPost.getShareCount(), postDetailRes.getPost().getShareCount());
+			assertEquals(mockPost.getPostId(), postDetailRes.getPostId());
+			assertEquals(mockPost.getTitle(), postDetailRes.getTitle());
+			assertEquals(mockPost.getContent(), postDetailRes.getContent());
+			assertEquals(mockPost.getViewCount(), postDetailRes.getViewCount());
+			assertEquals(mockPost.getLikeCount(), postDetailRes.getLikeCount());
+			assertEquals(mockPost.getShareCount(), postDetailRes.getShareCount());
 
 			// 레포지토리 메서드가 한 번 호출되었는지 확인
-			verify(postRepository, times(1)).findDetailPostById(mockPost.getPostId());
+			verify(postRepository, times(1)).findById(mockPost.getPostId());
 		}
 
 		@Test
@@ -76,9 +76,8 @@ class PostServiceGetPostDetailTest {
 			Long invalidId = -1L;
 
 			// When & Then
-			BusinessException exception = assertThrows(BusinessException.class, () -> {
-				postService.getPostDetail(invalidId);
-			});
+			BusinessException exception = assertThrows(BusinessException.class,
+				() -> postService.getPostDetail(invalidId));
 
 			assertEquals(StatusCode.BAD_REQUEST, exception.getStatusCode());
 			assertEquals("잘못된 요청입니다.", exception.getMessage());
@@ -89,25 +88,24 @@ class PostServiceGetPostDetailTest {
 		void getPostDetail_shouldThrowException_whenPostDoesNotExist() {
 			// Given
 			Long nonExistentPostId = 2L;
-			when(postRepository.findDetailPostById(nonExistentPostId)).thenReturn(Optional.empty());
+			when(postRepository.findById(nonExistentPostId)).thenReturn(Optional.empty());
 
 			// When & Then
-			BusinessException exception = assertThrows(BusinessException.class, () -> {
-				postService.getPostDetail(nonExistentPostId);
-			});
+			BusinessException exception = assertThrows(BusinessException.class, () ->
+				postService.getPostDetail(nonExistentPostId));
 
 			assertEquals(StatusCode.NOT_FOUND, exception.getStatusCode());
 			assertEquals(StatusCode.NOT_FOUND.getMessage(), exception.getMessage());
 
 			// 레포지토리 메서드가 한 번 호출되었는지 확인
-			verify(postRepository, times(1)).findDetailPostById(nonExistentPostId);
+			verify(postRepository, times(1)).findById(nonExistentPostId);
 		}
 
 		@Test
 		@DisplayName("[성공] 조회된 게시물의 view_count가 1 증가한다.")
 		void getPostDetail_shouldIncreaseViewCount_whenPostExists() {
 			// Given
-			when(postRepository.findDetailPostById(mockPost.getPostId())).thenReturn(Optional.of(mockPost));
+			when(postRepository.findById(mockPost.getPostId())).thenReturn(Optional.of(mockPost));
 
 			// When
 			postService.getPostDetail(mockPost.getPostId());
@@ -116,7 +114,7 @@ class PostServiceGetPostDetailTest {
 			assertEquals(101L, mockPost.getViewCount());
 
 			// 레포지토리 메서드가 한 번 호출되었는지 확인
-			verify(postRepository, times(1)).findDetailPostById(mockPost.getPostId());
+			verify(postRepository, times(1)).findById(mockPost.getPostId());
 		}
 	}
 }
