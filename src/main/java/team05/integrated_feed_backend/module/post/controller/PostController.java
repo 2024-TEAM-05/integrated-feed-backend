@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import team05.integrated_feed_backend.common.BaseApiResponse;
-import team05.integrated_feed_backend.exception.code.StatusCode;
+import team05.integrated_feed_backend.common.code.StatusCode;
 import team05.integrated_feed_backend.module.post.dto.request.PostSearchReq;
 import team05.integrated_feed_backend.module.post.dto.response.PostSearchRes;
 
