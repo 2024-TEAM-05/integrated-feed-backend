@@ -16,6 +16,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import team05.integrated_feed_backend.common.enums.OrderType;
 import team05.integrated_feed_backend.common.enums.SocialMediaType;
@@ -29,6 +30,7 @@ import team05.integrated_feed_backend.module.post.repository.PostRepository;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Import(QueryDSLConfig.class)
+@EnableJpaAuditing
 public class PostRepositoryTest {
 
 	@Autowired
