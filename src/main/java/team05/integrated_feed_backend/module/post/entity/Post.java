@@ -18,7 +18,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import team05.integrated_feed_backend.common.BaseEntity;
+import team05.integrated_feed_backend.common.entity.BaseEntity;
 import team05.integrated_feed_backend.common.enums.SocialMediaType;
 
 @Entity
