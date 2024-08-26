@@ -1,7 +1,5 @@
 package team05.integrated_feed_backend.module.post.service;
 
-import java.util.stream.Collectors;
-
 import team05.integrated_feed_backend.module.post.dto.response.HashtagDto;
 import team05.integrated_feed_backend.module.post.dto.response.PostDto;
 import team05.integrated_feed_backend.module.post.entity.Post;
@@ -26,7 +24,7 @@ public class PostMapper {
 			post.getUpdatedAt(),
 			post.getPostHashtags().stream()
 				.map(PostMapper::toDto)
-				.collect(Collectors.toList())
+				.toList()
 		);
 
 	}
