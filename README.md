@@ -1,16 +1,136 @@
-# integrated-feed-backend
-소셜 미디어 통합 Feed 서비스
+# 소셜 미디어 통합 Feed 서비스
 
+![인스타그램](https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white) ![쓰레드](https://img.shields.io/badge/Threads-000000?style=for-the-badge&logo=Threads&logoColor=white) ![페이스북](https://img.shields.io/badge/Facebook-%231877F2.svg?style=for-the-badge&logo=Facebook&logoColor=white) ![트위터](https://img.shields.io/badge/X-%23000000.svg?style=for-the-badge&logo=X&logoColor=white) 등 다양한 SNS에 게시된 컨텐츠를 한 곳에 모아 보여주는 서비스
 
-## 개요
+## 목차
 
-다양한 소셜 미디어 플랫폼을 통해 수많은 정보를 접할 수 있게 되었지만 여러 SNS 상에서 산발적으로 게시되는 컨텐츠를 모두 놓치지 않고 확인하기는 쉽지 않습니다. 예를 들어 어떤 주제나 브랜드와 관련해 모니터링하고 싶은 경우, 여러 플랫폼에서 따로따로 관리하는 것은 굉장히 번거로운 일입니다.
+- [개요](#heavy_check_mark-개요)
+- [Skils](#Skills)
+- [Installation](#Installation)
+- [요구사항 정리 및 기술 명세서](#요구사항-정리-및-기술-명세서)
+- [API Reference](#api-reference)
+- [프로젝트 진행 및 이슈 관리](#프로젝트-진행-및-이슈-관리)
+- [디렉토리 구조](#디렉토리-구조)
+- [Authors](#authors)
 
-`소셜 미디어 통합 Feed 서비스`는 이러한 문제를 해결하기 위한 서비스로, `유저 계정` 또는 브랜드의 `#해시태그`를 기반으로 ![인스타그램](https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white), ![쓰레드](https://img.shields.io/badge/Threads-000000?style=for-the-badge&logo=Threads&logoColor=white), ![페이스북](https://img.shields.io/badge/Facebook-%231877F2.svg?style=for-the-badge&logo=Facebook&logoColor=white), ![트위터](https://img.shields.io/badge/X-%23000000.svg?style=for-the-badge&logo=X&logoColor=white) 등 다양한 SNS에 게시된 관련 컨텐츠를 한 곳에서 모아볼 수 있는 소셜 미디어 통합 Feed 어플리케이션입니다. 유저들은 자신이 관심 있는 주제나 브랜드의 SNS 노출 현황과 통계를 한눈에 확인할 수 있습니다.
+</br>
+
+## :heavy_check_mark: 개요
+
+다양한 소셜 미디어 플랫폼을 통해 수많은 정보를 접할 수 있게 되었지만, 여러 SNS 상에서 산발적으로 게시되는 컨텐츠를 일일이 확인하고 관리하는 건 굉장히 번거로운 일입니다. 어떤 주제나 브랜드에 대해 다양한 사용자 입장에서 모니터링하려면 각 플랫폼을 따로 관리해야 하는 불편함이 있습니다. 이런 문제를 해결할 수 있는 소셜 미디어 통합 Feed 애플리케이션입니다. 
+
+`소셜 미디어 통합 Feed 서비스`는 `유저 계정` 또는 브랜드의 `#해시태그`를 기반으로 인스타그램, 쓰레드, 페이스북, 트위터(X) 등 다양한 SNS에 게시된 관련 컨텐츠를 하나의 피드로 통합하여 제공합니다. 이를 통해 관심 있는 주제나 브랜드의 SNS 노출 현황과 통계를 한눈에 쉽게 확인할 수 있습니다.
 
 <br/>
 
 ## 요구사항 정리 및 기술 명세서
+
+<details>
+	<summary> 로그인 API</summary>
+	
+### **요약 (Summary)**
+
+유저는 가입한 계정, 비밀번호로 로그인합니다. 서비스 로그인 시 메뉴는 **통합 Feed** 단일 입니다. 
+
+### **목표 (Goals)**
+
+- `계정`, `비밀번호` 로 로그인 시 `JWT` 가 발급됩니다.
+- **이후 모든 API 요청 Header 에 `JWT` 가 항시 포함되며, `JWT` 유효성을 검증합니다.**
+- 서비스 로그인 시, 메뉴는 **통합 Feed** 단일 입니다. 
+
+### **목표가 아닌 것 (Non-Goals)**
+
+- JWT 발급받은 후 유저를 통합 Feed 페이지로 프론트엔드 리디렉션 처리
+- 계정 잠금, 자동 로그아웃 등 사용자 경험 관련 추가 로직
+
+### 로그인 api 요구사항 상세
+- **설명**
+    - 사용자는 계정과 비밀번호를 입력하여 로그인할 수 있으며, 로그인 성공 시 JWT 토큰을 발급받습니다. (**Authentication)**
+    - 이후 모든 API에서 JWT 토큰을 사용하여 인가 요청을 보낼 수 있습니다. **(Authorization)**
+- **입력 데이터**
+    - `계정(아이디)`
+    - `비밀번호`
+- **출력 데이터**
+    - `JWT 토큰`
+- **처리 과정**:
+    1. 사용자가 입력한 계정과 비밀번호를 검증합니다.
+    2. 검증이 성공하면 JWT 토큰을 생성합니다.
+    3. 생성된 JWT 토큰을 사용자에게 반환합니다.
+    4. 사용자는 이후의 API 요청 시 이 JWT 토큰을 헤더에 포함하여 서버에 요청을 보냅니다.
+    5. 서버는 각 요청에서 JWT 토큰의 유효성을 검증하여 인가 처리합니다.
+- **예외 사항**
+    - 입력한 계정(아이디)이나 비밀번호가 잘못된 경우, 오류 메시지와 함께 인증 실패 응답을 반환합니다.
+    - 만료된 JWT 토큰으로 요청한 경우, 인증 오류 응답을 반환합니다.
+    - JWT 토큰이 없는 경우, 인증되지 않은 상태로 처리하여 오류 응답을 반환합니다.
+  
+ </br>
+ 
+<details>
+	<summary> 플로우 차트 </summary>
+
+```mermaid
+flowchart TD
+    A[유저] -->|로그인 요청| B[로그인 API]
+    B -->|검증| C[(사용자 DB)]
+    
+    C -->|유효한 사용자| D{JWT 생성 및 반환}
+    C -->|유효하지 않은 사용자| E[Error Message]
+
+    D --> F[API 요청]
+
+    subgraph "🔒 Authorization"
+        F --> G[보호된 API]
+        G --> H{JWT 유효성 검증}
+        H -->|유효| J[응답]
+        H -->|유효하지 않음| K[Unauthorized error]
+    end
+```
+</details>
+
+<details>
+	<summary> 유저 ERD </summary>
+
+```mermaid
+erDiagram
+member {
+	member_id BIGINT PK "BIGSERIAL"
+	account VARCHAR(50) UK "NOT NULL"
+	email VARCHAR(320) UK "NOT NULL"
+	password VARCHAR(255) "NOT NULL"
+	status VARCHAR(15) "NOT NULL DEFAULT UNVERIFIED"
+  created_at TIMESTAMP "NOT NULL DEFAULT CURRENT_TIMESTAMP"
+	updated_at TIMESTAMP "NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+}
+```
+</details>
+
+### **계획 (Plan)**
+
+- DTO, 서비스, 레파지토리 구현
+    - 계정(아이디) 및 비밀번호를 사용한 유저 인증 로직 작성
+- JWT 토큰 생성 로직 구현
+- **JWT 검증 로직 구현**
+    - JWT 검증 필터 설정
+        - Spring Security 설정
+        - JWT 인증 필터 작성 - 로그인, 회원가입 및 인증 제외 모든 요청이 필터를 통과하도록
+    - 기본적인 예외 처리 로직 구현 (유효하지 않은 JWT, 만료된 JWT 등)
+- 로그인 컨트롤러 구현
+- 테스트 코드 작성 및 기능 테스트
+    - JWT, 로그인 API, Spring Security 설정 유닛 테스트
+    - 통합 테스트
+
+### **이외 추가 고려 사항들 (Other Considerations)**
+
+- JWT 만료 시간, 비밀키 저장 방법, 만료 전 갱신 등
+- 로그인 시도, 실패, 성공, 토큰 만료 등의 이벤트 로깅
+- 잘못된 로그인 정보, 만료된 토큰, 권한 부족 등 에러 처리
+
+### **마일스톤 (Milestones)**
+![image](https://github.com/user-attachments/assets/dbd228fd-2e98-4f61-aff3-bb2bde808265)
+
+ 
+</details>
+
 
 <details>
 	<summary> 게시물 “좋아요수”, “공유수” 증가 API</summary>
@@ -297,6 +417,7 @@ sequenceDiagram
 
 </details>
 
+</br>
 
 ## 프로젝트 진행 및 이슈 관리
 
