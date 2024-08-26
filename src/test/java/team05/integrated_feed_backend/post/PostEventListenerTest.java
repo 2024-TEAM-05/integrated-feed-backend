@@ -10,11 +10,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import team05.integrated_feed_backend.common.enums.SocialMediaType;
 import team05.integrated_feed_backend.infra.sns.adapter.FacebookAdapter;
 import team05.integrated_feed_backend.infra.sns.adapter.InstagramAdapter;
 import team05.integrated_feed_backend.infra.sns.adapter.TwitterAdapter;
-import team05.integrated_feed_backend.module.post.event.LikeCountIncreaseEvent;
-import team05.integrated_feed_backend.module.post.event.ShareCountIncreaseEvent;
+import team05.integrated_feed_backend.module.post.event.LikeCountIncreasedEvent;
+import team05.integrated_feed_backend.module.post.event.ShareCountIncreasedEvent;
 import team05.integrated_feed_backend.module.post.event.listener.PostEventListener;
 
 @ExtendWith(MockitoExtension.class)
@@ -34,43 +35,45 @@ public class PostEventListenerTest {
 
 	@Nested
 	@DisplayName("게시물 좋아요 수 증가 이벤트 처리")
-	class HandleLikeCountIncreaseEvent {
+	class HandleLikeCountIncreasedEvent {
 
 		@Test
-		@DisplayName("[성공] LikeCountIncreaseEvent가 수신되어 외부 API가 호출된다.")
-		void shouldHandleLikeCountIncreaseEvent() {
+		@DisplayName("[성공] LikeCountIncreasedEvent가 수신되어 Instagram API가 호출된다.")
+		void shouldHandleLikeCountIncreasedEvent() {
 			// Given
 			Long postId = 1L;
-			LikeCountIncreaseEvent event = new LikeCountIncreaseEvent(postId);
+			SocialMediaType type = SocialMediaType.INSTAGRAM;
+			LikeCountIncreasedEvent event = new LikeCountIncreasedEvent(1L, type);
 
 			// when
-			postEventListener.handleLikeCountIncreaseEvent(event);
+			postEventListener.handleLikeCountIncreasedEvent(event);
 
 			// then
-			verify(facebookAdapter, times(1)).increaseLikeCount(postId);
-			verify(twitterAdapter, times(1)).increaseLikeCount(postId);
+			verify(facebookAdapter, times(0)).increaseLikeCount(postId);
+			verify(twitterAdapter, times(0)).increaseLikeCount(postId);
 			verify(instagramAdapter, times(1)).increaseLikeCount(postId);
 		}
 	}
 
 	@Nested
 	@DisplayName("게시물 공유 수 증가 이벤트 처리")
-	class HandleShareCountIncreaseEvent {
+	class HandleShareCountIncreasedEvent {
 
 		@Test
-		@DisplayName("[성공] ShareCountIncreaseEvent가 수신되어 외부 API가 호출된다.")
-		void shouldHandleShareCountIncreaseEvent() {
+		@DisplayName("[성공] ShareCountIncreasedEvent가 수신되어 Facebook API가 호출된다.")
+		void shouldHandleShareCountIncreasedEvent() {
 			// Given
 			Long postId = 1L;
-			ShareCountIncreaseEvent event = new ShareCountIncreaseEvent(postId);
+			SocialMediaType type = SocialMediaType.FACEBOOK;
+			ShareCountIncreasedEvent event = new ShareCountIncreasedEvent(1L, type);
 
 			// when
-			postEventListener.handleShareCountIncreaseEvent(event);
+			postEventListener.handleShareCountIncreasedEvent(event);
 
 			// then
 			verify(facebookAdapter, times(1)).increaseShareCount(postId);
-			verify(twitterAdapter, times(1)).increaseShareCount(postId);
-			verify(instagramAdapter, times(1)).increaseShareCount(postId);
+			verify(twitterAdapter, times(0)).increaseShareCount(postId);
+			verify(instagramAdapter, times(0)).increaseShareCount(postId);
 		}
 	}
 }
