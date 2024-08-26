@@ -1,4 +1,4 @@
-package team05.integrated_feed_backend.common;
+package team05.integrated_feed_backend.common.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;

@@ -1,4 +1,4 @@
-package team05.integrated_feed_backend.exception.code;
+package team05.integrated_feed_backend.common.code;
 
 import org.springframework.http.HttpStatus;
 
@@ -18,6 +18,9 @@ public enum StatusCode {
 	 * 400 번대 CODE
 	 **/
 	METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, "요청 경로가 지원되지 않습니다."),
+	POST_NOT_EXIST(HttpStatus.NOT_FOUND, "존재하지 않는 게시물입니다."),
+	USER_NOT_FOUND(HttpStatus.NOT_FOUND, "요청된 사용자를 찾을 수 없습니다."),
+	UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "인증 오류가 발생했습니다."),
 
 	/**
 	 * 500 번대 CODE

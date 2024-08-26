@@ -13,11 +13,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import team05.integrated_feed_backend.module.post.PostService;
 import team05.integrated_feed_backend.module.post.dto.request.PostSearchReq;
 import team05.integrated_feed_backend.module.post.dto.response.PostSearchRes;
 import team05.integrated_feed_backend.module.post.entity.Post;
 import team05.integrated_feed_backend.module.post.repository.PostRepository;
+import team05.integrated_feed_backend.module.post.service.PostService;
 
 @ExtendWith(MockitoExtension.class)
 public class PostServiceTest {

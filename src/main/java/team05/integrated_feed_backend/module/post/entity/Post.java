@@ -18,7 +18,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import team05.integrated_feed_backend.common.BaseEntity;
+import team05.integrated_feed_backend.common.entity.BaseEntity;
 import team05.integrated_feed_backend.common.enums.SocialMediaType;
 
 @Entity
@@ -55,4 +55,13 @@ public class Post extends BaseEntity {
 	@Builder.Default
 	private List<PostHashtag> postHashtags = new ArrayList<>();
 
+	// 좋아요 수 증가시키는 메서드
+	public void increaseLikeCount() {
+		this.likeCount += 1;
+	}
+
+	// 공유 수 증가시키는 메서드
+	public void increaseShareCount() {
+		this.shareCount += 1;
+	}
 }

@@ -22,3 +22,8 @@ springdoc:
   swagger-ui:
     tags-sorter: alpha
     operations-sorter: method
+
+jwt:
+  secret: ${JWT_SECRET}   # secret key, 만료 시간 환경 변수로 관리
+  token-validity-in-seconds: ${JWT_EXPIRATION}
+    
