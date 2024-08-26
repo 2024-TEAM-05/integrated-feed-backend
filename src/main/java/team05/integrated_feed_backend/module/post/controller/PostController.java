@@ -1,9 +1,12 @@
 package team05.integrated_feed_backend.module.post.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.constraints.NotNull;
@@ -43,6 +46,22 @@ public class PostController implements PostControllerDocs {
 
 		return BaseApiResponse.of(StatusCode.OK, res);
 
+	}
+
+	// 좋아요 수 증가시키는 api
+	@ResponseStatus(HttpStatus.OK)
+	@PatchMapping("/{postId}/like")
+	public BaseApiResponse<Void> increaseLikeCount(@PathVariable(name = "postId") Long postId) {
+		postService.increaseLikeCount(postId);
+		return BaseApiResponse.of(StatusCode.OK);
+	}
+
+	// 공유 수 증가시키는 api
+	@ResponseStatus(HttpStatus.OK)
+	@PatchMapping("/{postId}/share")
+	public BaseApiResponse<Void> increaseShareCount(@PathVariable(name = "postId") Long postId) {
+		postService.increaseShareCount(postId);
+		return BaseApiResponse.of(StatusCode.OK);
 	}
 
 }
