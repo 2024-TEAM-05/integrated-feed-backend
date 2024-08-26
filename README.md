@@ -187,13 +187,15 @@ sequenceDiagram
 
 </details>
 
-# **마일스톤 (Milestones)**
+### **마일스톤 (Milestones)**
 
-> `~ 8.22(목)`:  controller 계층 구현 <br>
-`~ 8.23(금)`:  infra 계층의 adapter,client 구현 <br>
-`~ 8.24(토)`: service 구현, 단위 테스트 작성 <br>
-`~ 8.25(일)`: Rollout
->
+> `~ 8.22(목)`: controller 계층 구현
+> 
+> `~ 8.23(금)`: infra 계층의 adapter,client 구현
+> 
+> `~ 8.24(토)`: service 구현, 단위 테스트 작성
+> 
+> `~ 8.25(일)`: Rollout
 
 </details>
 
@@ -290,11 +292,13 @@ sequenceDiagram
 </details>
 
 
-# **마일스톤 (Milestones)**
+### **마일스톤 (Milestones)**
 
-> `~8월 24(목)` : 요구사항 정리 및 문서화, controller, repository 계층 구현, queryDSL 공부
-> `~8월 25일(금)` : , service 계층 구현 , 테스트 코드 추가
-> `~8월 26일(토)` :코드 리팩토링
+> `~8월 24(목)`: 요구사항 정리 및 문서화, controller, repository 계층 구현, queryDSL 공부
+> 
+> `~8월 25일(금)`: service 계층 구현 , 테스트 코드 추가
+> 
+> `~8월 26일(토)`: 코드 리팩토링
 
 </details>
 
@@ -303,7 +307,7 @@ sequenceDiagram
 
 ### **요약 (Summary)**
 
-사용자가 지정한 파라미터에 맞는 게시물을 반환합니다.
+사용자가 지정한 파라미터에 맞는 게시물을 통계를 내어 반환합니다.
 
 사용자는 `type`, `hashtag`, `value`, `start(조회 시작일)`, `end(조회 종료일)`를 지정할 수 있습니다.
 
@@ -389,14 +393,17 @@ classDiagram
 
 </details>
 
-# **마일스톤 (Milestones)**
+### **마일스톤 (Milestones)**
 
 > `~ 8.22(목)`: 요구 사항 분석, 테크 스펙 작성
-`~ 8.23(금)`: 더미 데이터 생성. api 명세 구상
-`~ 8.24(토)`: `dto`, `controller` 계층 작성
-`~ 8.25(일)`: `service`, `repository`계층 기능 개발
-`~ 8.26(월)`: Rollout
->
+> 
+> `~ 8.23(금)`: 더미 데이터 생성. api 명세 구상
+> 
+> `~ 8.24(토)`: `dto`, `controller` 계층 작성
+> 
+> `~ 8.25(일)`: `service`, `repository`계층 기능 개발
+> 
+> `~ 8.26(월)`: Rollout
 </details>
 
 ## ERD
