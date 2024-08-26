@@ -7,7 +7,7 @@ import lombok.Getter;
 import team05.integrated_feed_backend.common.code.StatusCode;
 
 /**
- *  code, status, message 기본 응답 형식
+ * code, status, message 기본 응답 형식
  **/
 @Getter
 @Schema(description = "기본 응답 형식")
