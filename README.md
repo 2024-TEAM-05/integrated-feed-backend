@@ -288,6 +288,19 @@ sequenceDiagram
 
 </details>
 
+
+## 프로젝트 진행 및 이슈 관리
+
+- Github Project 칸반보드 활용
+- 각 기능별 이슈 작성 후 하위 이슈 추가
+
+
+<table>
+    <tr align="center">
+        <td><img width="1455" alt="스크린샷 2024-08-26 18 06 36" src="https://github.com/user-attachments/assets/b808e098-626d-4f34-a699-2ea8ddd55c0a"></td>
+        <td><img width="1455" alt="스크린샷 2024-08-26 18 06 58" src="https://github.com/user-attachments/assets/ecc23acf-1850-4a87-8abc-97953ba1d8d0"></td>
+</table>
+
 ## Authors
 
 <table>
