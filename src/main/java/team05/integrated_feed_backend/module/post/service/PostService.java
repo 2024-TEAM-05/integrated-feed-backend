@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import team05.integrated_feed_backend.common.code.StatusCode;
+import team05.integrated_feed_backend.common.util.ValidationUtil;
 import team05.integrated_feed_backend.exception.custom.BusinessException;
 import team05.integrated_feed_backend.module.post.dto.response.PostDetailRes;
 import team05.integrated_feed_backend.module.post.entity.Post;
@@ -20,9 +21,7 @@ public class PostService {
 	@Transactional
 	public PostDetailRes getPostDetail(Long id) {
 
-		if (id == null || id <= 0) {
-			throw new BusinessException(StatusCode.BAD_REQUEST, StatusCode.BAD_REQUEST.getMessage());
-		}
+		ValidationUtil.validateId(id);
 
 		Post post = postRepository.findDetailPostById(id)
 			.orElseThrow(() -> new BusinessException(StatusCode.NOT_FOUND, StatusCode.NOT_FOUND.getMessage()));
