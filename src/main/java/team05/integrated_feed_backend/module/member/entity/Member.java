@@ -28,7 +28,8 @@ import team05.integrated_feed_backend.module.member.entity.vo.Password;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder(access = AccessLevel.PRIVATE)
 public class Member extends BaseEntity {
-	public static final MemberStatus DEFAULT_MEMBER_STATUS = UNVERIFIED;
+	private static final MemberStatus DEFAULT_MEMBER_STATUS = UNVERIFIED;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long memberId;

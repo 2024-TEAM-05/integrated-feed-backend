@@ -207,5 +207,6 @@ gradle-app.setting
 .idea/
 application.yml
 **/src/main/generated/**
+docker/
 
 

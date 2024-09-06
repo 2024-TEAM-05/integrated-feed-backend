@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -28,6 +27,7 @@ public class SecurityConfig {
 	private final UserDetailsService userDetailsService;
 	private final CustomAccessDeniedHandler customAccessDeniedHandler;
 	private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+	private final PasswordEncoder passwordEncoder;
 
 	@Bean
 	public JwtAuthenticationFilter jwtAuthenticationFilter() {
@@ -62,16 +62,11 @@ public class SecurityConfig {
 	}
 
 	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8();
-	}
-
-	@Bean
 	public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
 		AuthenticationManagerBuilder authManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
 		authManagerBuilder
 			.userDetailsService(userDetailsService)
-			.passwordEncoder(passwordEncoder());
+			.passwordEncoder(passwordEncoder);
 		return authManagerBuilder.build();
 	}
 }
