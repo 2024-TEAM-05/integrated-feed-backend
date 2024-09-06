@@ -49,6 +49,6 @@ class EmailTest {
 		boolean result = email1.equals(email2);
 
 		// then
-		assertThat(result).isTrue();
+		assertTrue(result);
 	}
 }
