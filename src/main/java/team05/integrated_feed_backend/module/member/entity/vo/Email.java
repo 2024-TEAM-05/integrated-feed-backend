@@ -16,7 +16,7 @@ import team05.integrated_feed_backend.exception.custom.BadRequestException;
 @Getter
 @EqualsAndHashCode
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
-public class Email {
+public final class Email {
 	private static final Pattern EMAIL_PATTERN = Pattern.compile(
 		"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$");
 

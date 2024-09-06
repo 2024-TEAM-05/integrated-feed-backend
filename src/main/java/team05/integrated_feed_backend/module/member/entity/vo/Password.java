@@ -20,7 +20,7 @@ import team05.integrated_feed_backend.exception.custom.BadRequestException;
 @EqualsAndHashCode
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
-public class Password {
+public final class Password {
 	private static final int MIN_PASSWORD_LENGTH = 10;
 	private static final Pattern SINGLE_TYPE_CHARACTER_PATTERN = Pattern.compile(
 		"^\\d+$|^[a-zA-Z]+$|^[!@#$%^&*(),.?\":{}|<>]+$");
