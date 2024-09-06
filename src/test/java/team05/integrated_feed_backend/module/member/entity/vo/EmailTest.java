@@ -27,7 +27,7 @@ class EmailTest {
 
 	@ParameterizedTest
 	@ValueSource(strings = {"plainaddress", "@missingusername.com", "username@domain@domain.com"})
-	@DisplayName("[실패] 이메일 형식이 올바르지 않아 생성에 실패한다.")
+	@DisplayName("[실패] 이메일 형식이 올바르지 않으면 생성에 실패한다.")
 	void shouldThrowExceptionWhenEmailFormatIsInvalid(String email) {
 		// when
 		ThrowingCallable create = () -> Email.from(email);
